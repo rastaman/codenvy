@@ -16,7 +16,6 @@ package com.codenvy.auth.sso.server;
 
 import com.codenvy.auth.sso.server.handler.BearerTokenAuthenticationHandler;
 import com.google.inject.AbstractModule;
-import com.google.inject.name.Names;
 
 import org.eclipse.che.inject.DynaModule;
 
@@ -32,6 +31,5 @@ public class BearerSecurityModule extends AbstractModule {
         bind(com.codenvy.auth.sso.server.BearerTokenAuthenticationService.class);
         bind(BearerTokenAuthenticationHandler.class);
         bind(EmailValidator.class);
-        bindConstant().annotatedWith(Names.named(EmailValidator.EMAIL_BLACKLIST_FILE)).to("cloud-ide-user-mail-blacklist.txt");
     }
 }
