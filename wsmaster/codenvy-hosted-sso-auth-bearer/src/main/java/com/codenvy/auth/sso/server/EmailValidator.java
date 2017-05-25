@@ -50,14 +50,17 @@ import java.util.concurrent.TimeUnit;
 public class EmailValidator {
     private static final Logger LOG = LoggerFactory.getLogger(EmailValidator.class);
 
-    public static final String EMAIL_BLACKLIST_FILE = "emailvalidator.blacklistfile";
+    private static final String EMAIL_BLACKLIST_FILE = "emailvalidator.blacklistfile";
+
+    private final String blacklistPath;
 
     private Set<String> emailBlackList = Collections.emptySet();
 
     @Inject
     public EmailValidator(@Named(EMAIL_BLACKLIST_FILE) String emailBlacklistFile) {
+        this.blacklistPath = emailBlacklistFile;
         try {
-            readBlacklistFile(emailBlacklistFile);
+            readBlacklistFile();
         } catch (FileNotFoundException e) {
             LOG.warn("Email blacklist is not found or is a directory", emailBlacklistFile);
         } catch (IOException e) {
@@ -69,14 +72,12 @@ public class EmailValidator {
      * Reads set of forbidden words from file. One word by line. If file not
      * found file reading failed, then throws exception.
      *
-     * @param blacklistPath
-     *         path to email black list file
      * @return set with forbidden words
      * @throws java.io.FileNotFoundException
      * @throws java.io.IOException
      */
     @ScheduleRate(period = 2, unit = TimeUnit.MINUTES)
-    private void readBlacklistFile(String blacklistPath) throws IOException {
+    private void readBlacklistFile() throws IOException {
         InputStream blacklistStream;
         File blacklistFile = new File(blacklistPath);
         if (blacklistFile.exists() && blacklistFile.isFile()) {
