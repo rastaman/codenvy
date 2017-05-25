@@ -364,6 +364,10 @@ $machine_docker_parent_cgroup = getValue("CODENVY_DOCKER_PARENT_CGROUP","NULL")
   $rsync_ssh_log_level=getValue("RSYNC_SSH_LOG_LEVEL","INFO")
 
 ###############################
+# User mail blacklist
+  $user_mail_blacklist = getValue("CODENVY_USER_MAIL_BLACKLIST","")
+
+###############################
 # Include base module
   include base
 }

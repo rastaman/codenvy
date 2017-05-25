@@ -17,6 +17,7 @@ package com.codenvy.auth.sso.server;
 import com.google.inject.name.Named;
 
 import org.eclipse.che.api.core.BadRequestException;
+import org.eclipse.che.commons.schedule.ScheduleRate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -33,9 +34,14 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 /**
- * Validates email.
+ * Validates email by the blacklist file.
+ * File line format can be following:
+ *  - Exact email: e.g. john@gmail.com - only this email will be banned;
+ *  - Partial email with asterisk: e.g   *hotmail.com,  *john@gmail.com - any email which ends
+ *    with this suffix will be banned.
  *
  * @author Alexander Garagatyi
  * @author Sergey Kabashniuk
@@ -44,14 +50,17 @@ import java.util.Set;
 public class EmailValidator {
     private static final Logger LOG = LoggerFactory.getLogger(EmailValidator.class);
 
-    public static final String EMAIL_BLACKLIST_FILE = "emailvalidator.blacklistfile";
+    private static final String EMAIL_BLACKLIST_FILE = "emailvalidator.blacklistfile";
+
+    private final String blacklistPath;
 
     private Set<String> emailBlackList = Collections.emptySet();
 
     @Inject
     public EmailValidator(@Named(EMAIL_BLACKLIST_FILE) String emailBlacklistFile) {
+        this.blacklistPath = emailBlacklistFile;
         try {
-            this.emailBlackList = readBlacklistFile(emailBlacklistFile);
+            readBlacklistFile();
         } catch (FileNotFoundException e) {
             LOG.warn("Email blacklist is not found or is a directory", emailBlacklistFile);
         } catch (IOException e) {
@@ -63,13 +72,12 @@ public class EmailValidator {
      * Reads set of forbidden words from file. One word by line. If file not
      * found file reading failed, then throws exception.
      *
-     * @param blacklistPath
-     *         path to email black list file
      * @return set with forbidden words
      * @throws java.io.FileNotFoundException
      * @throws java.io.IOException
      */
-    private static Set<String> readBlacklistFile(String blacklistPath) throws IOException {
+    @ScheduleRate(period = 2, unit = TimeUnit.MINUTES)
+    private void readBlacklistFile() throws IOException {
         InputStream blacklistStream;
         File blacklistFile = new File(blacklistPath);
         if (blacklistFile.exists() && blacklistFile.isFile()) {
@@ -88,7 +96,7 @@ public class EmailValidator {
                     blacklist.add(in.nextLine().trim());
                 }
             }
-            return blacklist;
+            this.emailBlackList =  blacklist;
         }
     }
 
@@ -107,7 +115,7 @@ public class EmailValidator {
 
         // Check blacklist
         for (String current : emailBlackList) {
-            if (userMail.endsWith(current)) {
+            if ((current.startsWith("*") && userMail.endsWith(current.substring(1))) || userMail.equals(current)) {
                 throw new BadRequestException("User mail " + userMail + " is forbidden.");
             }
         }
