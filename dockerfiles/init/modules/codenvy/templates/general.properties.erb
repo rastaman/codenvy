@@ -83,3 +83,6 @@ db.jndi.datasource.name=java:/comp/env/jdbc/codenvy
 system.super_privileged_mode=<%= scope.lookupvar('codenvy::system_super_privileged_mode') %>
 
 auth.blocked_country_names=<%= scope.lookupvar('codenvy::auth_blocked_country_names') %>
+
+# email black list
+emailvalidator.blacklistfile=/opt/codenvy-data/conf/user-mail-blacklist.txt
