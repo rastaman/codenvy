@@ -184,4 +184,12 @@ class codenvy {
     mode    => "755",
     require => File[$config_dirs],
   }
+
+  # creating user-mail-blacklist.txt
+  file { "/opt/codenvy/config/codenvy/conf/user-mail-blacklist.txt":
+    ensure  => "present",
+    content => template("codenvy/user-mail-blacklist.txt.erb"),
+    mode    => "644",
+    require => File[$config_dirs]
+  }
 }
