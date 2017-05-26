@@ -17,6 +17,7 @@ package com.codenvy.auth.sso.server;
 import com.google.inject.name.Named;
 
 import org.eclipse.che.api.core.BadRequestException;
+import org.eclipse.che.commons.annotation.Nullable;
 import org.eclipse.che.commons.schedule.ScheduleRate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,7 +58,7 @@ public class EmailValidator {
     private Set<String> emailBlackList = Collections.emptySet();
 
     @Inject
-    public EmailValidator(@Named(EMAIL_BLACKLIST_FILE) String emailBlacklistFile) {
+    public EmailValidator(@Nullable @Named(EMAIL_BLACKLIST_FILE) String emailBlacklistFile) {
         this.blacklistPath = emailBlacklistFile;
         try {
             readBlacklistFile();
@@ -78,6 +79,9 @@ public class EmailValidator {
      */
     @ScheduleRate(period = 2, unit = TimeUnit.MINUTES)
     private void readBlacklistFile() throws IOException {
+        if (blacklistPath == null) {
+            return;
+        }
         InputStream blacklistStream;
         File blacklistFile = new File(blacklistPath);
         if (blacklistFile.exists() && blacklistFile.isFile()) {
