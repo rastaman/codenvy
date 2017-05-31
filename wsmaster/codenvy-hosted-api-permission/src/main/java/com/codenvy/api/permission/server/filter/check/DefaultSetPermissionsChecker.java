@@ -14,37 +14,30 @@
  */
 package com.codenvy.api.permission.server.filter.check;
 
-import com.codenvy.api.permission.server.SuperPrivilegesChecker;
 import com.codenvy.api.permission.shared.model.Permissions;
 
 import org.eclipse.che.api.core.ForbiddenException;
 import org.eclipse.che.commons.env.EnvironmentContext;
 
-import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import static com.codenvy.api.permission.server.AbstractPermissionsDomain.SET_PERMISSIONS;
 
 /**
+ * Common checks while setting permissions.
+ *
  * @author Anton Korneta
  */
 @Singleton
 public class DefaultSetPermissionsChecker implements SetPermissionsChecker {
 
-    private final SuperPrivilegesChecker superPrivilegesChecker;
-
-    @Inject
-    public DefaultSetPermissionsChecker(SuperPrivilegesChecker superPrivilegesChecker) {
-        this.superPrivilegesChecker = superPrivilegesChecker;
-    }
-
     @Override
     public void check(Permissions permissions) throws ForbiddenException {
-        if (!(superPrivilegesChecker.isPrivilegedToManagePermissions(permissions.getDomainId())
-              || EnvironmentContext.getCurrent().getSubject().hasPermission(permissions.getDomainId(),
-                                                                            permissions.getInstanceId(),
-                                                                            SET_PERMISSIONS))) {
-            throw new ForbiddenException("AZAZA");
+        if (!EnvironmentContext.getCurrent().getSubject().hasPermission(permissions.getDomainId(),
+                                                                        permissions.getInstanceId(),
+                                                                        SET_PERMISSIONS)) {
+            throw new ForbiddenException("User can't edit permissions for this instance");
         }
     }
+
 }

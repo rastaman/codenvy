@@ -22,7 +22,6 @@ import org.eclipse.che.api.core.ServerException;
 import org.eclipse.che.api.machine.server.recipe.RecipeImpl;
 import org.eclipse.che.api.machine.server.recipe.RecipeLoader;
 import org.eclipse.che.api.machine.server.spi.RecipeDao;
-import org.eclipse.che.commons.annotation.Nullable;
 import org.eclipse.che.core.db.DBInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,11 +46,11 @@ public class OnPremisesRecipeLoader extends RecipeLoader {
     private final JpaRecipePermissionsDao permissionsDao;
 
     @Inject
-    public OnPremisesRecipeLoader(@Nullable @Named("predefined.recipe.path") Set<String> recipesPaths,
+    public OnPremisesRecipeLoader(@Named(CHE_PREDEFINED_RECIPES) Set<String> predefinedRecipes,
                                   JpaRecipePermissionsDao permissionsDao,
                                   RecipeDao recipeDao,
                                   DBInitializer dbInitializer) {
-        super(recipesPaths, recipeDao, dbInitializer);
+        super(predefinedRecipes, recipeDao, dbInitializer);
         this.permissionsDao = permissionsDao;
     }
 

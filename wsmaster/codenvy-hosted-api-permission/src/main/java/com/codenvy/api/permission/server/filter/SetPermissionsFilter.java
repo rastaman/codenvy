@@ -60,6 +60,9 @@ public class SetPermissionsFilter extends CheMethodInvokerFilter {
             final String domain = permissions.getDomainId();
             checkArgument(!isNullOrEmpty(domain), "Domain required");
             instanceValidator.validate(domain, permissions.getInstanceId());
+            if (superPrivilegesChecker.isPrivilegedToManagePermissions(permissions.getDomainId())) {
+                return;
+            }
             domainsPermissionsChecker.getSetChecker(domain).check(permissions);
         }
     }

@@ -29,6 +29,8 @@ import org.slf4j.LoggerFactory;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
+import java.nio.file.Path;
+import java.util.Map;
 
 import static com.codenvy.api.workspace.server.stack.StackDomain.SEARCH;
 import static java.lang.String.format;
@@ -48,17 +50,17 @@ public class OnPremisesStackLoader extends StackLoader {
 
     @Inject
     @SuppressWarnings("unused")
-    public OnPremisesStackLoader(@Named("che.stacks.storage") String stacksPath,
-                                 @Named("che.stacks.images") String stackIconFolder,
+    public OnPremisesStackLoader(@Named("codenvy.predefined.stacks.reload_on_start") boolean reloadStacksOnStart,
+                                 @Named(CHE_PREDEFINED_STACKS) Map<String, String> stacks2images,
                                  StackDao stackDao,
                                  DBInitializer dbInitializer,
                                  JpaStackPermissionsDao permissionsDao) {
-        super(stacksPath, stackIconFolder, stackDao, dbInitializer);
+        super(reloadStacksOnStart, stacks2images, stackDao, dbInitializer);
         this.permissionsDao = permissionsDao;
     }
 
-    protected void loadStack(StackImpl stack) {
-        setIconData(stack, stackIconFolderPath);
+    protected void loadStack(StackImpl stack, Path imagePath) {
+        setIconData(stack, imagePath);
         try {
             try {
                 stackDao.update(stack);

@@ -14,37 +14,26 @@
  */
 package com.codenvy.api.permission.server.filter.check;
 
-import com.codenvy.api.permission.server.SuperPrivilegesChecker;
-
 import org.eclipse.che.api.core.ForbiddenException;
 import org.eclipse.che.commons.env.EnvironmentContext;
-import org.eclipse.che.commons.subject.Subject;
 
-import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import static com.codenvy.api.permission.server.AbstractPermissionsDomain.SET_PERMISSIONS;
 
 /**
+ * Common checks while removing permissions.
+ *
  * @author Anton Korneta
  */
 @Singleton
 public class DefaultRemovePermissionsChecker implements RemovePermissionsChecker {
 
-    private final SuperPrivilegesChecker superPrivilegesChecker;
-
-    @Inject
-    public DefaultRemovePermissionsChecker(SuperPrivilegesChecker superPrivilegesChecker) {
-        this.superPrivilegesChecker = superPrivilegesChecker;
-    }
-
     @Override
     public void check(String user, String domainId, String instance) throws ForbiddenException {
-        final Subject subject = EnvironmentContext.getCurrent().getSubject();
-        if (!(subject.getUserId().equals(user)
-              || superPrivilegesChecker.isPrivilegedToManagePermissions(domainId)
-              || subject.hasPermission(domainId, instance, SET_PERMISSIONS))) {
-            throw new ForbiddenException("Default message");
+        if (!EnvironmentContext.getCurrent().getSubject().hasPermission(domainId, instance, SET_PERMISSIONS)) {
+            throw new ForbiddenException("User can't edit permissions for this instance");
         }
     }
+
 }

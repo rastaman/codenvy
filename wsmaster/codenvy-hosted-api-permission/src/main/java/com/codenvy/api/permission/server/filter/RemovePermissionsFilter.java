@@ -15,12 +15,15 @@
 package com.codenvy.api.permission.server.filter;
 
 import com.codenvy.api.permission.server.InstanceParameterValidator;
+import com.codenvy.api.permission.server.SuperPrivilegesChecker;
 import com.codenvy.api.permission.server.filter.check.DomainsPermissionsCheckers;
 
 import org.eclipse.che.api.core.BadRequestException;
 import org.eclipse.che.api.core.ForbiddenException;
 import org.eclipse.che.api.core.NotFoundException;
 import org.eclipse.che.api.core.ServerException;
+import org.eclipse.che.commons.env.EnvironmentContext;
+import org.eclipse.che.commons.subject.Subject;
 import org.eclipse.che.everrest.CheMethodInvokerFilter;
 import org.everrest.core.Filter;
 import org.everrest.core.resource.GenericResourceMethod;
@@ -48,6 +51,9 @@ public class RemovePermissionsFilter extends CheMethodInvokerFilter {
     private String user;
 
     @Inject
+    private SuperPrivilegesChecker superPrivilegesChecker;
+
+    @Inject
     private InstanceParameterValidator instanceValidator;
 
     @Inject
@@ -60,6 +66,10 @@ public class RemovePermissionsFilter extends CheMethodInvokerFilter {
                                                                                           ServerException {
         if (genericResourceMethod.getMethod().getName().equals("removePermissions")) {
             instanceValidator.validate(domain, instance);
+            final Subject currentSubject = EnvironmentContext.getCurrent().getSubject();
+            if (currentSubject.getUserId().equals(user) || superPrivilegesChecker.isPrivilegedToManagePermissions(domain)) {
+                return;
+            }
             domainsPermissionsCheckers.getRemoveChecker(domain).check(user, domain, instance);
         }
     }

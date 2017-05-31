@@ -15,7 +15,6 @@
 package com.codenvy.api.permission.server.filter.check;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 import javax.inject.Singleton;
 import java.util.Map;
 
