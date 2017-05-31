@@ -22,6 +22,7 @@ import com.codenvy.api.dao.authentication.PassportValidator;
 import com.codenvy.api.license.server.SystemLicenseModule;
 import com.codenvy.api.machine.server.jpa.OnPremisesJpaMachineModule;
 import com.codenvy.api.permission.server.PermissionChecker;
+import com.codenvy.api.permission.server.filter.check.DomainsPermissionsCheckers;
 import com.codenvy.api.permission.server.jpa.SystemPermissionsJpaModule;
 import com.codenvy.api.user.server.AdminUserService;
 import com.codenvy.api.workspace.server.jpa.OnPremisesJpaWorkspaceModule;
@@ -507,5 +508,7 @@ public class OnPremisesIdeApiModule extends AbstractModule {
         bind(org.eclipse.che.api.agent.server.filters.AddExecAgentInStackFilter.class);
 
         bind(org.eclipse.che.api.workspace.server.event.WorkspaceJsonRpcMessenger.class).asEagerSingleton();
+
+        bind(DomainsPermissionsCheckers.class);
     }
 }

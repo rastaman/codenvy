@@ -17,9 +17,12 @@ package com.codenvy.api.permission.server.filter;
 import com.codenvy.api.permission.server.InstanceParameterValidator;
 import com.codenvy.api.permission.server.PermissionsService;
 import com.codenvy.api.permission.server.SuperPrivilegesChecker;
+import com.codenvy.api.permission.server.filter.check.DomainsPermissionsCheckers;
+import com.codenvy.api.permission.server.filter.check.RemovePermissionsChecker;
 import com.jayway.restassured.response.Response;
 
 import org.eclipse.che.api.core.BadRequestException;
+import org.eclipse.che.api.core.ForbiddenException;
 import org.eclipse.che.api.core.rest.shared.dto.ServiceError;
 import org.eclipse.che.commons.env.EnvironmentContext;
 import org.eclipse.che.commons.subject.Subject;
@@ -43,8 +46,11 @@ import static org.everrest.assured.JettyHttpServer.SECURE_PATH;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
@@ -72,6 +78,9 @@ public class RemovePermissionsFilterTest {
     @Mock
     private SuperPrivilegesChecker superPrivilegesChecker;
 
+    @Mock
+    private DomainsPermissionsCheckers domainsPermissionsCheckers;
+
     @InjectMocks
     private RemovePermissionsFilter permissionsFilter;
 
@@ -82,7 +91,9 @@ public class RemovePermissionsFilterTest {
 
     @Test
     public void shouldRespond403IfUserDoesNotHaveAnyPermissionsForInstance() throws Exception {
-        when(subject.hasPermission("test", "test123", SET_PERMISSIONS)).thenReturn(false);
+        final RemovePermissionsChecker rmPermissionsChecker = mock(RemovePermissionsChecker.class);
+        when(domainsPermissionsCheckers.getRemoveChecker("test")).thenReturn(rmPermissionsChecker);
+        doThrow(new ForbiddenException("ex")).when(rmPermissionsChecker).check(anyString(), anyString(), anyString());
 
         final Response response = given().auth()
                                          .basic(ADMIN_USER_NAME, ADMIN_USER_PASSWORD)
@@ -91,9 +102,9 @@ public class RemovePermissionsFilterTest {
                                          .delete(SECURE_PATH + "/permissions/test?instance=test123&user123");
 
         assertEquals(response.getStatusCode(), 403);
-        assertEquals(unwrapError(response), "User can't edit permissions for this instance");
         verifyZeroInteractions(permissionsService);
         verify(instanceValidator).validate("test", "test123");
+        verify(rmPermissionsChecker, times(1)).check(anyString(), anyString(), anyString());
     }
 
     @Test
@@ -116,8 +127,9 @@ public class RemovePermissionsFilterTest {
 
     @Test
     public void shouldDoChainIfUserHasAnyPermissionsForInstance() throws Exception {
-        when(subject.hasPermission("test", "test123", SET_PERMISSIONS)).thenReturn(true);
-
+        final RemovePermissionsChecker rmPermissionsChecker = mock(RemovePermissionsChecker.class);
+        when(domainsPermissionsCheckers.getRemoveChecker("test")).thenReturn(rmPermissionsChecker);
+        doNothing().when(rmPermissionsChecker).check(ADMIN_USER_NAME, "test", "test123");
         final Response response = given().auth()
                                          .basic(ADMIN_USER_NAME, ADMIN_USER_PASSWORD)
                                          .contentType("application/json")
