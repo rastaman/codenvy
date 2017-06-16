@@ -17,7 +17,6 @@ package com.codenvy.ide.hosted.client.informers;
 import org.eclipse.che.api.user.shared.dto.UserDto;
 import org.eclipse.che.ide.api.app.AppContext;
 import org.eclipse.che.ide.api.event.HttpSessionDestroyedEvent;
-import org.eclipse.che.ide.api.event.HttpSessionDestroyedHandler;
 import org.eclipse.che.ide.api.user.UserServiceClient;
 import org.eclipse.che.ide.rest.AsyncRequestCallback;
 import org.eclipse.che.ide.rest.DtoUnmarshallerFactory;
@@ -36,7 +35,7 @@ import com.google.web.bindery.event.shared.EventBus;
  * @author Sergii Leschenko
  */
 @Singleton
-public class HttpSessionDestroyedInformer implements HttpSessionDestroyedHandler {
+public class HttpSessionDestroyedInformer implements HttpSessionDestroyedEvent.Handler {
     private final EventBus                   eventBus;
     private final PromptToLoginView          view;
     private final DtoUnmarshallerFactory     dtoUnmarshallerFactory;
