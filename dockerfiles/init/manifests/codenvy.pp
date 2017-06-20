@@ -369,6 +369,10 @@ $machine_docker_parent_cgroup = getValue("CODENVY_DOCKER_PARENT_CGROUP","NULL")
   $emailvalidator_blacklistfile = getValue("CODENVY_BLACKLISTFILE_PATH","/opt/codenvy-data/conf/user-mail-blacklist.txt")
 
 ###############################
+# Defines stack loading policy. Allowed values true/false.
+  $codenvy_predefined_stacks_reload_on_start = getValue("CODENVY_PREDEFINED_STACKS_RELOAD_ON_START","false")
+
+###############################
 # Include base module
   include base
 }

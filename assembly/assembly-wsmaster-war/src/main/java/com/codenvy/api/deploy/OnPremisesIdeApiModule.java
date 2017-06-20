@@ -94,8 +94,8 @@ import org.eclipse.che.api.factory.server.jpa.JpaFactoryDao;
 import org.eclipse.che.api.factory.server.spi.FactoryDao;
 import org.eclipse.che.api.machine.server.jpa.JpaRecipeDao;
 import org.eclipse.che.api.machine.server.jpa.JpaSnapshotDao;
+import org.eclipse.che.api.machine.server.recipe.RecipeLoader;
 import org.eclipse.che.api.machine.server.recipe.RecipeService;
-import org.eclipse.che.api.machine.server.recipe.providers.RecipeProvider;
 import org.eclipse.che.api.machine.server.spi.RecipeDao;
 import org.eclipse.che.api.machine.server.spi.SnapshotDao;
 import org.eclipse.che.api.project.server.handlers.ProjectHandler;
@@ -118,6 +118,7 @@ import org.eclipse.che.api.workspace.server.event.WorkspaceMessenger;
 import org.eclipse.che.api.workspace.server.jpa.JpaStackDao;
 import org.eclipse.che.api.workspace.server.jpa.WorkspaceJpaModule;
 import org.eclipse.che.api.workspace.server.spi.StackDao;
+import org.eclipse.che.api.workspace.server.stack.StackLoader;
 import org.eclipse.che.api.workspace.server.stack.StackMessageBodyAdapter;
 import org.eclipse.che.api.workspace.server.stack.StackService;
 import org.eclipse.che.commons.schedule.executor.ScheduleModule;
@@ -168,9 +169,6 @@ public class OnPremisesIdeApiModule extends AbstractModule {
         bind(ProfileService.class);
         bind(PreferencesService.class);
         bind(PreferencesService.class);
-
-        //recipe service
-        bind(RecipeService.class);
 
         install(new AdminApiModule());
 
@@ -250,16 +248,16 @@ public class OnPremisesIdeApiModule extends AbstractModule {
         requestInjection(authInterceptor);
         bindInterceptor(subclassesOf(AuthenticationDao.class), names("login"), authInterceptor);
 
-
-        final Multibinder<String> recipeBinder = Multibinder.newSetBinder(binder(),
-                                                                          String.class,
-                                                                          Names.named("predefined.recipe.path"));
-        recipeBinder.addBinding().toProvider(RecipeProvider.class);
-        recipeBinder.addBinding().toInstance("predefined-recipes.json");
+        bind(RecipeService.class);
+        bind(com.codenvy.api.machine.server.recipe.OnPremisesRecipeLoader.class);
+        Multibinder.newSetBinder(binder(), String.class, Names.named(RecipeLoader.CHE_PREDEFINED_RECIPES))
+                   .addBinding().toInstance("predefined-recipes.json");
 
         bind(StackService.class);
-        bind(com.codenvy.api.machine.server.recipe.OnPremisesRecipeLoader.class);
         bind(com.codenvy.api.workspace.server.stack.OnPremisesStackLoader.class);
+        MapBinder.newMapBinder(binder(), String.class, String.class, Names.named(StackLoader.CHE_PREDEFINED_STACKS))
+                 .addBinding("stacks.json")
+                 .toInstance("stacks-images");
 
         bind(WorkspaceValidator.class).to(org.eclipse.che.api.workspace.server.DefaultWorkspaceValidator.class);
         bind(WorkspaceManager.class).to(com.codenvy.api.workspace.LimitsCheckingWorkspaceManager.class);
