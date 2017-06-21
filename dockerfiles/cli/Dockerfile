@@ -15,11 +15,11 @@
 # use:
 #    docker run -v $(pwd):/codenvy codenvy/cli [command]
 
-FROM eclipse/che-base:nightly
+FROM eclipse/che-base:5.13.0
 
 COPY scripts /scripts/
 COPY version /version/
 
-RUN mkdir /codenvy 
+RUN mkdir /codenvy
 
 ENTRYPOINT ["/scripts/entrypoint.sh"]
