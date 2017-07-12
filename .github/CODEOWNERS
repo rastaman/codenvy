@@ -2,19 +2,19 @@
 * @skabashnyuk
 
 # dashboard
-dashboard/* @ashumilova
+dashboard/** @ashumilova
 
 # dockerfiles
-dockerfiles/* @riuvshin @benoitf
+dockerfiles/** @riuvshin @benoitf
 
 # assembly
-assembly/* @riuvshin
+assembly/** @riuvshin
 
 # site
-site/* @vkuznyetsov
+site/** @vkuznyetsov
 
 # wsmaster
-wsmaster/* @garagatyi
+wsmaster/** @garagatyi
 
 # plugins
-plugins/* @garagatyi
+plugins/** @garagatyi
