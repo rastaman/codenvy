@@ -46,8 +46,12 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
+
+/**
+ * @author Mihail Kuznyetsov
+ */
 @Listeners(value = MockitoTestNGListener.class)
-public class WorkspaceActivityManagerTest {
+public class HostedWorkspaceActivityManagerTest {
     private static final long EXPIRE_PERIOD_MS = 60_000L;//1 minute
 
     @Mock
@@ -70,11 +74,11 @@ public class WorkspaceActivityManagerTest {
     @Mock
     private EventService eventService;
 
-    private WorkspaceActivityManager activityManager;
+    private HostedWorkspaceActivityManager activityManager;
 
     @BeforeMethod
     private void setUp() throws Exception {
-        activityManager = new WorkspaceActivityManager(resourceUsageManager, accountManager, workspaceManager, eventService);
+        activityManager = new HostedWorkspaceActivityManager(resourceUsageManager, accountManager, workspaceManager, eventService);
 
         when(account.getName()).thenReturn("accountName");
         when(account.getId()).thenReturn("account123");
@@ -157,8 +161,8 @@ public class WorkspaceActivityManagerTest {
     }
 
     @SuppressWarnings("unchecked")
-    private Map<String, Long> getActiveWorkspaces(WorkspaceActivityManager workspaceActivityManager) throws Exception {
-        for (Field field : workspaceActivityManager.getClass().getDeclaredFields()) {
+    private Map<String, Long> getActiveWorkspaces(HostedWorkspaceActivityManager workspaceActivityManager) throws Exception {
+        for (Field field : workspaceActivityManager.getClass().getSuperclass().getDeclaredFields()) {
             field.setAccessible(true);
             if (field.getName().equals("activeWorkspaces")) {
                 return (Map<String, Long>)field.get(workspaceActivityManager);
@@ -167,4 +171,3 @@ public class WorkspaceActivityManagerTest {
         throw new IllegalAccessException();
     }
 }
-
