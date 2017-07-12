@@ -1,0 +1,20 @@
+# Global Owners
+* @skabashnyuk
+
+#dashboard
+dashboard/* @ashumilova
+
+#dockerfiles
+dockerfiles/* @riuvshin @benoitf
+
+#assembly
+assembly/* @riuvshin
+
+#site
+site/* @vkuznyetsov
+
+#wsmaster
+wsmaster/* @garagatyi
+
+#plugins
+plugins/* @garagatyi
