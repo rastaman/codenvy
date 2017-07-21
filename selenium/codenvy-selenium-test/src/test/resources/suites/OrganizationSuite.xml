@@ -1,0 +1,39 @@
+<!--
+
+     [2012] - [2017] Codenvy, S.A.
+     All Rights Reserved.
+
+    NOTICE:  All information contained herein is, and remains
+    the property of Codenvy S.A. and its suppliers,
+    if any.  The intellectual and technical concepts contained
+    herein are proprietary to Codenvy S.A.
+    and its suppliers and may be covered by U.S. and Foreign Patents,
+    patents in process, and are protected by trade secret or copyright law.
+    Dissemination of this information or reproduction of this material
+    is strictly forbidden unless prior written permission is obtained
+    from Codenvy S.A..
+
+-->
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Codenvy organization feature tests suite"
+       verbose="10"
+       parallel="classes"
+       thread-count="1">
+
+    <test name="codenvy-organization" preserve-order="true">
+        <classes>
+            <class name="com.codenvy.selenium.dashboard.organization.AdminOrganizationTest" />
+            <class name="com.codenvy.selenium.dashboard.organization.BulkOrganizationDeletionTest" />
+            <class name="com.codenvy.selenium.dashboard.organization.DeleteOrganizationInListTest" />
+            <class name="com.codenvy.selenium.dashboard.organization.FilterOrganizationTest" />
+            <class name="com.codenvy.selenium.dashboard.organization.OrganizationListTest" />
+            <class name="com.codenvy.selenium.dashboard.organization.OrganizationTest" />
+            <class name="com.codenvy.selenium.dashboard.organization.UserOrganizationTest" />
+            <class name="com.codenvy.selenium.dashboard.organization.AdminOfParentOrganizationTest" />
+            <class name="com.codenvy.selenium.dashboard.organization.AdminOfSubOrganizationTest" />
+            <class name="com.codenvy.selenium.dashboard.organization.UserEmptyOrganizationTest" />
+            <class name="com.codenvy.selenium.dashboard.organization.DeleteOrganizationTest"/>
+            <class name="com.codenvy.selenium.dashboard.organization.RenameOrganizationTest"/>
+        </classes>
+    </test>
+</suite>
