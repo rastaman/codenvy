@@ -132,7 +132,6 @@ public class LoginBySshKeyTest {
 
         String sshPrivateKeyFromFirstMachine = testSshServiceClient.getPrivateKeyByName(user.getAuthToken(), TITLE_OF_SSH_KEY);
         workspaceServiceClient.stop(ws1.getName(), user.getName(), user.getAuthToken(), false);
-        workspaceServiceClient.waitStatus(ws1.getName(), user.getName(), user.getAuthToken(), STOPPED);
         seleniumWebDriver.navigate().refresh();
         notifications.waitExpectedMessageOnProgressPanelAndClosed(TestWorkspaceConstants.RUNNING_WORKSPACE_MESS);
         notifications.waitPopUpPanelsIsClosed();

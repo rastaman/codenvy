@@ -91,8 +91,7 @@ public class OnpremSeleniumSuiteModule extends AbstractModule {
     @Provides
     public TestWorkspace getWorkspace(TestWorkspaceProvider testWorkspaceProvider,
                                       Provider<DefaultTestUser> defaultUserProvider,
-                                      @Named("workspace.default_memory_gb") int defaultMemoryGb)
-            throws ExecutionException, InterruptedException {
+                                      @Named("workspace.default_memory_gb") int defaultMemoryGb) throws Exception {
 
         TestWorkspace workspace = testWorkspaceProvider.createWorkspace(defaultUserProvider.get(),
                                                                         defaultMemoryGb,
