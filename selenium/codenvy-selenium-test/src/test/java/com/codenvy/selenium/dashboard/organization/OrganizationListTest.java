@@ -12,14 +12,14 @@ package com.codenvy.selenium.dashboard.organization;
 
 import com.codenvy.organization.shared.dto.OrganizationDto;
 import com.codenvy.selenium.core.client.OnpremTestOrganizationServiceClient;
-import org.eclipse.che.selenium.pageobject.dashboard.NavigationBar;
 import com.codenvy.selenium.pageobject.dashboard.organization.OrganizationListPage;
 import com.google.inject.Inject;
 
+import org.eclipse.che.commons.lang.NameGenerator;
 import org.eclipse.che.selenium.core.user.AdminTestUser;
 import org.eclipse.che.selenium.pageobject.dashboard.Dashboard;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.eclipse.che.selenium.pageobject.dashboard.NavigationBar;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -35,8 +35,6 @@ import static org.testng.Assert.assertTrue;
  * @author Ann Shumilova
  */
 public class OrganizationListTest {
-    private static final Logger LOG = LoggerFactory.getLogger(OrganizationListTest.class);
-
     private List<OrganizationDto> organizations;
 
     @Inject
@@ -50,10 +48,19 @@ public class OrganizationListTest {
     @Inject
     private AdminTestUser                       adminTestUser;
 
+    private OrganizationDto organization;
+
     @BeforeClass
     public void setUp() throws Exception {
-        dashboard.open(adminTestUser.getAuthToken());
+        organization =
+                organizationServiceClient.createOrganization(NameGenerator.generate("organization", 5), adminTestUser.getAuthToken());
         organizations = organizationServiceClient.getOrganizations(adminTestUser.getAuthToken());
+        dashboard.open(adminTestUser.getAuthToken());
+    }
+
+    @AfterClass
+    public void tearDown() throws Exception {
+        organizationServiceClient.deleteOrganizationById(organization.getId(), adminTestUser.getAuthToken());
     }
 
     @Test

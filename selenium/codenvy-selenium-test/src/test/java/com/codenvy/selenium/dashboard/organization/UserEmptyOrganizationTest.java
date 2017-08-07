@@ -10,12 +10,12 @@
  *******************************************************************************/
 package com.codenvy.selenium.dashboard.organization;
 
-import org.eclipse.che.selenium.pageobject.dashboard.NavigationBar;
 import com.codenvy.selenium.pageobject.dashboard.organization.OrganizationListPage;
 import com.google.inject.Inject;
 
 import org.eclipse.che.selenium.core.user.DefaultTestUser;
 import org.eclipse.che.selenium.pageobject.dashboard.Dashboard;
+import org.eclipse.che.selenium.pageobject.dashboard.NavigationBar;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.BeforeClass;
@@ -53,7 +53,7 @@ public class UserEmptyOrganizationTest {
         organizationListPage.waitForOrganizationsToolbar();
         organizationListPage.waitForOrganizationsEmptyList();
 
-        assertEquals(navigationBar.getMenuCounterValue(NavigationBar.MenuItem.ORGANIZATIONS), "");
+        assertEquals(navigationBar.getMenuCounterValue(NavigationBar.MenuItem.ORGANIZATIONS), "0");
         assertEquals(organizationListPage.getOrganizationsToolbarTitle(), "Organizations");
         assertFalse(organizationListPage.isAddOrganizationButtonVisible());
         assertFalse(organizationListPage.isSearchInputVisible());

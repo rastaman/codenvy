@@ -13,7 +13,6 @@ package com.codenvy.selenium.dashboard.organization;
 import com.codenvy.organization.shared.dto.OrganizationDto;
 import com.codenvy.selenium.core.client.OnpremTestOrganizationServiceClient;
 import com.codenvy.selenium.pageobject.dashboard.ConfirmDialog;
-import org.eclipse.che.selenium.pageobject.dashboard.NavigationBar;
 import com.codenvy.selenium.pageobject.dashboard.organization.OrganizationListPage;
 import com.codenvy.selenium.pageobject.dashboard.organization.OrganizationPage;
 import com.google.inject.Inject;
@@ -22,8 +21,7 @@ import org.eclipse.che.commons.lang.NameGenerator;
 import org.eclipse.che.selenium.core.user.AdminTestUser;
 import org.eclipse.che.selenium.core.user.DefaultTestUser;
 import org.eclipse.che.selenium.pageobject.dashboard.Dashboard;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.eclipse.che.selenium.pageobject.dashboard.NavigationBar;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -36,8 +34,6 @@ import static org.testng.Assert.assertEquals;
  * @author Ann Shumilova
  */
 public class DeleteOrganizationTest {
-    private static final Logger LOG = LoggerFactory.getLogger(DeleteOrganizationTest.class);
-
     private OrganizationDto parentOrganization;
     private OrganizationDto childOrganization;
 
@@ -124,6 +120,6 @@ public class DeleteOrganizationTest {
         confirmDialog.waitClosed();
 
         organizationListPage.waitForOrganizationsEmptyList();
-        assertEquals(navigationBar.getMenuCounterValue(NavigationBar.MenuItem.ORGANIZATIONS), "");
+        assertEquals(navigationBar.getMenuCounterValue(NavigationBar.MenuItem.ORGANIZATIONS), "0");
     }
 }
