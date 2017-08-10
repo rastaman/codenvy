@@ -144,10 +144,6 @@
         </dependency>
         <dependency>
             <groupId>com.codenvy.onpremises.wsmaster</groupId>
-            <artifactId>codenvy-hosted-workspace-activity</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.codenvy.onpremises.wsmaster</groupId>
             <artifactId>codenvy-ldap</artifactId>
         </dependency>
         <dependency>
@@ -157,6 +153,10 @@
         <dependency>
             <groupId>com.codenvy.plugin</groupId>
             <artifactId>codenvy-machine-hosted</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.codenvy.plugin</groupId>
+            <artifactId>codenvy-plugin-activity-wsmaster</artifactId>
         </dependency>
         <dependency>
             <groupId>com.codenvy.plugin</groupId>
