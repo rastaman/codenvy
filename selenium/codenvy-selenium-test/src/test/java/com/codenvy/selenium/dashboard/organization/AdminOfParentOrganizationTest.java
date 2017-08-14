@@ -12,10 +12,11 @@ package com.codenvy.selenium.dashboard.organization;
 
 import com.codenvy.organization.shared.dto.OrganizationDto;
 import com.codenvy.selenium.core.client.OnpremTestOrganizationServiceClient;
-import org.eclipse.che.selenium.pageobject.dashboard.NavigationBar;
+import com.codenvy.selenium.pageobject.dashboard.CodenvyAdminDashboard;
 import com.codenvy.selenium.pageobject.dashboard.organization.OrganizationListPage;
 import com.codenvy.selenium.pageobject.dashboard.organization.OrganizationPage;
 import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 import org.eclipse.che.commons.lang.NameGenerator;
 import org.eclipse.che.selenium.core.provider.TestDashboardUrlProvider;
@@ -23,7 +24,7 @@ import org.eclipse.che.selenium.core.provider.TestIdeUrlProvider;
 import org.eclipse.che.selenium.core.user.AdminTestUser;
 import org.eclipse.che.selenium.core.user.DefaultTestUser;
 import org.eclipse.che.selenium.core.utils.WaitUtils;
-import com.codenvy.selenium.pageobject.dashboard.CodenvyAdminDashboard;
+import org.eclipse.che.selenium.pageobject.dashboard.NavigationBar;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.AfterClass;
@@ -32,13 +33,13 @@ import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 
-import static org.eclipse.che.selenium.pageobject.dashboard.NavigationBar.MenuItem.ORGANIZATIONS;
 import static com.codenvy.selenium.pageobject.dashboard.organization.OrganizationListPage.OrganizationListHeader.ACTIONS;
 import static com.codenvy.selenium.pageobject.dashboard.organization.OrganizationListPage.OrganizationListHeader.AVAILABLE_RAM;
 import static com.codenvy.selenium.pageobject.dashboard.organization.OrganizationListPage.OrganizationListHeader.MEMBERS;
 import static com.codenvy.selenium.pageobject.dashboard.organization.OrganizationListPage.OrganizationListHeader.NAME;
 import static com.codenvy.selenium.pageobject.dashboard.organization.OrganizationListPage.OrganizationListHeader.SUB_ORGANIZATIONS;
 import static com.codenvy.selenium.pageobject.dashboard.organization.OrganizationListPage.OrganizationListHeader.TOTAL_RAM;
+import static org.eclipse.che.selenium.pageobject.dashboard.NavigationBar.MenuItem.ORGANIZATIONS;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
@@ -56,23 +57,24 @@ public class AdminOfParentOrganizationTest {
     private OrganizationDto childOrganization;
 
     @Inject
-    private OrganizationListPage                organizationListPage;
+    private OrganizationListPage                        organizationListPage;
     @Inject
-    private OrganizationPage                    organizationPage;
+    private OrganizationPage                            organizationPage;
     @Inject
-    private NavigationBar                       navigationBar;
+    private NavigationBar                               navigationBar;
     @Inject
-    private CodenvyAdminDashboard               dashboard;
+    private CodenvyAdminDashboard                       dashboard;
     @Inject
-    private TestIdeUrlProvider                  testIdeUrlProvider;
+    private TestIdeUrlProvider                          testIdeUrlProvider;
     @Inject
-    private TestDashboardUrlProvider            testDashboardUrlProvider;
+    private TestDashboardUrlProvider                    testDashboardUrlProvider;
     @Inject
-    private DefaultTestUser                     testUser;
+    private DefaultTestUser                             testUser;
     @Inject
+    @Named("admin")
     private OnpremTestOrganizationServiceClient organizationServiceClient;
     @Inject
-    private AdminTestUser                       adminTestUser;
+    private AdminTestUser                               adminTestUser;
 
     @BeforeClass
     public void setUp() throws Exception {
@@ -80,22 +82,21 @@ public class AdminOfParentOrganizationTest {
         dashboard.waitDashboardToolbarTitle();
 
         parentOrganization =
-                organizationServiceClient.createOrganization(NameGenerator.generate("organization", 5), adminTestUser.getAuthToken());
+                organizationServiceClient.createOrganization(NameGenerator.generate("organization", 5));
         childOrganization =
                 organizationServiceClient
-                        .createOrganization(NameGenerator.generate("organization", 5), parentOrganization.getId(),
-                                            adminTestUser.getAuthToken());
+                        .createOrganization(NameGenerator.generate("organization", 5), parentOrganization.getId());
 
-        organizationServiceClient.addOrganizationAdmin(parentOrganization.getId(), testUser.getId(), adminTestUser.getAuthToken());
-        organizationServiceClient.addOrganizationMember(childOrganization.getId(), testUser.getId(), adminTestUser.getAuthToken());
+        organizationServiceClient.addOrganizationAdmin(parentOrganization.getId(), testUser.getId());
+        organizationServiceClient.addOrganizationMember(childOrganization.getId(), testUser.getId());
 
         dashboard.open(testUser.getAuthToken());
     }
 
     @AfterClass
     public void tearDown() throws Exception {
-        organizationServiceClient.deleteOrganizationById(childOrganization.getId(), adminTestUser.getAuthToken());
-        organizationServiceClient.deleteOrganizationById(parentOrganization.getId(), adminTestUser.getAuthToken());
+        organizationServiceClient.deleteOrganizationById(childOrganization.getId());
+        organizationServiceClient.deleteOrganizationById(parentOrganization.getId());
     }
 
     @Test(priority = 1)

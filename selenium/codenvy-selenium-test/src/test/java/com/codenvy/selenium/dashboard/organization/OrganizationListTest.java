@@ -14,6 +14,7 @@ import com.codenvy.organization.shared.dto.OrganizationDto;
 import com.codenvy.selenium.core.client.OnpremTestOrganizationServiceClient;
 import com.codenvy.selenium.pageobject.dashboard.organization.OrganizationListPage;
 import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 import org.eclipse.che.commons.lang.NameGenerator;
 import org.eclipse.che.selenium.core.user.AdminTestUser;
@@ -38,29 +39,29 @@ public class OrganizationListTest {
     private List<OrganizationDto> organizations;
 
     @Inject
-    private OrganizationListPage                organizationListPage;
+    private OrganizationListPage                        organizationListPage;
     @Inject
-    private NavigationBar                       navigationBar;
+    private NavigationBar                               navigationBar;
     @Inject
-    private Dashboard                           dashboard;
+    private Dashboard                                   dashboard;
     @Inject
-    private OnpremTestOrganizationServiceClient organizationServiceClient;
+    @Named("admin")
+    private OnpremTestOrganizationServiceClient         organizationServiceClient;
     @Inject
-    private AdminTestUser                       adminTestUser;
+    private AdminTestUser                               adminTestUser;
 
     private OrganizationDto organization;
 
     @BeforeClass
     public void setUp() throws Exception {
-        organization =
-                organizationServiceClient.createOrganization(NameGenerator.generate("organization", 5), adminTestUser.getAuthToken());
-        organizations = organizationServiceClient.getOrganizations(adminTestUser.getAuthToken());
+        organization = organizationServiceClient.createOrganization(NameGenerator.generate("organization", 5));
+        organizations = organizationServiceClient.getOrganizations();
         dashboard.open(adminTestUser.getAuthToken());
     }
 
     @AfterClass
     public void tearDown() throws Exception {
-        organizationServiceClient.deleteOrganizationById(organization.getId(), adminTestUser.getAuthToken());
+        organizationServiceClient.deleteOrganizationById(organization.getId());
     }
 
     @Test

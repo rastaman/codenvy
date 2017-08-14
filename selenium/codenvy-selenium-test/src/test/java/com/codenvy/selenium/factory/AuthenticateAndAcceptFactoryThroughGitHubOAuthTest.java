@@ -10,6 +10,7 @@
  *******************************************************************************/
 package com.codenvy.selenium.factory;
 
+import com.codenvy.selenium.pageobject.site.LoginAndCreateOnpremAccountPage;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 
@@ -20,12 +21,15 @@ import org.eclipse.che.selenium.core.client.TestWorkspaceServiceClient;
 import org.eclipse.che.selenium.core.factory.FactoryTemplate;
 import org.eclipse.che.selenium.core.factory.TestFactory;
 import org.eclipse.che.selenium.core.factory.TestFactoryInitializer;
+import org.eclipse.che.selenium.core.provider.TestApiEndpointUrlProvider;
+import org.eclipse.che.selenium.core.requestfactory.TestUserHttpJsonRequestFactory;
+import org.eclipse.che.selenium.core.user.TestUserNamespaceResolver;
 import org.eclipse.che.selenium.pageobject.GitHub;
 import org.eclipse.che.selenium.pageobject.Ide;
 import org.eclipse.che.selenium.pageobject.NotificationsPopupPanel;
 import org.eclipse.che.selenium.pageobject.Profile;
 import org.eclipse.che.selenium.pageobject.ProjectExplorer;
-import com.codenvy.selenium.pageobject.site.LoginAndCreateOnpremAccountPage;
+import org.openqa.selenium.Cookie;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -59,7 +63,9 @@ public class AuthenticateAndAcceptFactoryThroughGitHubOAuthTest {
     @Inject
     private TestUserServiceClient           testUserServiceClient;
     @Inject
-    private TestWorkspaceServiceClient      workspaceServiceClient;
+    private TestApiEndpointUrlProvider      apiEndpointUrlProvider;
+    @Inject
+    private TestUserNamespaceResolver       testUserNamespaceResolver;
 
     private TestFactory testFactory;
 
@@ -71,14 +77,20 @@ public class AuthenticateAndAcceptFactoryThroughGitHubOAuthTest {
 
     @AfterClass
     public void tearDown() throws Exception {
-        String authToken = ide.driver().manage().getCookieNamed("session-access-key").getValue();
+        Cookie cookieNamed = ide.driver().manage().getCookieNamed("session-access-key");
+        if (cookieNamed == null) {
+            return;
+        }
 
+        String authToken = cookieNamed.getValue();
         User user = testUserServiceClient.getUser(authToken);
-
-        workspaceServiceClient.getAll(authToken)
-                              .forEach(w -> {
+        TestWorkspaceServiceClient workspaceServiceClient = new TestWorkspaceServiceClient(apiEndpointUrlProvider,
+                                                                                           new TestUserHttpJsonRequestFactory(authToken),
+                                                                                           testUserNamespaceResolver);
+        workspaceServiceClient.getAll()
+                              .forEach(ws -> {
                                   try {
-                                      workspaceServiceClient.delete(w, user.getName(), authToken);
+                                      workspaceServiceClient.delete(ws, user.getName());
                                   } catch (Exception e) {
                                       throw new RuntimeException(e);
                                   }

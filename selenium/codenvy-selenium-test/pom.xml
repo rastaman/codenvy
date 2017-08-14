@@ -147,6 +147,16 @@
             <scope>runtime</scope>
         </dependency>
         <dependency>
+            <groupId>org.eclipse.che.plugin</groupId>
+            <artifactId>che-plugin-github-server</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.che.plugin</groupId>
+            <artifactId>che-plugin-github-shared</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <scope>test</scope>
@@ -181,8 +191,7 @@
                                 </property>
                                 <property>
                                     <name>listener</name>
-                                    <value>com.codenvy.selenium.core.FairSourceLicenseAcceptorListener,
-                                        com.codenvy.selenium.core.OnpremSeleniumTestHandler</value>
+                                    <value>com.codenvy.selenium.core.OnpremSeleniumTestHandler</value>
                                 </property>
                             </properties>
                         </configuration>

@@ -12,12 +12,12 @@ package com.codenvy.selenium.dashboard.organization;
 
 import com.codenvy.organization.shared.dto.OrganizationDto;
 import com.codenvy.selenium.core.client.OnpremTestOrganizationServiceClient;
-import org.eclipse.che.selenium.pageobject.dashboard.NavigationBar;
 import com.codenvy.selenium.pageobject.dashboard.organization.AddMember;
 import com.codenvy.selenium.pageobject.dashboard.organization.AddOrganization;
 import com.codenvy.selenium.pageobject.dashboard.organization.OrganizationListPage;
 import com.codenvy.selenium.pageobject.dashboard.organization.OrganizationPage;
 import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 import org.eclipse.che.selenium.core.client.TestProfileServiceClient;
 import org.eclipse.che.selenium.core.client.TestUserServiceClient;
@@ -26,6 +26,7 @@ import org.eclipse.che.selenium.core.user.DefaultTestUser;
 import org.eclipse.che.selenium.core.user.TestUser;
 import org.eclipse.che.selenium.pageobject.Loader;
 import org.eclipse.che.selenium.pageobject.dashboard.Dashboard;
+import org.eclipse.che.selenium.pageobject.dashboard.NavigationBar;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -45,31 +46,32 @@ public class OrganizationTest {
     private OrganizationDto organization;
 
     @Inject
-    private OrganizationListPage                organizationListPage;
+    private OrganizationListPage                        organizationListPage;
     @Inject
-    private OrganizationPage                    organizationPage;
+    private OrganizationPage                            organizationPage;
     @Inject
-    private NavigationBar                       navigationBar;
+    private NavigationBar                               navigationBar;
     @Inject
-    private AddOrganization                     addOrganization;
+    private AddOrganization                             addOrganization;
     @Inject
-    private AddMember                           addMember;
+    private AddMember                                   addMember;
     @Inject
-    private Loader                              loader;
+    private Loader                                      loader;
     @Inject
-    private OnpremTestOrganizationServiceClient organizationServiceClient;
+    @Named("admin")
+    private OnpremTestOrganizationServiceClient         organizationServiceClient;
     @Inject
-    private Dashboard                           dashboard;
+    private Dashboard                                   dashboard;
     @Inject
-    private DefaultTestUser                     testUser1;
+    private DefaultTestUser                             testUser1;
     @Inject
-    private TestUser                            memberUser;
+    private TestUser                                    memberUser;
     @Inject
-    private TestProfileServiceClient            profileServiceClient;
+    private TestProfileServiceClient                    profileServiceClient;
     @Inject
-    private TestUserServiceClient               userApiUtils;
+    private TestUserServiceClient                       userApiUtils;
     @Inject
-    private AdminTestUser                       adminTestUser;
+    private AdminTestUser                               adminTestUser;
 
     @BeforeClass
     public void setUp() throws Exception {
@@ -78,7 +80,7 @@ public class OrganizationTest {
         String lastName = generate("L", 7);
         emailsList.stream().forEach(email -> {
             try {
-                profileServiceClient.setUserNames(firstName, lastName, adminTestUser.getAuthToken());
+                profileServiceClient.setUserNames(firstName, lastName);
             } catch (Exception e) {
                 throw new RuntimeException(e.getMessage(), e);
             }
@@ -86,14 +88,14 @@ public class OrganizationTest {
 
         orgName = generate("orgX", 6);
 
-        organization = organizationServiceClient.createOrganization(orgName, adminTestUser.getAuthToken());
+        organization = organizationServiceClient.createOrganization(orgName);
 
         dashboard.open(adminTestUser.getAuthToken());
     }
 
     @AfterClass
     public void tearDown() throws Exception {
-        organizationServiceClient.deleteOrganizationById(organization.getId(), adminTestUser.getAuthToken());
+        organizationServiceClient.deleteOrganizationById(organization.getId());
     }
 
     @Test
@@ -167,8 +169,6 @@ public class OrganizationTest {
         organizationPage.clickMembersTab();
 
         organizationPage.clickSettingsTab();
-        organizationPage.clickDeleteOrganizationButton();
-        organizationListPage.waitForOrganizationsList();
     }
 
 }
