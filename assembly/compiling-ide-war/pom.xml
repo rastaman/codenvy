@@ -16,7 +16,7 @@
     <parent>
         <artifactId>onpremises-ide-parent</artifactId>
         <groupId>com.codenvy.onpremises</groupId>
-        <version>5.16.0-SNAPSHOT</version>
+        <version>5.17.0-SNAPSHOT</version>
     </parent>
     <artifactId>compiling-ide-war</artifactId>
     <packaging>war</packaging>
@@ -30,6 +30,10 @@
         <dependency>
             <groupId>com.codenvy.onpremises</groupId>
             <artifactId>codenvy-ide-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.codenvy.plugin</groupId>
+            <artifactId>codenvy-plugin-activity-ide</artifactId>
         </dependency>
         <dependency>
             <groupId>com.codenvy.plugin</groupId>
@@ -58,6 +62,10 @@
             <exclusions>
                 <exclusion>
                     <artifactId>che-plugin-product-info</artifactId>
+                    <groupId>org.eclipse.che.plugin</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>che-plugin-activity-ide</artifactId>
                     <groupId>org.eclipse.che.plugin</groupId>
                 </exclusion>
             </exclusions>
