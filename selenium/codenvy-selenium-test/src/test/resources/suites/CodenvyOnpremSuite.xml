@@ -287,6 +287,7 @@
             </class>
             <class name="org.eclipse.che.selenium.filewatcher.UpdateFilesWithoutIDE"/>
             <class name="org.eclipse.che.selenium.filewatcher.CheckDeletingProjectByApiTest"/>
+            <class name="org.eclipse.che.selenium.filewatcher.CheckFileWatcherExcludeFeatureTest"/>
             <class name="org.eclipse.che.selenium.git.AddFilesToIndexTest">
                 <methods>
                     <!-- https://github.com/eclipse/che/issues/5071 -->
@@ -572,6 +573,7 @@
             <class name="org.eclipse.che.selenium.projectexplorer.RenameJustCreatedNotJavaFileTest"/>
             <class name="org.eclipse.che.selenium.projectexplorer.RenameProjectTest"/>
             <class name="org.eclipse.che.selenium.projectexplorer.ShowFileReferenceTest"/>
+            <class name="org.eclipse.che.selenium.projectexplorer.CheckDisplayingArtifactIdTest"/>
             <class name="org.eclipse.che.selenium.refactor.fields.FailNotPrivateFieldTest"/>
             <class name="org.eclipse.che.selenium.refactor.fields.FailPrivateFieldTest">
                 <methods>
