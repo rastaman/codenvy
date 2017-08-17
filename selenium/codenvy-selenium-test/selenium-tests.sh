@@ -20,22 +20,22 @@ defineProfileConfiguration() {
             PROFILE=$(echo "$var" | sed -e "s/-P//g")
 
             if [[ ${PROFILE} == "nightly" ]]; then
-                ADDITIONAL_ARGS="--https --host=nightly-onprem.codenvy-stg.com"
+                PROFILE_ARGS="--https --host=nightly-onprem.codenvy-stg.com"
 
             elif [[ ${PROFILE} == "a1" ]]; then
-                ADDITIONAL_ARGS="--https --host=a1.codenvy-stg.com"
+                PROFILE_ARGS="--https --host=a1.codenvy-stg.com"
 
             elif [[ ${PROFILE} == "a2" ]]; then
-                ADDITIONAL_ARGS="--https --host=a2.codenvy-stg.com"
+                PROFILE_ARGS="--https --host=a2.codenvy-stg.com"
 
             elif [[ ${PROFILE} == "a3" ]]; then
-                ADDITIONAL_ARGS="--https --host=a3.codenvy-stg.com"
+                PROFILE_ARGS="--https --host=a3.codenvy-stg.com"
 
             elif [[ ${PROFILE} == "a4" ]]; then
-                ADDITIONAL_ARGS="--https --host=a4.codenvy-stg.com"
+                PROFILE_ARGS="--https --host=a4.codenvy-stg.com"
 
             elif [[ ${PROFILE} == "a5" ]]; then
-                ADDITIONAL_ARGS="--https --host=a5.codenvy-stg.com"
+                PROFILE_ARGS="--https --host=a5.codenvy-stg.com"
 
             else
                 echo "[TEST] Unrecognized profile "${PROFILE}
@@ -50,6 +50,8 @@ defineProfileConfiguration() {
 
 defineProfileConfiguration $@
 
+cd ${CUR_DIR}
+
 mvn dependency:unpack-dependencies \
     -DincludeArtifactIds=che-selenium-core \
     -DincludeGroupIds=org.eclipse.che.selenium \
@@ -57,5 +59,12 @@ mvn dependency:unpack-dependencies \
     -DoutputDirectory=${CUR_DIR}/target/bin
 chmod +x ${CUR_DIR}/target/bin/webdriver.sh
 
-(target/bin/webdriver.sh --suite=CodenvyOnpremSuite.xml "$@" "$ADDITIONAL_ARGS")
+TESTS_SCOPE="--suite=CodenvyOnpremSuite.xml"
+for var in "$@"; do
+    if [[ "$var" =~ --test=.* ]] || [[ "$var" =~ --suite=.* ]]; then
+        TESTS_SCOPE=
+        break
+    fi
+done
 
+(target/bin/webdriver.sh "$TESTS_SCOPE" $@ "$PROFILE_ARGS")
