@@ -21,7 +21,6 @@ import com.google.inject.multibindings.MapBinder;
 import com.google.inject.multibindings.Multibinder;
 import com.google.inject.name.Names;
 
-
 /** @author Sergii Leschenko */
 public class PermissionsModule extends AbstractModule {
   @Override
