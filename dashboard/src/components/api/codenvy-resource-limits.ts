@@ -15,6 +15,8 @@
  *
  * @author Ann Shumilova
  */
+// todo remove
+// moved to che
 export enum CodenvyResourceLimits {
   RAM = <any>'RAM',
   WORKSPACE = <any>'workspace',

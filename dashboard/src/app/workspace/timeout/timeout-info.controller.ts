@@ -10,9 +10,7 @@
  */
 'use strict';
 import {CodenvySubscription} from '../../../components/api/codenvy-subscription.factory';
-import {CodenvyResourcesDistribution} from './../../../components/api/codenvy-resources-distribution.factory';
 import {CodenvyResourceLimits} from '../../../components/api/codenvy-resource-limits';
-import {CodenvyTeam} from '../../../components/api/codenvy-team.factory';
 
 /**
  * Controller for timeout information widget.
@@ -24,10 +22,10 @@ export class TimeoutInfoController {
    * Subscription API service.
    */
   codenvySubscription: CodenvySubscription;
-  codenvyTeam: CodenvyTeam;
+  cheTeam: che.api.ICheTeam;
   cheUser: any;
   $mdDialog: ng.material.IDialogService;
-  codenvyResourcesDistribution: CodenvyResourcesDistribution;
+  codenvyResourcesDistribution: che.api.ICheResourcesDistribution;
   lodash: any;
 
   team: any;
@@ -42,11 +40,11 @@ export class TimeoutInfoController {
   /**
    * @ngInject for Dependency injection
    */
-  constructor ($mdDialog: ng.material.IDialogService, $route: ng.route.IRouteService, codenvyTeam: CodenvyTeam,
-               codenvyResourcesDistribution: CodenvyResourcesDistribution, cheUser: any,
+  constructor ($mdDialog: ng.material.IDialogService, $route: ng.route.IRouteService, cheTeam: che.api.ICheTeam,
+               codenvyResourcesDistribution: che.api.ICheResourcesDistribution, cheUser: any,
                codenvySubscription: CodenvySubscription, lodash: any) {
     this.$mdDialog = $mdDialog;
-    this.codenvyTeam = codenvyTeam;
+    this.cheTeam = cheTeam;
     this.codenvyResourcesDistribution = codenvyResourcesDistribution;
     this.codenvySubscription = codenvySubscription;
     this.cheUser = cheUser;
@@ -63,16 +61,16 @@ export class TimeoutInfoController {
    *
    */
   fetchTeamDetails(name: string): void {
-    this.team  = this.codenvyTeam.getTeamByName(name);
+    this.team  = this.cheTeam.getTeamByName(name);
     if (!this.team) {
-      this.codenvyTeam.fetchTeamByName(name).then((team: any) => {
+      this.cheTeam.fetchTeamByName(name).then((team: any) => {
         this.team = team;
         this.fetchTimeoutValue(this.team.id);
       }, (error: any) => {
         if (error.status === 304) {
-          this.team = this.codenvyTeam.getTeamByName(name);
+          this.team = this.cheTeam.getTeamByName(name);
           this.fetchTimeoutValue(this.team.id);
-        } else if (error.status === 404 && !this.codenvyTeam.getPersonalAccount() && this.cheUser.getUser().name === name) {
+        } else if (error.status === 404 && !this.cheTeam.getPersonalAccount() && this.cheUser.getUser().name === name) {
           this.fetchTimeoutValue(this.cheUser.getUser().id);
         }
       });
@@ -110,7 +108,7 @@ export class TimeoutInfoController {
       return resource.type === CodenvyResourceLimits.TIMEOUT;
     });
 
-    this.canBuy = (this.codenvyTeam.getPersonalAccount() && this.team && this.codenvyTeam.getPersonalAccount().id === this.team.id);
+    this.canBuy = (this.cheTeam.getPersonalAccount() && this.team && this.cheTeam.getPersonalAccount().id === this.team.id);
 
     this.timeoutValue =  timeout ? (timeout.amount < 60 ? (timeout.amount + ' minute') : (timeout.amount / 60 + ' hour')) : '';
   }

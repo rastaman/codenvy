@@ -10,8 +10,6 @@
  */
 'use strict';
 import {CodenvyAPI} from '../../components/api/codenvy-api.factory';
-import {CodenvyPermissions} from '../../components/api/codenvy-permissions.factory';
-import {CodenvyOrganization} from '../../components/api/codenvy-organizations.factory';
 
 export class CodenvyNavBarController {
   menuItemUrl = {
@@ -55,15 +53,15 @@ export class CodenvyNavBarController {
   private $cookies: ng.cookies.ICookiesService;
   private $resource: ng.resource.IResourceService;
   private $mdSidenav: ng.material.ISidenavService;
-  private userServices: codenvy.IUserServices;
+  private userServices: che.IUserServices;
   private codenvyAPI: CodenvyAPI;
   private cheFactory: any;
-  private codenvyPermissions: CodenvyPermissions;
+  private chePermissions: che.api.IChePermissions;
   private cheAPI: any;
   private profile: che.IProfile;
   private logoutAPI: any;
   private hasPersonalAccount: boolean;
-  private organizations: Array<codenvy.IOrganization>;
+  private organizations: Array<che.IOrganization>;
 
   /**
    * Default constructor
@@ -80,7 +78,7 @@ export class CodenvyNavBarController {
     this.cheAPI = cheAPI;
     this.codenvyAPI = codenvyAPI;
     this.cheFactory = cheAPI.getFactory();
-    this.codenvyPermissions = codenvyAPI.getPermissions();
+    this.chePermissions = cheAPI.getPermissions();
     this.$rootScope = $rootScope;
     this.$window = $window;
     this.$resource = $resource;
@@ -125,11 +123,11 @@ export class CodenvyNavBarController {
     });
 
     cheAPI.cheWorkspace.fetchWorkspaces();
-    this.userServices = this.codenvyPermissions.getUserServices();
-    if (this.codenvyPermissions.getSystemPermissions()) {
+    this.userServices = this.chePermissions.getUserServices();
+    if (this.chePermissions.getSystemPermissions()) {
       this.updateData();
     } else {
-      this.codenvyPermissions.fetchSystemPermissions().finally(() => {
+      this.chePermissions.fetchSystemPermissions().finally(() => {
         this.updateData();
       });
     }
@@ -139,7 +137,7 @@ export class CodenvyNavBarController {
    * Update data.
    */
   updateData(): void {
-    let organization: CodenvyOrganization = this.codenvyAPI.getOrganization();
+    let organization: che.api.ICheOrganization = this.cheAPI.getOrganization();
     organization.fetchOrganizations().then(() => {
       this.organizations = organization.getOrganizations();
       let user: che.IUser = this.cheAPI.getUser().getUser();

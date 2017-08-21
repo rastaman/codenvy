@@ -10,7 +10,6 @@
  */
 'use strict';
 
-import {AccountProfile} from './profile/account-profile.directive';
 import {AccountDelete} from './account-delete.directive';
 import {AccountDeleteController} from './account-delete.controller';
 import {AccountUpdatePassword} from './account-update-password.directive';
@@ -22,15 +21,13 @@ export class AccountConfig {
   constructor(register: che.IRegisterService) {
     register.directive('accountUpdatePassword', AccountUpdatePassword);
 
-    register.directive('accountProfile', AccountProfile);
-
     register.controller('AccountDeleteController', AccountDeleteController);
     register.directive('accountDelete', AccountDelete);
 
     register.controller('AccountController', AccountController);
 
     // config routes
-    register.app.config(($routeProvider: ng.route.IRouteProvider) => {
+    register.app.config(($routeProvider: che.route.IRouteProvider) => {
       let locationProvider = {
         title: 'Account',
         templateUrl: 'app/account/details/account.html',

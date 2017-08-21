@@ -9,7 +9,6 @@
  *   Red Hat, Inc. - initial API and implementation
  */
 'use strict';
-import IResource = angular.resource.IResource;
 
 export interface ICreditCard {
   accountId?: string;
