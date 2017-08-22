@@ -32,6 +32,7 @@
         <module>ide/codenvy-ide-core</module>
         <module>assembly</module>
         <module>dockerfiles/agents</module>
+        <module>selenium</module>
     </modules>
     <scm>
         <connection>scm:git:git@github.com:codenvy/codenvy.git</connection>
@@ -671,6 +672,11 @@
                 <artifactId>codenvy-tomcat8-slf4j-logback</artifactId>
                 <version>${version.resource-bundle}</version>
                 <type>zip</type>
+            </dependency>
+            <dependency>
+                <groupId>com.codenvy.selenium</groupId>
+                <artifactId>onprem-selenium-tests</artifactId>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.github.cloudfoundry-community</groupId>
