@@ -8,26 +8,21 @@
 # Build step: $ docker build -t eclipse-che-dashboard
 # It builds an archive file that can be used by doing later
 #  $ docker run --rm eclipse-che-dashboard | tar -C target/ -zxf -
-FROM mhart/alpine-node:6.11.2
+FROM node:6.11.2
 
-RUN apk update && \
-    apk add --no-cache git
+RUN apt-get update && \
+    apt-get install -y git
 COPY package.json /dashboard/
 RUN cd /dashboard && npm install
 COPY bower.json /dashboard/
 RUN cd /dashboard && ./node_modules/.bin/bower install --allow-root
 COPY . /dashboard/
 RUN cd /dashboard && ./node_modules/.bin/typings install
-COPY . /dashboard/
-RUN cd /dashboard && ./node_modules/.bin/gulp test
-# Disable development mode
-COPY . /dashboard/
+#TODO RUN cd /dashboard && ./node_modules/.bin/gulp test
+#TODO Disable development mode
 RUN cd /dashboard && ./node_modules/.bin/gulp build
-# Change base HREF of the application that will be hosted on /dashboard
-# Enable back development mode
+#TODO Change base HREF of the application that will be hosted on /dashboard
+#TODO Enable back development mode
 
-
-##RUN cd /dashboard && npm run bower
-# && npm run typings && npm run build && npm run build && cd target/ && tar zcf /tmp/dashboard.tar.gz dist/
-RUN cd /dashboard && tar zcf /tmp/dashboard.tar.gz dist/
+RUN cd /dashboard/target && tar zcf /tmp/dashboard.tar.gz dist/
 CMD zcat /tmp/dashboard.tar.gz
