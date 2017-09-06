@@ -5,9 +5,9 @@
 # http://www.eclipse.org/legal/epl-v10.html
 
 # This is a Dockerfile allowing to build dashboard by using a docker container.
-# Build step: $ docker build -t eclipse-che-dashboard
+# Build step: $ docker build -t codenvy-dashboard
 # It builds an archive file that can be used by doing later
-#  $ docker run --rm eclipse-che-dashboard | tar -C target/ -zxf -
+#  $ docker run --rm codenvy-dashboard | tar -C target/ -zxf -
 FROM node:6.11.2
 
 RUN apt-get update && \
@@ -15,12 +15,14 @@ RUN apt-get update && \
 COPY package.json /dashboard/
 RUN cd /dashboard && npm install
 COPY bower.json /dashboard/
+# workaround to prevent caching old che-dashboard
+ADD https://api.github.com/repos/eclipse/che/git/refs/heads/master /tmp/che-dashboard-version.json
 RUN cd /dashboard && ./node_modules/.bin/bower install --allow-root
 COPY . /dashboard/
 RUN cd /dashboard && ./node_modules/.bin/typings install
-#TODO RUN cd /dashboard && ./node_modules/.bin/gulp test
 #TODO Disable development mode
 RUN cd /dashboard && ./node_modules/.bin/gulp build
+RUN cd /dashboard && ./node_modules/.bin/gulp test
 #TODO Change base HREF of the application that will be hosted on /dashboard
 #TODO Enable back development mode
 
