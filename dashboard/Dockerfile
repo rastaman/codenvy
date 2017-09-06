@@ -1,0 +1,33 @@
+# Copyright (c) 2012-2017 Red Hat, Inc
+# All rights reserved. This program and the accompanying materials
+# are made available under the terms of the Eclipse Public License v1.0
+# which accompanies this distribution, and is available at
+# http://www.eclipse.org/legal/epl-v10.html
+
+# This is a Dockerfile allowing to build dashboard by using a docker container.
+# Build step: $ docker build -t eclipse-che-dashboard
+# It builds an archive file that can be used by doing later
+#  $ docker run --rm eclipse-che-dashboard | tar -C target/ -zxf -
+FROM mhart/alpine-node:6.11.2
+
+RUN apk update && \
+    apk add --no-cache git
+COPY package.json /dashboard/
+RUN cd /dashboard && npm install
+COPY bower.json /dashboard/
+RUN cd /dashboard && ./node_modules/.bin/bower install --allow-root
+COPY . /dashboard/
+RUN cd /dashboard && ./node_modules/.bin/typings install
+COPY . /dashboard/
+RUN cd /dashboard && ./node_modules/.bin/gulp test
+# Disable development mode
+COPY . /dashboard/
+RUN cd /dashboard && ./node_modules/.bin/gulp build
+# Change base HREF of the application that will be hosted on /dashboard
+# Enable back development mode
+
+
+##RUN cd /dashboard && npm run bower
+# && npm run typings && npm run build && npm run build && cd target/ && tar zcf /tmp/dashboard.tar.gz dist/
+RUN cd /dashboard && tar zcf /tmp/dashboard.tar.gz dist/
+CMD zcat /tmp/dashboard.tar.gz
