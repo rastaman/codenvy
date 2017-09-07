@@ -10,7 +10,7 @@
  */
 package com.codenvy.api.dao.authentication;
 
-import org.eclipse.che.api.auth.AuthenticationException;
+import org.eclipse.che.commons.auth.AuthenticationException;
 
 /**
  * Authentication using username and password.

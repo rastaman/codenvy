@@ -19,9 +19,9 @@ import static org.mockito.Mockito.verify;
 import static org.testng.Assert.assertEquals;
 
 import com.codenvy.api.node.server.NodeService;
-import com.codenvy.api.permission.server.SystemDomain;
 import com.jayway.restassured.response.Response;
 import org.eclipse.che.api.core.rest.ApiExceptionMapper;
+import org.eclipse.che.api.permission.server.SystemDomain;
 import org.eclipse.che.commons.env.EnvironmentContext;
 import org.eclipse.che.commons.subject.Subject;
 import org.everrest.assured.EverrestJetty;

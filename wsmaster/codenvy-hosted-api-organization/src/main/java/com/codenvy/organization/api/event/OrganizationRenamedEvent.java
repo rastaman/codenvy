@@ -54,7 +54,7 @@ public class OrganizationRenamedEvent implements OrganizationEvent {
     return newName;
   }
 
-  /** Returns name of user who initiated organization rename */
+  @Override
   public String getInitiator() {
     return initiator;
   }

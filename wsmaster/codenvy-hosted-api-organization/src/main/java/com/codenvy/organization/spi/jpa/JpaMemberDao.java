@@ -14,8 +14,6 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static java.util.Objects.requireNonNull;
 import static java.util.stream.Collectors.toList;
 
-import com.codenvy.api.permission.server.AbstractPermissionsDomain;
-import com.codenvy.api.permission.server.jpa.AbstractJpaPermissionsDao;
 import com.codenvy.organization.spi.MemberDao;
 import com.codenvy.organization.spi.impl.MemberImpl;
 import com.codenvy.organization.spi.impl.OrganizationImpl;
@@ -29,6 +27,8 @@ import javax.persistence.NoResultException;
 import org.eclipse.che.api.core.NotFoundException;
 import org.eclipse.che.api.core.Page;
 import org.eclipse.che.api.core.ServerException;
+import org.eclipse.che.api.permission.server.AbstractPermissionsDomain;
+import org.eclipse.che.api.permission.server.jpa.AbstractJpaPermissionsDao;
 
 /**
  * JPA based implementation of {@link MemberDao}.
@@ -161,6 +161,7 @@ public class JpaMemberDao extends AbstractJpaPermissionsDao<MemberImpl> implemen
     }
   }
 
+  @Override
   @Transactional
   protected void doRemove(String organizationId, String userId) {
     final EntityManager manager = managerProvider.get();

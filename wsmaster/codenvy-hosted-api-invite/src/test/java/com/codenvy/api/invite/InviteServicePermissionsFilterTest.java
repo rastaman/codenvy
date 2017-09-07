@@ -10,8 +10,8 @@
  */
 package com.codenvy.api.invite;
 
-import static com.codenvy.api.permission.server.AbstractPermissionsDomain.SET_PERMISSIONS;
 import static com.jayway.restassured.RestAssured.given;
+import static org.eclipse.che.api.permission.server.AbstractPermissionsDomain.SET_PERMISSIONS;
 import static org.everrest.assured.JettyHttpServer.ADMIN_USER_NAME;
 import static org.everrest.assured.JettyHttpServer.ADMIN_USER_PASSWORD;
 import static org.everrest.assured.JettyHttpServer.SECURE_PATH;

@@ -12,9 +12,9 @@ package com.codenvy.api.user.server;
 
 import static com.codenvy.api.user.server.UserServicePermissionsFilter.MANAGE_USERS_ACTION;
 
-import com.codenvy.api.permission.server.SystemDomain;
 import javax.ws.rs.Path;
 import org.eclipse.che.api.core.ApiException;
+import org.eclipse.che.api.permission.server.SystemDomain;
 import org.eclipse.che.commons.env.EnvironmentContext;
 import org.eclipse.che.commons.subject.Subject;
 import org.eclipse.che.everrest.CheMethodInvokerFilter;

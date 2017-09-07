@@ -48,6 +48,7 @@ public class WsAgentHealthCheckerWithAuth extends WsAgentHealthCheckerImpl {
   }
 
   // modifies the ping request if it is possible to get the machine token.
+  @Override
   protected HttpJsonRequest createPingRequest(Machine devMachine) throws ServerException {
     final HttpJsonRequest pingRequest = super.createPingRequest(devMachine);
     final String tokenServiceUrl =

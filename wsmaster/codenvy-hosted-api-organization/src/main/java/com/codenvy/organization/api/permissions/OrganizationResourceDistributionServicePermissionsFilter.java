@@ -10,7 +10,6 @@
  */
 package com.codenvy.organization.api.permissions;
 
-import com.codenvy.api.permission.server.SuperPrivilegesChecker;
 import com.codenvy.organization.api.OrganizationManager;
 import com.codenvy.organization.api.resource.OrganizationResourcesDistributionService;
 import com.codenvy.organization.shared.model.Organization;
@@ -18,6 +17,7 @@ import javax.inject.Inject;
 import javax.ws.rs.Path;
 import org.eclipse.che.api.core.ApiException;
 import org.eclipse.che.api.core.ForbiddenException;
+import org.eclipse.che.api.permission.server.SuperPrivilegesChecker;
 import org.eclipse.che.commons.env.EnvironmentContext;
 import org.eclipse.che.commons.subject.Subject;
 import org.eclipse.che.everrest.CheMethodInvokerFilter;

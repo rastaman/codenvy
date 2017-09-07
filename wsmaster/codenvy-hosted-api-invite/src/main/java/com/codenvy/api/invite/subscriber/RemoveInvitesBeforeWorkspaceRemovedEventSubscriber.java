@@ -11,12 +11,12 @@
 package com.codenvy.api.invite.subscriber;
 
 import com.codenvy.api.invite.InviteManager;
-import com.codenvy.api.workspace.server.WorkspaceDomain;
 import com.codenvy.shared.invite.model.Invite;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.eclipse.che.api.core.Pages;
 import org.eclipse.che.api.core.notification.EventService;
+import org.eclipse.che.api.workspace.server.WorkspaceDomain;
 import org.eclipse.che.api.workspace.server.event.BeforeWorkspaceRemovedEvent;
 import org.eclipse.che.core.db.cascade.CascadeEventSubscriber;
 

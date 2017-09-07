@@ -10,7 +10,6 @@
  */
 package com.codenvy.api.invite;
 
-import com.codenvy.api.workspace.server.WorkspaceDomain;
 import com.codenvy.organization.api.permissions.OrganizationDomain;
 import com.codenvy.shared.invite.model.Invite;
 import java.util.ArrayList;
@@ -27,6 +26,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import org.eclipse.che.api.workspace.server.WorkspaceDomain;
 
 /**
  * Data object for {@link Invite}.

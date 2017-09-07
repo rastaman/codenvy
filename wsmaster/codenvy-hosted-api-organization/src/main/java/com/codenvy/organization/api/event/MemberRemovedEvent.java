@@ -47,7 +47,7 @@ public class MemberRemovedEvent implements MemberEvent {
     return member;
   }
 
-  /** Returns name of user who initiated member removal */
+  @Override
   public String getInitiator() {
     return initiator;
   }

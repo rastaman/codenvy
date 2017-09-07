@@ -10,7 +10,6 @@
  */
 package com.codenvy.auth.sso.client;
 
-import com.codenvy.machine.authentication.server.MachineTokenRegistry;
 import com.google.common.annotations.VisibleForTesting;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
@@ -19,6 +18,7 @@ import javax.servlet.http.HttpSession;
 import org.eclipse.che.api.core.notification.EventService;
 import org.eclipse.che.api.core.notification.EventSubscriber;
 import org.eclipse.che.api.workspace.shared.dto.event.WorkspaceStatusEvent;
+import org.eclipse.che.machine.authentication.server.MachineTokenRegistry;
 
 /**
  * Invalidates all the sessions related to the certain machine, when the workspace is stopped.

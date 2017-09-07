@@ -44,7 +44,7 @@ public class MemberAddedEvent implements MemberEvent {
     return MEMBER_ADDED;
   }
 
-  /** Returns name of user who initiated member invitation */
+  @Override
   public String getInitiator() {
     return initiator;
   }

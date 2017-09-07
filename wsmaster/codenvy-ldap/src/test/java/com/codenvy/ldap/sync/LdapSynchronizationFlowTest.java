@@ -30,6 +30,8 @@ import org.apache.directory.shared.ldap.entry.Modification;
 import org.apache.directory.shared.ldap.entry.ServerEntry;
 import org.apache.directory.shared.ldap.entry.client.ClientModification;
 import org.apache.directory.shared.ldap.entry.client.DefaultClientAttribute;
+import org.eclipse.che.account.spi.AccountDao;
+import org.eclipse.che.account.spi.jpa.JpaAccountDao;
 import org.eclipse.che.api.core.notification.EventService;
 import org.eclipse.che.api.user.server.UserManager;
 import org.eclipse.che.api.user.server.jpa.UserJpaModule;
@@ -211,6 +213,7 @@ public class LdapSynchronizationFlowTest {
 
       install(new JpaPersistModule("test"));
       install(new UserJpaModule());
+      bind(AccountDao.class).to(JpaAccountDao.class);
       bind(String[].class)
           .annotatedWith(Names.named("che.auth.reserved_user_names"))
           .toInstance(new String[0]);

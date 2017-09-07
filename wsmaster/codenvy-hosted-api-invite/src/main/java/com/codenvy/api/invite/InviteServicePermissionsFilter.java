@@ -10,7 +10,7 @@
  */
 package com.codenvy.api.invite;
 
-import static com.codenvy.api.permission.server.AbstractPermissionsDomain.SET_PERMISSIONS;
+import static org.eclipse.che.api.permission.server.AbstractPermissionsDomain.SET_PERMISSIONS;
 
 import com.codenvy.shared.invite.dto.InviteDto;
 import javax.ws.rs.Path;

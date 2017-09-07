@@ -10,8 +10,6 @@
  */
 package com.codenvy.organization.api.listener;
 
-import com.codenvy.api.permission.shared.event.PermissionsEvent;
-import com.codenvy.api.permission.shared.model.Permissions;
 import com.codenvy.organization.api.OrganizationManager;
 import com.codenvy.organization.api.event.MemberAddedEvent;
 import com.codenvy.organization.api.event.MemberRemovedEvent;
@@ -25,6 +23,8 @@ import org.eclipse.che.api.core.ServerException;
 import org.eclipse.che.api.core.model.user.User;
 import org.eclipse.che.api.core.notification.EventService;
 import org.eclipse.che.api.core.notification.EventSubscriber;
+import org.eclipse.che.api.permission.shared.event.PermissionsEvent;
+import org.eclipse.che.api.permission.shared.model.Permissions;
 import org.eclipse.che.api.user.server.UserManager;
 
 /**

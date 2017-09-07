@@ -10,10 +10,10 @@
  */
 package com.codenvy.service.system;
 
-import com.codenvy.api.permission.server.SystemDomain;
 import javax.ws.rs.Path;
 import org.eclipse.che.api.core.ApiException;
 import org.eclipse.che.api.core.ForbiddenException;
+import org.eclipse.che.api.permission.server.SystemDomain;
 import org.eclipse.che.api.system.server.SystemService;
 import org.eclipse.che.commons.env.EnvironmentContext;
 import org.eclipse.che.everrest.CheMethodInvokerFilter;

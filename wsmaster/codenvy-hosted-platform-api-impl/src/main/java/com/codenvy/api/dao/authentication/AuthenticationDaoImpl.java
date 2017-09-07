@@ -16,13 +16,13 @@ import javax.ws.rs.core.Cookie;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import org.eclipse.che.api.auth.AuthenticationDao;
-import org.eclipse.che.api.auth.AuthenticationException;
 import org.eclipse.che.api.auth.shared.dto.Credentials;
 import org.eclipse.che.api.auth.shared.dto.Token;
 import org.eclipse.che.api.core.NotFoundException;
 import org.eclipse.che.api.core.ServerException;
 import org.eclipse.che.api.user.server.spi.UserDao;
 import org.eclipse.che.commons.annotation.Nullable;
+import org.eclipse.che.commons.auth.AuthenticationException;
 import org.eclipse.che.dto.server.DtoFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,7 +51,7 @@ public class AuthenticationDaoImpl implements AuthenticationDao {
    * @param tokenAccessCookie - old session-based cookie with token
    * @param credentials - username and password
    * @return - auth token in JSON, session-based and persistent cookies
-   * @throws org.eclipse.che.api.auth.AuthenticationException
+   * @throws AuthenticationException
    */
   public Response login(Credentials credentials, Cookie tokenAccessCookie, UriInfo uriInfo)
       throws AuthenticationException {

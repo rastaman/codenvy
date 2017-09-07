@@ -15,9 +15,9 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.testng.Assert.assertEquals;
 
-import com.codenvy.api.permission.server.account.AccountOperation;
 import com.codenvy.organization.spi.impl.OrganizationImpl;
 import org.eclipse.che.api.core.ForbiddenException;
+import org.eclipse.che.api.permission.server.account.AccountOperation;
 import org.eclipse.che.commons.env.EnvironmentContext;
 import org.eclipse.che.commons.subject.Subject;
 import org.mockito.Mock;

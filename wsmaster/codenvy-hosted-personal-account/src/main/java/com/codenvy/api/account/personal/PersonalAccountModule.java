@@ -10,10 +10,10 @@
  */
 package com.codenvy.api.account.personal;
 
-import com.codenvy.api.permission.server.account.AccountPermissionsChecker;
 import com.codenvy.resource.api.free.DefaultResourcesProvider;
 import com.google.inject.AbstractModule;
 import com.google.inject.multibindings.Multibinder;
+import org.eclipse.che.api.permission.server.account.AccountPermissionsChecker;
 import org.eclipse.che.api.user.server.UserManager;
 import org.eclipse.che.inject.DynaModule;
 

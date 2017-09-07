@@ -15,12 +15,12 @@ import java.util.Arrays;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
-import org.eclipse.che.api.auth.AuthenticationException;
 import org.eclipse.che.api.core.NotFoundException;
 import org.eclipse.che.api.core.ServerException;
 import org.eclipse.che.api.core.model.user.Profile;
 import org.eclipse.che.api.user.server.spi.ProfileDao;
 import org.eclipse.che.commons.annotation.Nullable;
+import org.eclipse.che.commons.auth.AuthenticationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

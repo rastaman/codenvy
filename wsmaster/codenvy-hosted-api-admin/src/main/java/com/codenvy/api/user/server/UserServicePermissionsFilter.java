@@ -12,12 +12,12 @@ package com.codenvy.api.user.server;
 
 import static org.eclipse.che.api.user.server.UserService.USER_SELF_CREATION_ALLOWED;
 
-import com.codenvy.api.permission.server.SystemDomain;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.ws.rs.Path;
 import org.eclipse.che.api.core.ApiException;
 import org.eclipse.che.api.core.ForbiddenException;
+import org.eclipse.che.api.permission.server.SystemDomain;
 import org.eclipse.che.api.user.server.UserService;
 import org.eclipse.che.commons.env.EnvironmentContext;
 import org.eclipse.che.commons.subject.Subject;

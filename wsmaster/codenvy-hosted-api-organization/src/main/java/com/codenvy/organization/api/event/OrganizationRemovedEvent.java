@@ -51,6 +51,7 @@ public class OrganizationRemovedEvent implements OrganizationEvent {
   }
 
   /** Returns name of user who initiated organization removal */
+  @Override
   public String getInitiator() {
     return initiator;
   }

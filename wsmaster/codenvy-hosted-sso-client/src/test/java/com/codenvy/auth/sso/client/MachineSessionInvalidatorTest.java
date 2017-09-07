@@ -17,11 +17,11 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.testng.Assert.assertNull;
 
-import com.codenvy.machine.authentication.server.MachineTokenRegistry;
 import javax.servlet.http.HttpSession;
 import org.eclipse.che.api.core.notification.EventService;
 import org.eclipse.che.api.workspace.shared.dto.event.WorkspaceStatusEvent;
 import org.eclipse.che.commons.lang.NameGenerator;
+import org.eclipse.che.machine.authentication.server.MachineTokenRegistry;
 import org.junit.Test;
 
 /** @author Yevhenii Voevodin */

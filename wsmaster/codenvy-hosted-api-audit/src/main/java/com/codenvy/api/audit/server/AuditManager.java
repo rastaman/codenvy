@@ -10,12 +10,10 @@
  */
 package com.codenvy.api.audit.server;
 
-import static com.codenvy.api.workspace.server.WorkspaceDomain.DOMAIN_ID;
 import static java.nio.file.Files.createTempDirectory;
+import static org.eclipse.che.api.workspace.server.WorkspaceDomain.DOMAIN_ID;
 
 import com.codenvy.api.audit.server.printer.Printer;
-import com.codenvy.api.permission.server.PermissionsManager;
-import com.codenvy.api.permission.server.model.impl.AbstractPermissions;
 import com.google.common.annotations.VisibleForTesting;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -36,6 +34,8 @@ import org.eclipse.che.api.core.NotFoundException;
 import org.eclipse.che.api.core.Page;
 import org.eclipse.che.api.core.Page.PageRef;
 import org.eclipse.che.api.core.ServerException;
+import org.eclipse.che.api.permission.server.PermissionsManager;
+import org.eclipse.che.api.permission.server.model.impl.AbstractPermissions;
 import org.eclipse.che.api.user.server.UserManager;
 import org.eclipse.che.api.user.server.model.impl.UserImpl;
 import org.eclipse.che.api.workspace.server.WorkspaceManager;

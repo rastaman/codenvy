@@ -27,13 +27,13 @@ import static org.mockito.Mockito.when;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
-import com.codenvy.api.permission.server.SystemDomain;
 import com.jayway.restassured.response.Response;
 import java.lang.reflect.Method;
 import java.util.stream.Stream;
 import org.eclipse.che.api.core.ForbiddenException;
 import org.eclipse.che.api.core.ServerException;
 import org.eclipse.che.api.core.rest.ApiExceptionMapper;
+import org.eclipse.che.api.permission.server.SystemDomain;
 import org.eclipse.che.api.user.server.UserManager;
 import org.eclipse.che.api.user.server.UserService;
 import org.eclipse.che.api.user.shared.dto.UserDto;

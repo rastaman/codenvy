@@ -22,7 +22,6 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.testng.Assert.fail;
 
-import com.codenvy.api.permission.server.SystemDomain;
 import com.google.common.collect.Sets;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -31,6 +30,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 import org.eclipse.che.api.core.ForbiddenException;
+import org.eclipse.che.api.permission.server.SystemDomain;
 import org.eclipse.che.api.system.server.SystemService;
 import org.eclipse.che.commons.env.EnvironmentContext;
 import org.eclipse.che.commons.subject.Subject;

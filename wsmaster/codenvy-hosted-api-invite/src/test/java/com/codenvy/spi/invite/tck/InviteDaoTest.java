@@ -17,7 +17,6 @@ import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
 import com.codenvy.api.invite.InviteImpl;
-import com.codenvy.api.workspace.server.WorkspaceDomain;
 import com.codenvy.organization.api.permissions.OrganizationDomain;
 import com.codenvy.organization.spi.impl.OrganizationImpl;
 import com.codenvy.spi.invite.InviteDao;
@@ -28,6 +27,7 @@ import java.util.stream.Stream;
 import javax.inject.Inject;
 import org.eclipse.che.api.core.NotFoundException;
 import org.eclipse.che.api.core.Pages;
+import org.eclipse.che.api.workspace.server.WorkspaceDomain;
 import org.eclipse.che.api.workspace.server.model.impl.WorkspaceImpl;
 import org.eclipse.che.commons.test.tck.TckListener;
 import org.eclipse.che.commons.test.tck.repository.TckRepository;

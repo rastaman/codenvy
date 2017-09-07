@@ -47,7 +47,7 @@ public class OnpremisesUserManager extends UserManager {
       @Named("che.auth.reserved_user_names") String[] reservedNames,
       AccountManager accountManager,
       EventService eventService) {
-    super(userDao, profileDao, preferencesDao, eventService, reservedNames);
+    super(userDao, profileDao, preferencesDao, eventService, accountManager, reservedNames);
     this.accountManager = accountManager;
   }
 

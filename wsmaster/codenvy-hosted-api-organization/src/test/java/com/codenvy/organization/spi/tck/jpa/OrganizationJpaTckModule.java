@@ -12,7 +12,6 @@ package com.codenvy.organization.spi.tck.jpa;
 
 import static org.eclipse.che.commons.test.db.H2TestHelper.inMemoryDefault;
 
-import com.codenvy.api.permission.server.AbstractPermissionsDomain;
 import com.codenvy.organization.api.permissions.OrganizationDomain;
 import com.codenvy.organization.spi.MemberDao;
 import com.codenvy.organization.spi.OrganizationDao;
@@ -26,6 +25,7 @@ import com.codenvy.organization.spi.jpa.JpaOrganizationDistributedResourcesDao;
 import com.codenvy.organization.spi.jpa.JpaOrganizationImplTckRepository;
 import com.google.inject.TypeLiteral;
 import com.google.inject.persist.jpa.JpaPersistModule;
+import org.eclipse.che.api.permission.server.AbstractPermissionsDomain;
 import org.eclipse.che.api.user.server.model.impl.UserImpl;
 import org.eclipse.che.commons.test.db.H2JpaCleaner;
 import org.eclipse.che.commons.test.tck.TckModule;

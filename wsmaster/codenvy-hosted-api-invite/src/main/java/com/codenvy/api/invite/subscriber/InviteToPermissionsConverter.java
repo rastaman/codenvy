@@ -13,8 +13,6 @@ package com.codenvy.api.invite.subscriber;
 import static java.lang.String.format;
 
 import com.codenvy.api.invite.InviteManager;
-import com.codenvy.api.permission.server.PermissionsManager;
-import com.codenvy.api.permission.shared.dto.PermissionsDto;
 import com.codenvy.shared.invite.model.Invite;
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -24,6 +22,8 @@ import org.eclipse.che.api.core.Pages;
 import org.eclipse.che.api.core.ServerException;
 import org.eclipse.che.api.core.notification.EventService;
 import org.eclipse.che.api.core.notification.EventSubscriber;
+import org.eclipse.che.api.permission.server.PermissionsManager;
+import org.eclipse.che.api.permission.shared.dto.PermissionsDto;
 import org.eclipse.che.api.user.server.event.UserCreatedEvent;
 import org.eclipse.che.dto.server.DtoFactory;
 import org.slf4j.Logger;

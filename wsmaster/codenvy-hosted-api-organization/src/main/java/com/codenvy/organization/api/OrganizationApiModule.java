@@ -10,9 +10,6 @@
  */
 package com.codenvy.organization.api;
 
-import com.codenvy.api.permission.server.SuperPrivilegesChecker;
-import com.codenvy.api.permission.server.account.AccountPermissionsChecker;
-import com.codenvy.api.permission.shared.model.PermissionsDomain;
 import com.codenvy.organization.api.listener.MemberEventsPublisher;
 import com.codenvy.organization.api.listener.OrganizationEventsWebsocketBroadcaster;
 import com.codenvy.organization.api.listener.OrganizationNotificationEmailSender;
@@ -35,6 +32,9 @@ import com.google.inject.AbstractModule;
 import com.google.inject.multibindings.MapBinder;
 import com.google.inject.multibindings.Multibinder;
 import com.google.inject.name.Names;
+import org.eclipse.che.api.permission.server.SuperPrivilegesChecker;
+import org.eclipse.che.api.permission.server.account.AccountPermissionsChecker;
+import org.eclipse.che.api.permission.shared.model.PermissionsDomain;
 
 /** @author Sergii Leschenko */
 public class OrganizationApiModule extends AbstractModule {

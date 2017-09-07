@@ -24,15 +24,7 @@
     <dependencies>
         <dependency>
             <groupId>com.codenvy.onpremises.wsagent</groupId>
-            <artifactId>codenvy-hosted-machine-authentication-agent</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.codenvy.onpremises.wsagent</groupId>
             <artifactId>wsagent-codenvy</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.codenvy.onpremises.wsmaster</groupId>
-            <artifactId>codenvy-hosted-authorization</artifactId>
         </dependency>
         <dependency>
             <groupId>com.codenvy.onpremises.wsmaster</groupId>
@@ -57,6 +49,10 @@
         <dependency>
             <groupId>org.eclipse.che.core</groupId>
             <artifactId>che-core-api-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.che.core</groupId>
+            <artifactId>che-core-api-authorization</artifactId>
         </dependency>
         <dependency>
             <groupId>org.eclipse.che.core</groupId>

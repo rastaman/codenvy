@@ -10,7 +10,6 @@
  */
 package com.codenvy.auth.sso.client;
 
-import com.codenvy.machine.authentication.server.MachineTokenRegistry;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -20,6 +19,7 @@ import org.eclipse.che.api.core.rest.HttpJsonRequestFactory;
 import org.eclipse.che.api.user.server.UserManager;
 import org.eclipse.che.commons.subject.Subject;
 import org.eclipse.che.commons.subject.SubjectImpl;
+import org.eclipse.che.machine.authentication.server.MachineTokenRegistry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

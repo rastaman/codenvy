@@ -48,7 +48,7 @@ public class CodenvyAgentModule extends AbstractModule {
                 + "-logs-dir $HOME/che/exec-agent/logs");
 
     Multibinder<AgentLauncher> launchers = Multibinder.newSetBinder(binder(), AgentLauncher.class);
-    launchers.addBinding().to(com.codenvy.machine.agent.launcher.WsAgentWithAuthLauncherImpl.class);
+    launchers.addBinding().to(org.eclipse.che.api.agent.WsAgentLauncher.class);
     launchers
         .addBinding()
         .to(com.codenvy.machine.agent.launcher.MachineInnerRsyncAgentLauncherImpl.class);

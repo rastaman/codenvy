@@ -10,9 +10,6 @@
  */
 package com.codenvy.organization.api;
 
-import com.codenvy.api.permission.server.AbstractPermissionsDomain;
-import com.codenvy.api.permission.server.model.impl.AbstractPermissions;
-import com.codenvy.api.permission.server.spi.PermissionsDao;
 import com.codenvy.organization.api.permissions.OrganizationDomain;
 import com.codenvy.organization.spi.MemberDao;
 import com.codenvy.organization.spi.OrganizationDao;
@@ -24,6 +21,9 @@ import com.codenvy.organization.spi.jpa.JpaOrganizationDistributedResourcesDao;
 import com.google.inject.AbstractModule;
 import com.google.inject.TypeLiteral;
 import com.google.inject.multibindings.Multibinder;
+import org.eclipse.che.api.permission.server.AbstractPermissionsDomain;
+import org.eclipse.che.api.permission.server.model.impl.AbstractPermissions;
+import org.eclipse.che.api.permission.server.spi.PermissionsDao;
 
 /** @author Sergii Leschenko */
 public class OrganizationJpaModule extends AbstractModule {

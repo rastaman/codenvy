@@ -12,9 +12,9 @@ package com.codenvy.auth.sso.server;
 
 import com.codenvy.api.dao.authentication.AuthenticationHandler;
 import javax.inject.Inject;
-import org.eclipse.che.api.auth.AuthenticationException;
 import org.eclipse.che.api.core.ApiException;
 import org.eclipse.che.api.user.server.spi.UserDao;
+import org.eclipse.che.commons.auth.AuthenticationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

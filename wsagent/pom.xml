@@ -25,7 +25,6 @@
     <name>Codenvy Agent Parent</name>
     <modules>
         <module>wsagent-codenvy</module>
-        <module>codenvy-hosted-machine-authentication-agent</module>
         <module>codenvy-wsagent-core</module>
     </modules>
 </project>

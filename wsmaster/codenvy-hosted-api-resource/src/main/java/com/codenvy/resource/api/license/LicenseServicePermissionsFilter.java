@@ -13,8 +13,6 @@ package com.codenvy.resource.api.license;
 import static java.util.function.Function.identity;
 import static java.util.stream.Collectors.toMap;
 
-import com.codenvy.api.permission.server.account.AccountOperation;
-import com.codenvy.api.permission.server.account.AccountPermissionsChecker;
 import java.util.Map;
 import java.util.Set;
 import javax.inject.Inject;
@@ -23,6 +21,8 @@ import org.eclipse.che.account.api.AccountManager;
 import org.eclipse.che.account.shared.model.Account;
 import org.eclipse.che.api.core.ApiException;
 import org.eclipse.che.api.core.ForbiddenException;
+import org.eclipse.che.api.permission.server.account.AccountOperation;
+import org.eclipse.che.api.permission.server.account.AccountPermissionsChecker;
 import org.eclipse.che.everrest.CheMethodInvokerFilter;
 import org.everrest.core.Filter;
 import org.everrest.core.resource.GenericResourceMethod;

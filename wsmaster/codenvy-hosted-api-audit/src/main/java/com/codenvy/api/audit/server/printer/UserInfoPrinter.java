@@ -13,11 +13,11 @@ package com.codenvy.api.audit.server.printer;
 import static com.google.common.collect.ComparisonChain.start;
 import static java.util.Collections.sort;
 
-import com.codenvy.api.permission.server.model.impl.AbstractPermissions;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
 import org.eclipse.che.api.core.ServerException;
+import org.eclipse.che.api.permission.server.model.impl.AbstractPermissions;
 import org.eclipse.che.api.user.server.model.impl.UserImpl;
 import org.eclipse.che.api.workspace.server.model.impl.WorkspaceImpl;
 

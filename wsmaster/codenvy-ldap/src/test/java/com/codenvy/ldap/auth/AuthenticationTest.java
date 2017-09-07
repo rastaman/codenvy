@@ -20,7 +20,7 @@ import com.codenvy.api.dao.authentication.SSHAPasswordEncryptor;
 import com.codenvy.ldap.EmbeddedLdapServer;
 import com.codenvy.ldap.LdapUserIdNormalizer;
 import org.apache.directory.shared.ldap.entry.ServerEntry;
-import org.eclipse.che.api.auth.AuthenticationException;
+import org.eclipse.che.commons.auth.AuthenticationException;
 import org.ldaptive.auth.Authenticator;
 import org.ldaptive.auth.EntryResolver;
 import org.ldaptive.pool.PooledConnectionFactory;

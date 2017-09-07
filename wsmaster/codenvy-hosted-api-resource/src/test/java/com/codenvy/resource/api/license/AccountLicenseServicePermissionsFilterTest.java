@@ -22,8 +22,6 @@ import static org.mockito.Mockito.when;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-import com.codenvy.api.permission.server.account.AccountOperation;
-import com.codenvy.api.permission.server.account.AccountPermissionsChecker;
 import com.google.common.collect.ImmutableSet;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -34,6 +32,8 @@ import org.eclipse.che.account.api.AccountManager;
 import org.eclipse.che.account.shared.model.Account;
 import org.eclipse.che.api.core.ForbiddenException;
 import org.eclipse.che.api.core.rest.ApiExceptionMapper;
+import org.eclipse.che.api.permission.server.account.AccountOperation;
+import org.eclipse.che.api.permission.server.account.AccountPermissionsChecker;
 import org.eclipse.che.commons.env.EnvironmentContext;
 import org.eclipse.che.commons.subject.Subject;
 import org.everrest.assured.EverrestJetty;

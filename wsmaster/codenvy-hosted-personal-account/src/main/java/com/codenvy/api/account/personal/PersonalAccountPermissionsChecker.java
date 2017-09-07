@@ -10,10 +10,10 @@
  */
 package com.codenvy.api.account.personal;
 
-import com.codenvy.api.permission.server.account.AccountOperation;
-import com.codenvy.api.permission.server.account.AccountPermissionsChecker;
 import javax.inject.Singleton;
 import org.eclipse.che.api.core.ForbiddenException;
+import org.eclipse.che.api.permission.server.account.AccountOperation;
+import org.eclipse.che.api.permission.server.account.AccountPermissionsChecker;
 import org.eclipse.che.commons.env.EnvironmentContext;
 
 /**

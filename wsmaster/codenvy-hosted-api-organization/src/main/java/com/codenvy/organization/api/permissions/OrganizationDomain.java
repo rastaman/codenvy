@@ -10,10 +10,10 @@
  */
 package com.codenvy.organization.api.permissions;
 
-import com.codenvy.api.permission.server.AbstractPermissionsDomain;
 import com.codenvy.organization.spi.impl.MemberImpl;
 import com.google.common.collect.ImmutableList;
 import java.util.List;
+import org.eclipse.che.api.permission.server.AbstractPermissionsDomain;
 
 /**
  * Domain for storing organizations' permissions

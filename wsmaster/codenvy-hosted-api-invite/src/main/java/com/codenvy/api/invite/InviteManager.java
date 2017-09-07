@@ -13,8 +13,6 @@ package com.codenvy.api.invite;
 import static java.util.Objects.requireNonNull;
 
 import com.codenvy.api.invite.event.InviteCreatedEvent;
-import com.codenvy.api.permission.server.PermissionsManager;
-import com.codenvy.api.workspace.server.WorkspaceDomain;
 import com.codenvy.organization.api.permissions.OrganizationDomain;
 import com.codenvy.shared.invite.model.Invite;
 import com.codenvy.spi.invite.InviteDao;
@@ -27,7 +25,9 @@ import org.eclipse.che.api.core.NotFoundException;
 import org.eclipse.che.api.core.Page;
 import org.eclipse.che.api.core.ServerException;
 import org.eclipse.che.api.core.notification.EventService;
+import org.eclipse.che.api.permission.server.PermissionsManager;
 import org.eclipse.che.api.user.server.UserManager;
+import org.eclipse.che.api.workspace.server.WorkspaceDomain;
 import org.eclipse.che.commons.env.EnvironmentContext;
 import org.eclipse.che.commons.subject.Subject;
 

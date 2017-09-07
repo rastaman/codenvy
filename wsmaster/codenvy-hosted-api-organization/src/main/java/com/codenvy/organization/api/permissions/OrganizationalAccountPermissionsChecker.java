@@ -15,11 +15,11 @@ import static com.codenvy.organization.api.permissions.OrganizationDomain.DOMAIN
 import static com.codenvy.organization.api.permissions.OrganizationDomain.MANAGE_RESOURCES;
 import static com.codenvy.organization.api.permissions.OrganizationDomain.MANAGE_WORKSPACES;
 
-import com.codenvy.api.permission.server.account.AccountOperation;
-import com.codenvy.api.permission.server.account.AccountPermissionsChecker;
 import com.codenvy.organization.spi.impl.OrganizationImpl;
 import javax.inject.Singleton;
 import org.eclipse.che.api.core.ForbiddenException;
+import org.eclipse.che.api.permission.server.account.AccountOperation;
+import org.eclipse.che.api.permission.server.account.AccountPermissionsChecker;
 import org.eclipse.che.commons.env.EnvironmentContext;
 import org.eclipse.che.commons.subject.Subject;
 

@@ -13,7 +13,6 @@ package com.codenvy.organization.api.permissions;
 import static com.codenvy.organization.api.permissions.OrganizationDomain.DOMAIN_ID;
 import static com.codenvy.organization.api.permissions.OrganizationDomain.MANAGE_SUBORGANIZATIONS;
 
-import com.codenvy.api.permission.server.SuperPrivilegesChecker;
 import com.codenvy.organization.api.OrganizationManager;
 import com.codenvy.organization.api.OrganizationService;
 import com.codenvy.organization.shared.dto.OrganizationDto;
@@ -22,6 +21,7 @@ import javax.inject.Inject;
 import javax.ws.rs.Path;
 import org.eclipse.che.api.core.ApiException;
 import org.eclipse.che.api.core.ForbiddenException;
+import org.eclipse.che.api.permission.server.SuperPrivilegesChecker;
 import org.eclipse.che.commons.env.EnvironmentContext;
 import org.eclipse.che.commons.subject.Subject;
 import org.eclipse.che.everrest.CheMethodInvokerFilter;

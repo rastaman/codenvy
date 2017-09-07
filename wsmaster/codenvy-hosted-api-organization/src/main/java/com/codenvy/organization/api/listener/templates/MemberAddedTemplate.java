@@ -19,6 +19,7 @@ import com.codenvy.template.processor.html.thymeleaf.ThymeleafTemplate;
  */
 public class MemberAddedTemplate extends ThymeleafTemplate {
 
+  @Override
   public String getPath() {
     return "/email-templates/user_added_to_organization";
   }

@@ -10,12 +10,12 @@
  */
 package com.codenvy.organization.api.listener;
 
-import com.codenvy.api.permission.server.jpa.listener.RemovePermissionsOnLastUserRemovedEventSubscriber;
 import com.codenvy.organization.api.OrganizationManager;
 import com.codenvy.organization.spi.jpa.JpaMemberDao;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.eclipse.che.api.core.ServerException;
+import org.eclipse.che.api.permission.server.jpa.listener.RemovePermissionsOnLastUserRemovedEventSubscriber;
 import org.eclipse.che.api.user.server.model.impl.UserImpl;
 
 /**

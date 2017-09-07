@@ -23,7 +23,6 @@ import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertNull;
 
 import com.codenvy.auth.sso.shared.dto.SubjectDto;
-import com.codenvy.machine.authentication.server.MachineTokenRegistry;
 import org.eclipse.che.api.core.NotFoundException;
 import org.eclipse.che.api.core.model.user.User;
 import org.eclipse.che.api.core.rest.HttpJsonRequest;
@@ -33,6 +32,7 @@ import org.eclipse.che.api.user.server.UserManager;
 import org.eclipse.che.api.user.server.model.impl.UserImpl;
 import org.eclipse.che.commons.subject.Subject;
 import org.eclipse.che.commons.test.mockito.answer.SelfReturningAnswer;
+import org.eclipse.che.machine.authentication.server.MachineTokenRegistry;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 

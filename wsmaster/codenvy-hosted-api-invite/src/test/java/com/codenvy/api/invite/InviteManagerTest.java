@@ -25,8 +25,6 @@ import static org.mockito.Mockito.when;
 import static org.testng.Assert.assertEquals;
 
 import com.codenvy.api.invite.event.InviteCreatedEvent;
-import com.codenvy.api.permission.server.PermissionsManager;
-import com.codenvy.api.workspace.server.WorkspaceDomain;
 import com.codenvy.organization.api.permissions.OrganizationDomain;
 import com.codenvy.shared.invite.dto.InviteDto;
 import com.codenvy.shared.invite.model.Invite;
@@ -36,7 +34,9 @@ import org.eclipse.che.api.core.ConflictException;
 import org.eclipse.che.api.core.NotFoundException;
 import org.eclipse.che.api.core.Page;
 import org.eclipse.che.api.core.notification.EventService;
+import org.eclipse.che.api.permission.server.PermissionsManager;
 import org.eclipse.che.api.user.server.UserManager;
+import org.eclipse.che.api.workspace.server.WorkspaceDomain;
 import org.eclipse.che.dto.server.DtoFactory;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;

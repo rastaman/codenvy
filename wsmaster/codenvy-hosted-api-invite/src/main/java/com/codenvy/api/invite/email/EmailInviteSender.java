@@ -15,7 +15,6 @@ import static java.lang.String.format;
 import static javax.ws.rs.core.MediaType.TEXT_HTML;
 
 import com.codenvy.api.invite.event.InviteCreatedEvent;
-import com.codenvy.api.workspace.server.WorkspaceDomain;
 import com.codenvy.auth.sso.server.handler.BearerTokenAuthenticationHandler;
 import com.codenvy.mail.DefaultEmailResourceResolver;
 import com.codenvy.mail.EmailBean;
@@ -37,6 +36,7 @@ import org.eclipse.che.api.core.notification.EventService;
 import org.eclipse.che.api.core.notification.EventSubscriber;
 import org.eclipse.che.api.user.server.ProfileManager;
 import org.eclipse.che.api.user.server.UserManager;
+import org.eclipse.che.api.workspace.server.WorkspaceDomain;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

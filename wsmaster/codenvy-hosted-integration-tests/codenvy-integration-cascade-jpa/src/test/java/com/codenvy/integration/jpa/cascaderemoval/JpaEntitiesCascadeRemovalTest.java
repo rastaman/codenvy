@@ -10,7 +10,6 @@
  */
 package com.codenvy.integration.jpa.cascaderemoval;
 
-import static com.codenvy.api.permission.server.AbstractPermissionsDomain.SET_PERMISSIONS;
 import static com.codenvy.integration.jpa.cascaderemoval.TestObjectsFactory.createAccount;
 import static com.codenvy.integration.jpa.cascaderemoval.TestObjectsFactory.createFactory;
 import static com.codenvy.integration.jpa.cascaderemoval.TestObjectsFactory.createFreeResourcesLimit;
@@ -27,6 +26,7 @@ import static com.codenvy.resource.spi.jpa.JpaFreeResourcesLimitDao.RemoveFreeRe
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
+import static org.eclipse.che.api.permission.server.AbstractPermissionsDomain.SET_PERMISSIONS;
 import static org.eclipse.che.commons.test.db.H2TestHelper.inMemoryDefault;
 import static org.mockito.Mockito.when;
 import static org.testng.Assert.assertEquals;
@@ -36,18 +36,6 @@ import static org.testng.Assert.assertNull;
 import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.fail;
 
-import com.codenvy.api.machine.server.jpa.JpaRecipePermissionsDao;
-import com.codenvy.api.machine.server.jpa.OnPremisesJpaMachineModule;
-import com.codenvy.api.machine.server.recipe.RecipeDomain;
-import com.codenvy.api.machine.server.recipe.RecipePermissionsImpl;
-import com.codenvy.api.permission.server.model.impl.AbstractPermissions;
-import com.codenvy.api.permission.server.spi.PermissionsDao;
-import com.codenvy.api.workspace.server.jpa.OnPremisesJpaWorkspaceModule;
-import com.codenvy.api.workspace.server.jpa.listener.RemoveStackOnLastUserRemovedEventSubscriber;
-import com.codenvy.api.workspace.server.spi.WorkerDao;
-import com.codenvy.api.workspace.server.spi.jpa.JpaStackPermissionsDao;
-import com.codenvy.api.workspace.server.stack.StackDomain;
-import com.codenvy.api.workspace.server.stack.StackPermissionsImpl;
 import com.codenvy.organization.api.OrganizationJpaModule;
 import com.codenvy.organization.api.OrganizationManager;
 import com.codenvy.organization.api.listener.RemoveOrganizationOnLastUserRemovedEventSubscriber;
@@ -94,11 +82,16 @@ import org.eclipse.che.api.core.notification.EventService;
 import org.eclipse.che.api.factory.server.jpa.FactoryJpaModule;
 import org.eclipse.che.api.factory.server.model.impl.FactoryImpl;
 import org.eclipse.che.api.factory.server.spi.FactoryDao;
+import org.eclipse.che.api.machine.server.jpa.JpaRecipePermissionsDao;
 import org.eclipse.che.api.machine.server.jpa.MachineJpaModule;
 import org.eclipse.che.api.machine.server.model.impl.SnapshotImpl;
+import org.eclipse.che.api.machine.server.recipe.RecipeDomain;
 import org.eclipse.che.api.machine.server.recipe.RecipeImpl;
+import org.eclipse.che.api.machine.server.recipe.RecipePermissionsImpl;
 import org.eclipse.che.api.machine.server.spi.RecipeDao;
 import org.eclipse.che.api.machine.server.spi.SnapshotDao;
+import org.eclipse.che.api.permission.server.model.impl.AbstractPermissions;
+import org.eclipse.che.api.permission.server.spi.PermissionsDao;
 import org.eclipse.che.api.ssh.server.jpa.SshJpaModule;
 import org.eclipse.che.api.ssh.server.model.impl.SshPairImpl;
 import org.eclipse.che.api.ssh.server.spi.SshDao;
@@ -114,10 +107,15 @@ import org.eclipse.che.api.workspace.server.WorkspaceManager;
 import org.eclipse.che.api.workspace.server.WorkspaceRuntimes;
 import org.eclipse.che.api.workspace.server.WorkspaceSharedPool;
 import org.eclipse.che.api.workspace.server.jpa.WorkspaceJpaModule;
+import org.eclipse.che.api.workspace.server.jpa.listener.RemoveStackOnLastUserRemovedEventSubscriber;
 import org.eclipse.che.api.workspace.server.model.impl.WorkspaceImpl;
 import org.eclipse.che.api.workspace.server.model.impl.stack.StackImpl;
 import org.eclipse.che.api.workspace.server.spi.StackDao;
+import org.eclipse.che.api.workspace.server.spi.WorkerDao;
 import org.eclipse.che.api.workspace.server.spi.WorkspaceDao;
+import org.eclipse.che.api.workspace.server.spi.jpa.JpaStackPermissionsDao;
+import org.eclipse.che.api.workspace.server.stack.StackDomain;
+import org.eclipse.che.api.workspace.server.stack.StackPermissionsImpl;
 import org.eclipse.che.commons.env.EnvironmentContext;
 import org.eclipse.che.commons.lang.Pair;
 import org.eclipse.che.commons.subject.SubjectImpl;
@@ -252,8 +250,8 @@ public class JpaEntitiesCascadeRemovalTest {
                 install(new MachineJpaModule());
                 install(new FactoryJpaModule());
                 install(new OrganizationJpaModule());
-                install(new OnPremisesJpaWorkspaceModule());
-                install(new OnPremisesJpaMachineModule());
+                install(new WorkspaceJpaModule());
+                install(new MachineJpaModule());
 
                 bind(FreeResourcesLimitDao.class).to(JpaFreeResourcesLimitDao.class);
                 bind(RemoveFreeResourcesLimitSubscriber.class).asEagerSingleton();

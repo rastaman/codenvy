@@ -13,7 +13,7 @@ package com.codenvy.ldap.auth;
 import com.codenvy.api.dao.authentication.AuthenticationHandler;
 import com.codenvy.ldap.LdapUserIdNormalizer;
 import javax.inject.Inject;
-import org.eclipse.che.api.auth.AuthenticationException;
+import org.eclipse.che.commons.auth.AuthenticationException;
 import org.ldaptive.Credential;
 import org.ldaptive.LdapException;
 import org.ldaptive.auth.AuthenticationRequest;

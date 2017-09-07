@@ -10,17 +10,19 @@
  */
 package com.codenvy.organization.spi.impl;
 
-import com.codenvy.api.permission.server.model.impl.AbstractPermissions;
 import com.codenvy.organization.api.permissions.OrganizationDomain;
 import com.codenvy.organization.shared.model.Member;
 import java.util.List;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import org.eclipse.che.api.permission.server.model.impl.AbstractPermissions;
 
 /**
  * Data object for {@link Member}.
@@ -62,6 +64,10 @@ public class MemberImpl extends AbstractPermissions implements Member {
   @Column(name = "organizationid")
   private String organizationId;
 
+  @ElementCollection(fetch = FetchType.EAGER)
+  @Column(name = "actions")
+  protected List<String> actions;
+
   @ManyToOne
   @JoinColumn(
     name = "organizationid",
@@ -74,8 +80,11 @@ public class MemberImpl extends AbstractPermissions implements Member {
   public MemberImpl() {}
 
   public MemberImpl(String userId, String organizationId, List<String> actions) {
-    super(userId, actions);
+    super(userId);
     this.organizationId = organizationId;
+    if (actions != null) {
+      this.actions = actions;
+    }
   }
 
   public MemberImpl(Member member) {
@@ -92,6 +101,12 @@ public class MemberImpl extends AbstractPermissions implements Member {
     return OrganizationDomain.DOMAIN_ID;
   }
 
+  @Override
+  public List<String> getActions() {
+    return actions;
+  }
+
+  @Override
   public String getOrganizationId() {
     return organizationId;
   }

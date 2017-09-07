@@ -29,25 +29,15 @@
         <module>codenvy-hosted-platform-api-impl</module>
         <module>codenvy-hosted-recoverpassword</module>
         <module>codenvy-hosted-events</module>
-        <module>codenvy-hosted-machine-authentication-shared</module>
-        <module>codenvy-hosted-machine-authentication</module>
-        <module>codenvy-hosted-machine-authentication-ide</module>
         <module>codenvy-hosted-sso-server</module>
         <module>codenvy-hosted-sso-auth-bearer</module>
         <module>codenvy-hosted-sso-client</module>
         <module>codenvy-hosted-sso-oauth</module>
         <module>codenvy-hosted-sso-server-organization</module>
-        <module>codenvy-hosted-api-permission-shared</module>
-        <module>codenvy-hosted-api-permission</module>
         <module>codenvy-hosted-api-invite-shared</module>
         <module>codenvy-hosted-api-invite</module>
         <module>codenvy-hosted-api-node</module>
         <module>codenvy-hosted-api-node-shared</module>
-        <module>codenvy-hosted-api-machine</module>
-        <module>codenvy-hosted-api-workspace</module>
-        <module>codenvy-hosted-authorization</module>
-        <module>codenvy-hosted-authorization-impl</module>
-        <module>codenvy-hosted-api-factory</module>
         <module>codenvy-hosted-integration-tests</module>
         <module>codenvy-ldap</module>
         <module>codenvy-hosted-report-shared</module>
