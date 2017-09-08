@@ -19,11 +19,7 @@ import com.codenvy.api.audit.server.AuditService;
 import com.codenvy.api.audit.server.AuditServicePermissionsFilter;
 import com.codenvy.api.dao.authentication.AuthenticationDaoInterceptor;
 import com.codenvy.api.dao.authentication.PassportValidator;
-import com.codenvy.api.machine.server.jpa.OnPremisesJpaMachineModule;
-import com.codenvy.api.permission.server.PermissionChecker;
-import com.codenvy.api.permission.server.jpa.SystemPermissionsJpaModule;
 import com.codenvy.api.user.server.AdminUserService;
-import com.codenvy.api.workspace.server.jpa.OnPremisesJpaWorkspaceModule;
 import com.codenvy.auth.aws.ecr.AwsEcrAuthResolver;
 import com.codenvy.auth.sso.client.ServerClient;
 import com.codenvy.auth.sso.client.TokenHandler;
@@ -41,7 +37,6 @@ import com.codenvy.auth.sso.server.organization.UserCreator;
 import com.codenvy.ldap.LdapModule;
 import com.codenvy.ldap.auth.LdapAuthenticationHandler;
 import com.codenvy.machine.agent.WorkspaceInfrastructureModule;
-import com.codenvy.machine.authentication.server.MachineAuthLinksInjector;
 import com.codenvy.machine.backup.DockerEnvironmentBackupManager;
 import com.codenvy.machine.backup.EnvironmentBackupManager;
 import com.codenvy.organization.api.OrganizationApiModule;
@@ -94,10 +89,13 @@ import org.eclipse.che.api.factory.server.jpa.JpaFactoryDao;
 import org.eclipse.che.api.factory.server.spi.FactoryDao;
 import org.eclipse.che.api.machine.server.jpa.JpaRecipeDao;
 import org.eclipse.che.api.machine.server.jpa.JpaSnapshotDao;
+import org.eclipse.che.api.machine.server.jpa.MachineJpaModule;
 import org.eclipse.che.api.machine.server.recipe.RecipeLoader;
 import org.eclipse.che.api.machine.server.recipe.RecipeService;
 import org.eclipse.che.api.machine.server.spi.RecipeDao;
 import org.eclipse.che.api.machine.server.spi.SnapshotDao;
+import org.eclipse.che.api.permission.server.PermissionChecker;
+import org.eclipse.che.api.permission.server.jpa.SystemPermissionsJpaModule;
 import org.eclipse.che.api.project.server.handlers.ProjectHandler;
 import org.eclipse.che.api.project.server.template.ProjectTemplateDescriptionLoader;
 import org.eclipse.che.api.project.server.template.ProjectTemplateRegistry;
@@ -131,6 +129,7 @@ import org.eclipse.che.everrest.CheAsynchronousJobPool;
 import org.eclipse.che.everrest.ETagResponseFilter;
 import org.eclipse.che.everrest.EverrestDownloadFileResponseFilter;
 import org.eclipse.che.inject.DynaModule;
+import org.eclipse.che.machine.authentication.server.MachineAuthLinksInjector;
 import org.eclipse.che.plugin.github.factory.resolver.GithubFactoryParametersResolver;
 import org.eclipse.che.security.oauth.OAuthAuthenticatorProvider;
 import org.eclipse.che.security.oauth.OAuthAuthenticatorProviderImpl;
@@ -224,8 +223,8 @@ public class OnPremisesIdeApiModule extends AbstractModule {
     install(new UserJpaModule());
     install(new SshJpaModule());
     install(new WorkspaceJpaModule());
-    install(new OnPremisesJpaWorkspaceModule());
-    install(new OnPremisesJpaMachineModule());
+    install(new WorkspaceJpaModule());
+    install(new MachineJpaModule());
     install(new FactoryJpaModule());
     bind(AccountDao.class).to(JpaAccountDao.class);
     install(new OrganizationApiModule());
@@ -246,14 +245,14 @@ public class OnPremisesIdeApiModule extends AbstractModule {
     bindInterceptor(subclassesOf(AuthenticationDao.class), names("login"), authInterceptor);
 
     bind(RecipeService.class);
-    bind(com.codenvy.api.machine.server.recipe.OnPremisesRecipeLoader.class);
+    bind(org.eclipse.che.api.machine.server.recipe.RecipeLoader.class);
     Multibinder.newSetBinder(
             binder(), String.class, Names.named(RecipeLoader.CHE_PREDEFINED_RECIPES))
         .addBinding()
         .toInstance("predefined-recipes.json");
 
     bind(StackService.class);
-    bind(com.codenvy.api.workspace.server.stack.OnPremisesStackLoader.class);
+    bind(org.eclipse.che.api.workspace.server.stack.StackLoader.class);
     MapBinder.newMapBinder(
             binder(), String.class, String.class, Names.named(StackLoader.CHE_PREDEFINED_STACKS))
         .addBinding("stacks.json")
@@ -285,13 +284,13 @@ public class OnPremisesIdeApiModule extends AbstractModule {
     bind(com.codenvy.auth.sso.oauth.SsoOAuthAuthenticationService.class);
 
     //machine authentication
-    bind(com.codenvy.machine.authentication.server.MachineTokenPermissionsFilter.class);
-    bind(com.codenvy.machine.authentication.server.MachineTokenRegistry.class);
-    bind(com.codenvy.machine.authentication.server.MachineTokenService.class);
+    bind(org.eclipse.che.machine.authentication.server.MachineTokenPermissionsFilter.class);
+    bind(org.eclipse.che.machine.authentication.server.MachineTokenRegistry.class);
+    bind(org.eclipse.che.machine.authentication.server.MachineTokenService.class);
     bind(WorkspaceServiceLinksInjector.class)
-        .to(com.codenvy.machine.authentication.server.WorkspaceServiceAuthLinksInjector.class);
+        .to(org.eclipse.che.machine.authentication.server.WorkspaceServiceAuthLinksInjector.class);
     bind(MachineLinksInjector.class).to(MachineAuthLinksInjector.class);
-    install(new com.codenvy.machine.authentication.server.interceptor.InterceptorModule());
+    install(new org.eclipse.che.machine.authentication.server.interceptor.InterceptorModule());
     bind(ServerClient.class).to(com.codenvy.auth.sso.client.MachineSsoServerClient.class);
     bind(com.codenvy.auth.sso.client.MachineSessionInvalidator.class);
 
@@ -306,8 +305,9 @@ public class OnPremisesIdeApiModule extends AbstractModule {
     bind(UserCreator.class).to(com.codenvy.auth.sso.server.OrgServiceUserCreator.class);
 
     bind(UserCreationValidator.class).to(com.codenvy.auth.sso.server.OrgServiceUserValidator.class);
-    bind(PermissionChecker.class).to(com.codenvy.api.permission.server.PermissionCheckerImpl.class);
-    bind(TokenHandler.class).to(com.codenvy.api.permission.server.PermissionTokenHandler.class);
+    bind(PermissionChecker.class)
+        .to(org.eclipse.che.api.permission.server.PermissionCheckerImpl.class);
+    //bind(TokenHandler.class).to(com.codenvy.api.permission.server.PermissionTokenHandler.class);
     bind(TokenHandler.class)
         .annotatedWith(Names.named("delegated.handler"))
         .to(com.codenvy.auth.sso.client.NoUserInteractionTokenHandler.class);
@@ -397,10 +397,10 @@ public class OnPremisesIdeApiModule extends AbstractModule {
     install(new org.eclipse.che.plugin.docker.machine.proxy.DockerProxyModule());
 
     install(new SystemPermissionsJpaModule());
-    install(new com.codenvy.api.permission.server.PermissionsModule());
+    install(new org.eclipse.che.api.permission.server.PermissionsModule());
     install(new com.codenvy.api.node.server.NodeModule());
-    install(new OnPremisesJpaWorkspaceModule());
-    install(new com.codenvy.api.workspace.server.WorkspaceApiModule());
+    install(new WorkspaceJpaModule());
+    install(new org.eclipse.che.api.workspace.server.WorkspaceApiPermissionsModule());
 
     install(
         new FactoryModuleBuilder()
@@ -465,7 +465,7 @@ public class OnPremisesIdeApiModule extends AbstractModule {
         .to(com.codenvy.machine.WsAgentServerProxyTransformer.class);
 
     install(new org.eclipse.che.plugin.machine.ssh.SshMachineModule());
-    bind(com.codenvy.api.factory.server.filters.FactoryPermissionsFilter.class);
+    bind(org.eclipse.che.api.factory.server.permissions.FactoryPermissionsFilter.class);
 
     bind(MachineInstanceProvider.class).to(com.codenvy.machine.HostedMachineProviderImpl.class);
 

@@ -10,9 +10,9 @@
  */
 package com.codenvy.plugin.activity.inject;
 
-import com.codenvy.plugin.activity.ActivityPermissionsFilter;
 import com.codenvy.plugin.activity.HostedWorkspaceActivityManager;
 import com.google.inject.AbstractModule;
+import org.eclipse.che.plugin.activity.ActivityPermissionsFilter;
 import org.eclipse.che.plugin.activity.WorkspaceActivityManager;
 import org.eclipse.che.plugin.activity.WorkspaceActivityService;
 

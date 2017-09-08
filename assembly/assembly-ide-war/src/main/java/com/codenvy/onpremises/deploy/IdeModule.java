@@ -10,13 +10,13 @@
  */
 package com.codenvy.onpremises.deploy;
 
-import com.codenvy.api.permission.server.PermissionChecker;
 import com.codenvy.auth.sso.client.ServerClient;
 import com.codenvy.auth.sso.client.TokenHandler;
 import com.codenvy.auth.sso.client.filter.RequestFilter;
 import com.codenvy.auth.sso.client.token.RequestTokenExtractor;
 import com.google.inject.AbstractModule;
 import com.google.inject.name.Names;
+import org.eclipse.che.api.permission.server.PermissionChecker;
 import org.eclipse.che.inject.DynaModule;
 
 /** @author Alexander Garagatyi */
@@ -39,8 +39,8 @@ public class IdeModule extends AbstractModule {
     bind(RequestTokenExtractor.class)
         .to(com.codenvy.auth.sso.client.token.ChainedTokenExtractor.class);
     bind(PermissionChecker.class)
-        .to(com.codenvy.api.permission.server.HttpPermissionCheckerImpl.class);
-    bind(TokenHandler.class).to(com.codenvy.api.permission.server.PermissionTokenHandler.class);
+        .to(org.eclipse.che.api.permission.server.HttpPermissionCheckerImpl.class);
+    //bind(TokenHandler.class).to(com.codenvy.api.permission.server.PermissionTokenHandler.class);
     bind(TokenHandler.class)
         .annotatedWith(Names.named("delegated.handler"))
         .to(com.codenvy.auth.sso.client.RecoverableTokenHandler.class);

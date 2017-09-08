@@ -25,7 +25,6 @@ import static org.mockito.Mockito.when;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
-import com.codenvy.machine.authentication.server.MachineTokenRegistry;
 import org.eclipse.che.api.core.ServerException;
 import org.eclipse.che.api.core.jsonrpc.commons.RequestTransmitter;
 import org.eclipse.che.api.core.util.JsonRpcEndpointToMachineNameHolder;
@@ -35,6 +34,7 @@ import org.eclipse.che.api.machine.server.util.RecipeRetriever;
 import org.eclipse.che.commons.env.EnvironmentContext;
 import org.eclipse.che.commons.lang.os.WindowsPathEscaper;
 import org.eclipse.che.commons.subject.SubjectImpl;
+import org.eclipse.che.machine.authentication.server.MachineTokenRegistry;
 import org.eclipse.che.plugin.docker.client.DockerConnector;
 import org.eclipse.che.plugin.docker.client.DockerConnectorConfiguration;
 import org.eclipse.che.plugin.docker.client.DockerConnectorProvider;

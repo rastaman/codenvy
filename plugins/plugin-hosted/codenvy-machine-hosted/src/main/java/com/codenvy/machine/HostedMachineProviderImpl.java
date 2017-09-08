@@ -14,7 +14,6 @@ import static com.codenvy.machine.MaintenanceConstraintProvider.MAINTENANCE_CONS
 import static com.codenvy.machine.MaintenanceConstraintProvider.MAINTENANCE_CONSTRAINT_VALUE;
 import static org.slf4j.LoggerFactory.getLogger;
 
-import com.codenvy.machine.authentication.server.MachineTokenRegistry;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.MoreObjects;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
@@ -44,6 +43,7 @@ import org.eclipse.che.commons.annotation.Nullable;
 import org.eclipse.che.commons.env.EnvironmentContext;
 import org.eclipse.che.commons.lang.concurrent.LoggingUncaughtExceptionHandler;
 import org.eclipse.che.commons.lang.os.WindowsPathEscaper;
+import org.eclipse.che.machine.authentication.server.MachineTokenRegistry;
 import org.eclipse.che.plugin.docker.client.DockerConnector;
 import org.eclipse.che.plugin.docker.client.DockerConnectorProvider;
 import org.eclipse.che.plugin.docker.client.ProgressMonitor;

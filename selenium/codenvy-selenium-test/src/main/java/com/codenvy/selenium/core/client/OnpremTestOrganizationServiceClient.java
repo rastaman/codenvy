@@ -14,13 +14,13 @@ import static java.lang.String.format;
 import static java.util.Arrays.asList;
 import static org.eclipse.che.dto.server.DtoFactory.newDto;
 
-import com.codenvy.api.permission.shared.dto.PermissionsDto;
 import com.codenvy.organization.shared.dto.OrganizationDto;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.List;
 import org.eclipse.che.api.core.NotFoundException;
 import org.eclipse.che.api.core.rest.HttpJsonRequestFactory;
+import org.eclipse.che.api.permission.shared.dto.PermissionsDto;
 import org.eclipse.che.commons.annotation.Nullable;
 import org.eclipse.che.selenium.core.provider.TestApiEndpointUrlProvider;
 import org.slf4j.Logger;
