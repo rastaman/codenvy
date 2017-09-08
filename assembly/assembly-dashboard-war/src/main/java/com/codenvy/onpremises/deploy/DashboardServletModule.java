@@ -26,7 +26,7 @@ public class DashboardServletModule extends ServletModule {
   @Override
   protected void configureServlets() {
     bind(PermissionChecker.class)
-    .to(org.eclipse.che.api.permission.server.HttpPermissionCheckerImpl.class);
+        .to(org.eclipse.che.api.permission.server.HttpPermissionCheckerImpl.class);
     //bind(TokenHandler.class).to(com.codenvy.api.permission.server.PermissionTokenHandler.class);
     bind(TokenHandler.class)
         .annotatedWith(Names.named("delegated.handler"))
