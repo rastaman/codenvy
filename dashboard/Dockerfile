@@ -12,17 +12,19 @@ FROM node:6.11.2
 
 RUN apt-get update && \
     apt-get install -y git
-COPY package.json /dashboard/
+RUN mkdir -p /dashboard/.tmp
+RUN useradd -ms /bin/bash node-user
+COPY . /dashboard/
+RUN chown -R node-user:node-user /dashboard/
+USER node-user
 RUN cd /dashboard && npm install
-COPY bower.json /dashboard/
 # workaround to prevent caching old che-dashboard
 ADD https://api.github.com/repos/eclipse/che/git/refs/heads/master /tmp/che-dashboard-version.json
-RUN cd /dashboard && ./node_modules/.bin/bower install --allow-root
-COPY . /dashboard/
+RUN cd /dashboard && ./node_modules/.bin/bower install
 RUN cd /dashboard && ./node_modules/.bin/typings install
 #TODO Disable development mode
-RUN cd /dashboard && ./node_modules/.bin/gulp build
 RUN cd /dashboard && ./node_modules/.bin/gulp test
+RUN cd /dashboard && ./node_modules/.bin/gulp build
 #TODO Change base HREF of the application that will be hosted on /dashboard
 #TODO Enable back development mode
 
