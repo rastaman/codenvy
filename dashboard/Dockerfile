@@ -22,11 +22,14 @@ RUN cd /dashboard && npm install
 ADD https://api.github.com/repos/eclipse/che/git/refs/heads/master /tmp/che-dashboard-version.json
 RUN cd /dashboard && ./node_modules/.bin/bower install
 RUN cd /dashboard && ./node_modules/.bin/typings install
-#TODO Disable development mode
-RUN cd /dashboard && ./node_modules/.bin/gulp test
+# Disable dev mode before build
+RUN sed -i -e "s#var DEV = true;#var DEV = false;#" /dashboard/src/app/index.module.ts
 RUN cd /dashboard && ./node_modules/.bin/gulp build
-#TODO Change base HREF of the application that will be hosted on /dashboard
-#TODO Enable back development mode
+RUN cd /dashboard && ./node_modules/.bin/gulp test
+# Enable dev mode after build
+RUN sed -i -e "s#var DEV = false;#var DEV = true;#" /dashboard/src/app/index.module.ts
+# Change base HREF of the application that will be hosted on /dashboard
+RUN sed -i -e "s#base href=\"/\"#base href=\"/dashboard/\"#" /dashboard/target/dist/index.html
 
 RUN cd /dashboard/target && tar zcf /tmp/dashboard.tar.gz dist/
 CMD zcat /tmp/dashboard.tar.gz
