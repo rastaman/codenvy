@@ -307,7 +307,7 @@ public class OnPremisesIdeApiModule extends AbstractModule {
     bind(UserCreationValidator.class).to(com.codenvy.auth.sso.server.OrgServiceUserValidator.class);
     bind(PermissionChecker.class)
         .to(org.eclipse.che.api.permission.server.PermissionCheckerImpl.class);
-    //bind(TokenHandler.class).to(com.codenvy.api.permission.server.PermissionTokenHandler.class);
+    bind(TokenHandler.class).to(com.codenvy.api.permission.server.PermissionTokenHandler.class);
     bind(TokenHandler.class)
         .annotatedWith(Names.named("delegated.handler"))
         .to(com.codenvy.auth.sso.client.NoUserInteractionTokenHandler.class);

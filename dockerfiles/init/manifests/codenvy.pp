@@ -367,7 +367,7 @@ $machine_docker_parent_cgroup = getValue("CODENVY_DOCKER_PARENT_CGROUP","NULL")
 
 ###############################
 # Defines stack loading policy. Allowed values true/false.
-  $codenvy_predefined_stacks_reload_on_start = getValue("CODENVY_PREDEFINED_STACKS_RELOAD_ON_START","false")
+  $che_predefined_stacks_reload_on_start = getValue("CHE_PREDEFINED_STACKS_RELOAD_ON_START","false")
 
 ###############################
 # Include base module

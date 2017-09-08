@@ -10,7 +10,7 @@
  */
 package com.codenvy.api.user.server;
 
-import static com.codenvy.api.user.server.UserServicePermissionsFilter.MANAGE_USERS_ACTION;
+import static org.eclipse.che.api.user.server.permissions.UserServicePermissionsFilter.MANAGE_USERS_ACTION;
 
 import javax.ws.rs.Path;
 import org.eclipse.che.api.core.ApiException;

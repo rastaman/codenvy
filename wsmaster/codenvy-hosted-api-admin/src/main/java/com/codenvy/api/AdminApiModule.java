@@ -10,15 +10,14 @@
  */
 package com.codenvy.api;
 
-import com.codenvy.api.user.server.AdminUserCreator;
 import com.codenvy.api.user.server.AdminUserService;
 import com.codenvy.api.user.server.AdminUserServicePermissionsFilter;
-import com.codenvy.api.user.server.UserProfileServicePermissionsFilter;
-import com.codenvy.api.user.server.UserServicePermissionsFilter;
 import com.google.inject.AbstractModule;
 import com.google.inject.multibindings.Multibinder;
 import com.google.inject.name.Names;
 import org.eclipse.che.api.permission.server.SystemDomain;
+import org.eclipse.che.api.user.server.permissions.UserProfileServicePermissionsFilter;
+import org.eclipse.che.api.user.server.permissions.UserServicePermissionsFilter;
 
 /**
  * Initialize all components necessary for Admin User API.
@@ -39,6 +38,6 @@ public class AdminApiModule extends AbstractModule {
     bind(AdminUserServicePermissionsFilter.class);
     bind(UserProfileServicePermissionsFilter.class);
     bind(UserServicePermissionsFilter.class);
-    bind(AdminUserCreator.class);
+    //bind(AdminUserCreator.class);
   }
 }
