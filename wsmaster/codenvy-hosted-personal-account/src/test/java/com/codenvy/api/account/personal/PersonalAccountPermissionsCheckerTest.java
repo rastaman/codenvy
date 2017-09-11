@@ -14,6 +14,7 @@ import static org.mockito.Mockito.when;
 import static org.testng.Assert.assertEquals;
 
 import org.eclipse.che.api.core.ForbiddenException;
+import org.eclipse.che.api.user.server.UserManager;
 import org.eclipse.che.commons.env.EnvironmentContext;
 import org.eclipse.che.commons.subject.Subject;
 import org.mockito.Mock;
@@ -64,6 +65,6 @@ public class PersonalAccountPermissionsCheckerTest {
     final String accountType = permissionsChecker.getAccountType();
 
     //then
-    assertEquals(accountType, OnpremisesUserManager.PERSONAL_ACCOUNT);
+    assertEquals(accountType, UserManager.PERSONAL_ACCOUNT);
   }
 }

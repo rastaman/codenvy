@@ -14,7 +14,6 @@ import com.codenvy.resource.api.free.DefaultResourcesProvider;
 import com.google.inject.AbstractModule;
 import com.google.inject.multibindings.Multibinder;
 import org.eclipse.che.api.permission.server.account.AccountPermissionsChecker;
-import org.eclipse.che.api.user.server.UserManager;
 import org.eclipse.che.inject.DynaModule;
 
 /** @author Sergii Leschenko */
@@ -22,8 +21,6 @@ import org.eclipse.che.inject.DynaModule;
 public class PersonalAccountModule extends AbstractModule {
   @Override
   protected void configure() {
-    bind(UserManager.class).to(OnpremisesUserManager.class);
-
     Multibinder.newSetBinder(binder(), DefaultResourcesProvider.class)
         .addBinding()
         .to(DefaultUserResourcesProvider.class);

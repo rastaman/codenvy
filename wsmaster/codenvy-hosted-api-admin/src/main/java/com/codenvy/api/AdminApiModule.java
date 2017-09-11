@@ -10,6 +10,7 @@
  */
 package com.codenvy.api;
 
+import com.codenvy.api.user.server.AdminUserCreator;
 import com.codenvy.api.user.server.AdminUserService;
 import com.codenvy.api.user.server.AdminUserServicePermissionsFilter;
 import com.google.inject.AbstractModule;
@@ -38,6 +39,6 @@ public class AdminApiModule extends AbstractModule {
     bind(AdminUserServicePermissionsFilter.class);
     bind(UserProfileServicePermissionsFilter.class);
     bind(UserServicePermissionsFilter.class);
-    //bind(AdminUserCreator.class);
+    bind(AdminUserCreator.class);
   }
 }

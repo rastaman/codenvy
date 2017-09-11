@@ -25,6 +25,7 @@ import javax.inject.Named;
 import javax.inject.Singleton;
 import org.eclipse.che.api.core.NotFoundException;
 import org.eclipse.che.api.core.ServerException;
+import org.eclipse.che.api.user.server.UserManager;
 import org.eclipse.che.commons.lang.Size;
 
 /**
@@ -53,7 +54,7 @@ public class DefaultUserResourcesProvider implements DefaultResourcesProvider {
 
   @Override
   public String getAccountType() {
-    return OnpremisesUserManager.PERSONAL_ACCOUNT;
+    return UserManager.PERSONAL_ACCOUNT;
   }
 
   @Override

@@ -19,6 +19,7 @@ import com.codenvy.resource.api.type.TimeoutResourceType;
 import com.codenvy.resource.api.type.WorkspaceResourceType;
 import com.codenvy.resource.spi.impl.ResourceImpl;
 import java.util.List;
+import org.eclipse.che.api.user.server.UserManager;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -41,7 +42,7 @@ public class DefaultUserResourcesProviderTest {
     final String accountType = resourcesProvider.getAccountType();
 
     //then
-    assertEquals(accountType, OnpremisesUserManager.PERSONAL_ACCOUNT);
+    assertEquals(accountType, UserManager.PERSONAL_ACCOUNT);
   }
 
   @Test

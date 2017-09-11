@@ -14,6 +14,7 @@ import javax.inject.Singleton;
 import org.eclipse.che.api.core.ForbiddenException;
 import org.eclipse.che.api.permission.server.account.AccountOperation;
 import org.eclipse.che.api.permission.server.account.AccountPermissionsChecker;
+import org.eclipse.che.api.user.server.UserManager;
 import org.eclipse.che.commons.env.EnvironmentContext;
 
 /**
@@ -36,6 +37,6 @@ public class PersonalAccountPermissionsChecker implements AccountPermissionsChec
 
   @Override
   public String getAccountType() {
-    return OnpremisesUserManager.PERSONAL_ACCOUNT;
+    return UserManager.PERSONAL_ACCOUNT;
   }
 }
