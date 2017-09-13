@@ -26,14 +26,14 @@ import org.eclipse.che.machine.authentication.server.MachineTokenRegistry;
  * @author Yevhenii Voevodin
  */
 @Singleton
-public class MachineSessionInvalidator implements EventSubscriber<WorkspaceStatusEvent> {
+public class OnPremisesMachineSessionInvalidator implements EventSubscriber<WorkspaceStatusEvent> {
 
   private final MachineTokenRegistry tokenRegistry;
   private final SessionStore sessionStore;
   private final EventService eventService;
 
   @Inject
-  public MachineSessionInvalidator(
+  public OnPremisesMachineSessionInvalidator(
       MachineTokenRegistry tokenRegistry, SessionStore sessionStore, EventService eventService) {
     this.tokenRegistry = tokenRegistry;
     this.sessionStore = sessionStore;

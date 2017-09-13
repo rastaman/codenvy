@@ -21,6 +21,7 @@ import com.codenvy.api.dao.authentication.AuthenticationDaoInterceptor;
 import com.codenvy.api.dao.authentication.PassportValidator;
 import com.codenvy.api.user.server.AdminUserService;
 import com.codenvy.auth.aws.ecr.AwsEcrAuthResolver;
+import com.codenvy.auth.sso.client.OnPremisesMachineSessionInvalidator;
 import com.codenvy.auth.sso.client.ServerClient;
 import com.codenvy.auth.sso.client.TokenHandler;
 import com.codenvy.auth.sso.client.filter.ConjunctionRequestFilter;
@@ -94,7 +95,7 @@ import org.eclipse.che.api.machine.server.recipe.RecipeLoader;
 import org.eclipse.che.api.machine.server.recipe.RecipeService;
 import org.eclipse.che.api.machine.server.spi.RecipeDao;
 import org.eclipse.che.api.machine.server.spi.SnapshotDao;
-import org.eclipse.che.api.permission.server.PermissionChecker;
+import org.eclipse.che.multiuser.api.permission.server.PermissionChecker;
 import org.eclipse.che.api.permission.server.jpa.SystemPermissionsJpaModule;
 import org.eclipse.che.api.project.server.handlers.ProjectHandler;
 import org.eclipse.che.api.project.server.template.ProjectTemplateDescriptionLoader;
@@ -130,6 +131,7 @@ import org.eclipse.che.everrest.ETagResponseFilter;
 import org.eclipse.che.everrest.EverrestDownloadFileResponseFilter;
 import org.eclipse.che.inject.DynaModule;
 import org.eclipse.che.machine.authentication.server.MachineAuthLinksInjector;
+import org.eclipse.che.multiuser.api.permission.server.PermissionCheckerImpl;
 import org.eclipse.che.plugin.github.factory.resolver.GithubFactoryParametersResolver;
 import org.eclipse.che.security.oauth.OAuthAuthenticatorProvider;
 import org.eclipse.che.security.oauth.OAuthAuthenticatorProviderImpl;
@@ -292,7 +294,7 @@ public class OnPremisesIdeApiModule extends AbstractModule {
     bind(MachineLinksInjector.class).to(MachineAuthLinksInjector.class);
     install(new org.eclipse.che.machine.authentication.server.interceptor.InterceptorModule());
     bind(ServerClient.class).to(com.codenvy.auth.sso.client.MachineSsoServerClient.class);
-    bind(com.codenvy.auth.sso.client.MachineSessionInvalidator.class);
+    bind(OnPremisesMachineSessionInvalidator.class);
 
     //SSO
     Multibinder<com.codenvy.api.dao.authentication.AuthenticationHandler> handlerBinder =
@@ -306,7 +308,7 @@ public class OnPremisesIdeApiModule extends AbstractModule {
 
     bind(UserCreationValidator.class).to(com.codenvy.auth.sso.server.OrgServiceUserValidator.class);
     bind(PermissionChecker.class)
-        .to(org.eclipse.che.api.permission.server.PermissionCheckerImpl.class);
+        .to(PermissionCheckerImpl.class);
     bind(TokenHandler.class).to(com.codenvy.api.permission.server.PermissionTokenHandler.class);
     bind(TokenHandler.class)
         .annotatedWith(Names.named("delegated.handler"))

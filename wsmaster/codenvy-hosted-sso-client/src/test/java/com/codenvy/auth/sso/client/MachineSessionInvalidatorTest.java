@@ -32,8 +32,8 @@ public class MachineSessionInvalidatorTest {
     final MachineTokenRegistry registry = new MachineTokenRegistry();
     final EventService eventService = new EventService();
     final SessionStore sessionStore = new SessionStore();
-    final MachineSessionInvalidator invalidator =
-        new MachineSessionInvalidator(registry, sessionStore, eventService);
+    final OnPremisesMachineSessionInvalidator invalidator =
+        new OnPremisesMachineSessionInvalidator(registry, sessionStore, eventService);
     invalidator.subscribe();
     // generating a few tokens for the workspace
     final String token1 = registry.generateToken("user123", "workspace123");
