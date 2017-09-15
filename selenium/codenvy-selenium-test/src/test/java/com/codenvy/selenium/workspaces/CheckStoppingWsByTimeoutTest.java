@@ -52,9 +52,7 @@ public class CheckStoppingWsByTimeoutTest {
   public void checkStoppingWsWithApi() throws Exception {
     projectExplorer.waitProjectExplorer();
     WaitUtils.sleepQuietly(760, TimeUnit.SECONDS);
-    Workspace workspace =
-        workspaceServiceClient.getByName(
-            testWorkspace.getName(), USER_NAME, testUser.getAuthToken());
+    Workspace workspace = workspaceServiceClient.getByName(testWorkspace.getName(), testUser);
     assertEquals(workspace.getStatus(), WorkspaceStatus.STOPPED);
     toastLoader.waitStartButtonInToastLoader();
   }

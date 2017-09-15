@@ -21,7 +21,7 @@ import org.eclipse.che.selenium.core.factory.FactoryTemplate;
 import org.eclipse.che.selenium.core.factory.TestFactory;
 import org.eclipse.che.selenium.core.factory.TestFactoryInitializer;
 import org.eclipse.che.selenium.core.provider.TestApiEndpointUrlProvider;
-import org.eclipse.che.selenium.core.requestfactory.TestUserHttpJsonRequestFactory;
+import org.eclipse.che.selenium.core.user.TestUserImpl;
 import org.eclipse.che.selenium.core.user.TestUserNamespaceResolver;
 import org.eclipse.che.selenium.pageobject.GitHub;
 import org.eclipse.che.selenium.pageobject.Ide;
@@ -55,6 +55,7 @@ public class AuthenticateAndAcceptFactoryThroughGitHubOAuthTest {
   @Inject private TestUserServiceClient testUserServiceClient;
   @Inject private TestApiEndpointUrlProvider apiEndpointUrlProvider;
   @Inject private TestUserNamespaceResolver testUserNamespaceResolver;
+  @Inject private TestWorkspaceServiceClient workspaceServiceClient;
 
   private TestFactory testFactory;
 
@@ -72,23 +73,9 @@ public class AuthenticateAndAcceptFactoryThroughGitHubOAuthTest {
 
     String authToken = cookieNamed.getValue();
     User user = testUserServiceClient.getUser(authToken);
-    TestWorkspaceServiceClient workspaceServiceClient =
-        new TestWorkspaceServiceClient(
-            apiEndpointUrlProvider,
-            new TestUserHttpJsonRequestFactory(authToken),
-            testUserNamespaceResolver);
-    workspaceServiceClient
-        .getAll()
-        .forEach(
-            ws -> {
-              try {
-                workspaceServiceClient.delete(ws, user.getName());
-              } catch (Exception e) {
-                throw new RuntimeException(e);
-              }
-            });
 
-    testUserServiceClient.deleteByEmail(user.getEmail());
+    new TestUserImpl(user, authToken, testUserServiceClient, workspaceServiceClient).delete();
+
     testFactory.delete();
   }
 
