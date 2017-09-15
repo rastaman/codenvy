@@ -12,10 +12,10 @@ package com.codenvy.api.account.personal;
 
 import javax.inject.Singleton;
 import org.eclipse.che.api.core.ForbiddenException;
-import org.eclipse.che.api.permission.server.account.AccountOperation;
-import org.eclipse.che.api.permission.server.account.AccountPermissionsChecker;
 import org.eclipse.che.api.user.server.UserManager;
 import org.eclipse.che.commons.env.EnvironmentContext;
+import org.eclipse.che.multiuser.api.permission.server.account.AccountOperation;
+import org.eclipse.che.multiuser.api.permission.server.account.AccountPermissionsChecker;
 
 /**
  * Defines permissions checking for personal accounts.

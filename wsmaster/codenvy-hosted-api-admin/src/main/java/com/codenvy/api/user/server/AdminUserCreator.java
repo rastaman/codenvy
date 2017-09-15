@@ -25,14 +25,14 @@ import org.eclipse.che.api.core.ServerException;
 import org.eclipse.che.api.core.model.user.User;
 import org.eclipse.che.api.core.notification.EventService;
 import org.eclipse.che.api.core.notification.EventSubscriber;
-import org.eclipse.che.api.permission.server.AbstractPermissionsDomain;
-import org.eclipse.che.api.permission.server.PermissionsManager;
-import org.eclipse.che.api.permission.server.SystemDomain;
-import org.eclipse.che.api.permission.server.model.impl.AbstractPermissions;
 import org.eclipse.che.api.user.server.UserManager;
 import org.eclipse.che.api.user.server.event.PostUserPersistedEvent;
 import org.eclipse.che.api.user.server.model.impl.UserImpl;
 import org.eclipse.che.core.db.DBInitializer;
+import org.eclipse.che.multiuser.api.permission.server.AbstractPermissionsDomain;
+import org.eclipse.che.multiuser.api.permission.server.PermissionsManager;
+import org.eclipse.che.multiuser.api.permission.server.SystemDomain;
+import org.eclipse.che.multiuser.api.permission.server.model.impl.AbstractPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

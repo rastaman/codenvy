@@ -26,7 +26,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import org.eclipse.che.api.workspace.server.WorkspaceDomain;
+import org.eclipse.che.multiuser.permission.workspace.server.WorkspaceDomain;
 
 /**
  * Data object for {@link Invite}.

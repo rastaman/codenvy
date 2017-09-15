@@ -38,7 +38,7 @@ import org.eclipse.che.api.core.rest.HttpJsonRequest;
 import org.eclipse.che.api.core.rest.HttpJsonRequestFactory;
 import org.eclipse.che.api.core.rest.HttpJsonResponse;
 import org.eclipse.che.api.workspace.shared.dto.WsAgentHealthStateDto;
-import org.eclipse.che.machine.authentication.shared.dto.MachineTokenDto;
+import org.eclipse.che.multiuser.machine.authentication.shared.dto.MachineTokenDto;
 import org.mockito.Mock;
 import org.mockito.testng.MockitoTestNGListener;
 import org.testng.annotations.BeforeMethod;

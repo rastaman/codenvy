@@ -15,8 +15,8 @@ import com.codenvy.organization.spi.jpa.JpaMemberDao;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.eclipse.che.api.core.ServerException;
-import org.eclipse.che.api.permission.server.jpa.listener.RemovePermissionsOnLastUserRemovedEventSubscriber;
 import org.eclipse.che.api.user.server.model.impl.UserImpl;
+import org.eclipse.che.multiuser.api.permission.server.jpa.listener.RemovePermissionsOnLastUserRemovedEventSubscriber;
 
 /**
  * Listens for {@link UserImpl} removal events, and checks if the removing user is the last who has

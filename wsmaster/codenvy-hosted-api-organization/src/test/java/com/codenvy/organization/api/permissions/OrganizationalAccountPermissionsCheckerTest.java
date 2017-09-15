@@ -17,9 +17,9 @@ import static org.testng.Assert.assertEquals;
 
 import com.codenvy.organization.spi.impl.OrganizationImpl;
 import org.eclipse.che.api.core.ForbiddenException;
-import org.eclipse.che.api.permission.server.account.AccountOperation;
 import org.eclipse.che.commons.env.EnvironmentContext;
 import org.eclipse.che.commons.subject.Subject;
+import org.eclipse.che.multiuser.api.permission.server.account.AccountOperation;
 import org.mockito.Mock;
 import org.mockito.testng.MockitoTestNGListener;
 import org.testng.annotations.AfterMethod;

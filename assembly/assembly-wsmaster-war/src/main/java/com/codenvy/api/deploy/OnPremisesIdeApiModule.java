@@ -131,6 +131,7 @@ import org.eclipse.che.multiuser.api.permission.server.PermissionChecker;
 import org.eclipse.che.multiuser.api.permission.server.PermissionCheckerImpl;
 import org.eclipse.che.multiuser.api.permission.server.jpa.SystemPermissionsJpaModule;
 import org.eclipse.che.multiuser.machine.authentication.server.MachineAuthLinksInjector;
+import org.eclipse.che.multiuser.permission.system.SystemServicePermissionsFilter;
 import org.eclipse.che.plugin.github.factory.resolver.GithubFactoryParametersResolver;
 import org.eclipse.che.security.oauth.OAuthAuthenticatorProvider;
 import org.eclipse.che.security.oauth.OAuthAuthenticatorProviderImpl;
@@ -285,13 +286,19 @@ public class OnPremisesIdeApiModule extends AbstractModule {
     bind(com.codenvy.auth.sso.oauth.SsoOAuthAuthenticationService.class);
 
     //machine authentication
-    bind(org.eclipse.che.multiuser.machine.authentication.server.MachineTokenPermissionsFilter.class);
+    bind(
+        org.eclipse.che.multiuser.machine.authentication.server.MachineTokenPermissionsFilter
+            .class);
     bind(org.eclipse.che.multiuser.machine.authentication.server.MachineTokenRegistry.class);
     bind(org.eclipse.che.multiuser.machine.authentication.server.MachineTokenService.class);
     bind(WorkspaceServiceLinksInjector.class)
-        .to(org.eclipse.che.multiuser.machine.authentication.server.WorkspaceServiceAuthLinksInjector.class);
+        .to(
+            org.eclipse.che.multiuser.machine.authentication.server
+                .WorkspaceServiceAuthLinksInjector.class);
     bind(MachineLinksInjector.class).to(MachineAuthLinksInjector.class);
-    install(new org.eclipse.che.multiuser.machine.authentication.server.interceptor.InterceptorModule());
+    install(
+        new org.eclipse.che.multiuser.machine.authentication.server.interceptor
+            .InterceptorModule());
     bind(ServerClient.class).to(com.codenvy.auth.sso.client.MachineSsoServerClient.class);
     bind(OnPremisesMachineSessionInvalidator.class);
 
@@ -306,8 +313,7 @@ public class OnPremisesIdeApiModule extends AbstractModule {
     bind(UserCreator.class).to(com.codenvy.auth.sso.server.OrgServiceUserCreator.class);
 
     bind(UserCreationValidator.class).to(com.codenvy.auth.sso.server.OrgServiceUserValidator.class);
-    bind(PermissionChecker.class)
-        .to(PermissionCheckerImpl.class);
+    bind(PermissionChecker.class).to(PermissionCheckerImpl.class);
     bind(TokenHandler.class).to(com.codenvy.api.permission.server.PermissionTokenHandler.class);
     bind(TokenHandler.class)
         .annotatedWith(Names.named("delegated.handler"))
@@ -401,7 +407,8 @@ public class OnPremisesIdeApiModule extends AbstractModule {
     install(new org.eclipse.che.multiuser.api.permission.server.PermissionsModule());
     install(new com.codenvy.api.node.server.NodeModule());
     install(new WorkspaceJpaModule());
-    install(new org.eclipse.che.multiuser.permission.workspace.server.WorkspaceApiPermissionsModule());
+    install(
+        new org.eclipse.che.multiuser.permission.workspace.server.WorkspaceApiPermissionsModule());
 
     install(
         new FactoryModuleBuilder()

@@ -36,7 +36,7 @@ import org.eclipse.che.api.core.notification.EventService;
 import org.eclipse.che.api.core.notification.EventSubscriber;
 import org.eclipse.che.api.user.server.ProfileManager;
 import org.eclipse.che.api.user.server.UserManager;
-import org.eclipse.che.api.workspace.server.WorkspaceDomain;
+import org.eclipse.che.multiuser.permission.workspace.server.WorkspaceDomain;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

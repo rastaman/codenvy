@@ -27,8 +27,8 @@ import javax.persistence.NoResultException;
 import org.eclipse.che.api.core.NotFoundException;
 import org.eclipse.che.api.core.Page;
 import org.eclipse.che.api.core.ServerException;
-import org.eclipse.che.api.permission.server.AbstractPermissionsDomain;
-import org.eclipse.che.api.permission.server.jpa.AbstractJpaPermissionsDao;
+import org.eclipse.che.multiuser.api.permission.server.AbstractPermissionsDomain;
+import org.eclipse.che.multiuser.api.permission.server.jpa.AbstractJpaPermissionsDao;
 
 /**
  * JPA based implementation of {@link MemberDao}.

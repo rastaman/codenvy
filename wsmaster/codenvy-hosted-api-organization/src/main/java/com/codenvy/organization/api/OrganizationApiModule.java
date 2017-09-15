@@ -32,9 +32,9 @@ import com.google.inject.AbstractModule;
 import com.google.inject.multibindings.MapBinder;
 import com.google.inject.multibindings.Multibinder;
 import com.google.inject.name.Names;
-import org.eclipse.che.api.permission.server.SuperPrivilegesChecker;
-import org.eclipse.che.api.permission.server.account.AccountPermissionsChecker;
-import org.eclipse.che.api.permission.shared.model.PermissionsDomain;
+import org.eclipse.che.multiuser.api.permission.server.SuperPrivilegesChecker;
+import org.eclipse.che.multiuser.api.permission.server.account.AccountPermissionsChecker;
+import org.eclipse.che.multiuser.api.permission.shared.model.PermissionsDomain;
 
 /** @author Sergii Leschenko */
 public class OrganizationApiModule extends AbstractModule {

@@ -25,11 +25,11 @@ import org.eclipse.che.api.core.NotFoundException;
 import org.eclipse.che.api.core.Page;
 import org.eclipse.che.api.core.ServerException;
 import org.eclipse.che.api.core.notification.EventService;
-import org.eclipse.che.api.permission.server.PermissionsManager;
 import org.eclipse.che.api.user.server.UserManager;
-import org.eclipse.che.api.workspace.server.WorkspaceDomain;
 import org.eclipse.che.commons.env.EnvironmentContext;
 import org.eclipse.che.commons.subject.Subject;
+import org.eclipse.che.multiuser.api.permission.server.PermissionsManager;
+import org.eclipse.che.multiuser.permission.workspace.server.WorkspaceDomain;
 
 /**
  * Facade for invite related operations.

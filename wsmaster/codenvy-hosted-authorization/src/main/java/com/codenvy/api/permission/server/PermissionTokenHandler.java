@@ -21,6 +21,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.eclipse.che.commons.subject.Subject;
+import org.eclipse.che.multiuser.api.permission.server.AuthorizedSubject;
+import org.eclipse.che.multiuser.api.permission.server.PermissionChecker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

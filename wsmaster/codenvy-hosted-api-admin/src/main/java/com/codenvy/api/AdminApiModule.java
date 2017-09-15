@@ -16,9 +16,9 @@ import com.codenvy.api.user.server.AdminUserServicePermissionsFilter;
 import com.google.inject.AbstractModule;
 import com.google.inject.multibindings.Multibinder;
 import com.google.inject.name.Names;
-import org.eclipse.che.api.permission.server.SystemDomain;
-import org.eclipse.che.api.user.server.permissions.UserProfileServicePermissionsFilter;
-import org.eclipse.che.api.user.server.permissions.UserServicePermissionsFilter;
+import org.eclipse.che.multiuser.api.permission.server.SystemDomain;
+import org.eclipse.che.multiuser.permission.user.UserProfileServicePermissionsFilter;
+import org.eclipse.che.multiuser.permission.user.UserServicePermissionsFilter;
 
 /**
  * Initialize all components necessary for Admin User API.

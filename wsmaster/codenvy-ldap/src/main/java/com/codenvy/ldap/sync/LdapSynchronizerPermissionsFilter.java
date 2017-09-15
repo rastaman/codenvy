@@ -12,9 +12,9 @@ package com.codenvy.ldap.sync;
 
 import javax.ws.rs.Path;
 import org.eclipse.che.api.core.ApiException;
-import org.eclipse.che.api.permission.server.SystemDomain;
 import org.eclipse.che.commons.env.EnvironmentContext;
 import org.eclipse.che.everrest.CheMethodInvokerFilter;
+import org.eclipse.che.multiuser.api.permission.server.SystemDomain;
 import org.everrest.core.Filter;
 import org.everrest.core.resource.GenericResourceMethod;
 

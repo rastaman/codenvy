@@ -11,7 +11,7 @@
 package com.codenvy.api.user.server;
 
 import static com.jayway.restassured.RestAssured.given;
-import static org.eclipse.che.api.user.server.permissions.UserServicePermissionsFilter.MANAGE_USERS_ACTION;
+import static org.eclipse.che.multiuser.permission.user.UserServicePermissionsFilter.MANAGE_USERS_ACTION;
 import static org.everrest.assured.JettyHttpServer.ADMIN_USER_NAME;
 import static org.everrest.assured.JettyHttpServer.ADMIN_USER_PASSWORD;
 import static org.everrest.assured.JettyHttpServer.SECURE_PATH;
@@ -28,12 +28,12 @@ import com.jayway.restassured.response.Response;
 import java.lang.reflect.Method;
 import org.eclipse.che.api.core.ForbiddenException;
 import org.eclipse.che.api.core.rest.shared.dto.ServiceError;
-import org.eclipse.che.api.permission.server.SystemDomain;
 import org.eclipse.che.api.user.server.UserManager;
 import org.eclipse.che.api.workspace.server.WorkspaceManager;
 import org.eclipse.che.commons.env.EnvironmentContext;
 import org.eclipse.che.commons.subject.Subject;
 import org.eclipse.che.dto.server.DtoFactory;
+import org.eclipse.che.multiuser.api.permission.server.SystemDomain;
 import org.everrest.assured.EverrestJetty;
 import org.everrest.core.Filter;
 import org.everrest.core.GenericContainerRequest;

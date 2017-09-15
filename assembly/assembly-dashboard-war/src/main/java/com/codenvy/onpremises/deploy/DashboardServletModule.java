@@ -16,9 +16,9 @@ import com.codenvy.onpremises.maintenance.MaintenanceStatusServlet;
 import com.google.inject.name.Names;
 import com.google.inject.servlet.ServletModule;
 import javax.inject.Singleton;
-import org.eclipse.che.multiuser.api.permission.server.PermissionChecker;
 import org.eclipse.che.inject.DynaModule;
 import org.eclipse.che.multiuser.api.permission.server.HttpPermissionCheckerImpl;
+import org.eclipse.che.multiuser.api.permission.server.PermissionChecker;
 
 /** Servlet module composer for user dashboard war. */
 @DynaModule
@@ -26,8 +26,7 @@ public class DashboardServletModule extends ServletModule {
 
   @Override
   protected void configureServlets() {
-    bind(PermissionChecker.class)
-        .to(HttpPermissionCheckerImpl.class);
+    bind(PermissionChecker.class).to(HttpPermissionCheckerImpl.class);
     bind(TokenHandler.class).to(com.codenvy.api.permission.server.PermissionTokenHandler.class);
     bind(TokenHandler.class)
         .annotatedWith(Names.named("delegated.handler"))

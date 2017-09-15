@@ -16,9 +16,9 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.eclipse.che.api.core.Pages;
 import org.eclipse.che.api.core.notification.EventService;
-import org.eclipse.che.api.workspace.server.WorkspaceDomain;
 import org.eclipse.che.api.workspace.server.event.BeforeWorkspaceRemovedEvent;
 import org.eclipse.che.core.db.cascade.CascadeEventSubscriber;
+import org.eclipse.che.multiuser.permission.workspace.server.WorkspaceDomain;
 
 /**
  * Removes invitations that belong to workspace that is going to be removed.

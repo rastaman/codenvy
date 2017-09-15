@@ -18,10 +18,10 @@ import com.google.inject.name.Names;
 import org.eclipse.che.EventBusURLProvider;
 import org.eclipse.che.UserTokenProvider;
 import org.eclipse.che.api.core.rest.HttpJsonRequestFactory;
-import org.eclipse.che.multiuser.api.permission.server.PermissionChecker;
 import org.eclipse.che.api.project.server.ProjectServiceLinksInjector;
 import org.eclipse.che.inject.DynaModule;
 import org.eclipse.che.multiuser.api.permission.server.HttpPermissionCheckerImpl;
+import org.eclipse.che.multiuser.api.permission.server.PermissionChecker;
 
 /**
  * @author Evgen Vidolob
@@ -36,8 +36,7 @@ public class WsAgentModule extends AbstractModule {
   @Override
   protected void configure() {
 
-    bind(PermissionChecker.class)
-        .to(HttpPermissionCheckerImpl.class);
+    bind(PermissionChecker.class).to(HttpPermissionCheckerImpl.class);
     //bind(TokenHandler.class).to(com.codenvy.api.permission.server.PermissionTokenHandler.class);
     bind(TokenHandler.class)
         .annotatedWith(Names.named("delegated.handler"))

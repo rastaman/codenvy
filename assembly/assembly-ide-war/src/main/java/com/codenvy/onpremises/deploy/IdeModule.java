@@ -16,9 +16,9 @@ import com.codenvy.auth.sso.client.filter.RequestFilter;
 import com.codenvy.auth.sso.client.token.RequestTokenExtractor;
 import com.google.inject.AbstractModule;
 import com.google.inject.name.Names;
-import org.eclipse.che.multiuser.api.permission.server.PermissionChecker;
 import org.eclipse.che.inject.DynaModule;
 import org.eclipse.che.multiuser.api.permission.server.HttpPermissionCheckerImpl;
+import org.eclipse.che.multiuser.api.permission.server.PermissionChecker;
 
 /** @author Alexander Garagatyi */
 @DynaModule
@@ -39,8 +39,7 @@ public class IdeModule extends AbstractModule {
 
     bind(RequestTokenExtractor.class)
         .to(com.codenvy.auth.sso.client.token.ChainedTokenExtractor.class);
-    bind(PermissionChecker.class)
-        .to(HttpPermissionCheckerImpl.class);
+    bind(PermissionChecker.class).to(HttpPermissionCheckerImpl.class);
     bind(TokenHandler.class).to(com.codenvy.api.permission.server.PermissionTokenHandler.class);
     bind(TokenHandler.class)
         .annotatedWith(Names.named("delegated.handler"))

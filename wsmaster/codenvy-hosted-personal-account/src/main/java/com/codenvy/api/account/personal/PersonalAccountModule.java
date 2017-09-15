@@ -13,8 +13,8 @@ package com.codenvy.api.account.personal;
 import com.codenvy.resource.api.free.DefaultResourcesProvider;
 import com.google.inject.AbstractModule;
 import com.google.inject.multibindings.Multibinder;
-import org.eclipse.che.api.permission.server.account.AccountPermissionsChecker;
 import org.eclipse.che.inject.DynaModule;
+import org.eclipse.che.multiuser.api.permission.server.account.AccountPermissionsChecker;
 
 /** @author Sergii Leschenko */
 @DynaModule

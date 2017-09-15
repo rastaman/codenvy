@@ -17,10 +17,10 @@ import javax.inject.Inject;
 import javax.ws.rs.Path;
 import org.eclipse.che.api.core.ApiException;
 import org.eclipse.che.api.core.ForbiddenException;
-import org.eclipse.che.api.permission.server.SuperPrivilegesChecker;
 import org.eclipse.che.commons.env.EnvironmentContext;
 import org.eclipse.che.commons.subject.Subject;
 import org.eclipse.che.everrest.CheMethodInvokerFilter;
+import org.eclipse.che.multiuser.api.permission.server.SuperPrivilegesChecker;
 import org.everrest.core.Filter;
 import org.everrest.core.resource.GenericResourceMethod;
 

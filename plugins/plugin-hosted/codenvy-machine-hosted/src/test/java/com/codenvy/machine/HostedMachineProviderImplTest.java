@@ -34,7 +34,7 @@ import org.eclipse.che.api.machine.server.util.RecipeRetriever;
 import org.eclipse.che.commons.env.EnvironmentContext;
 import org.eclipse.che.commons.lang.os.WindowsPathEscaper;
 import org.eclipse.che.commons.subject.SubjectImpl;
-import org.eclipse.che.machine.authentication.server.MachineTokenRegistry;
+import org.eclipse.che.multiuser.machine.authentication.server.MachineTokenRegistry;
 import org.eclipse.che.plugin.docker.client.DockerConnector;
 import org.eclipse.che.plugin.docker.client.DockerConnectorConfiguration;
 import org.eclipse.che.plugin.docker.client.DockerConnectorProvider;

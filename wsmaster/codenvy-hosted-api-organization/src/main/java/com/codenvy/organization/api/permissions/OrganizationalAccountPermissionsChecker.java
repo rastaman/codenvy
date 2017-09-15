@@ -18,10 +18,10 @@ import static com.codenvy.organization.api.permissions.OrganizationDomain.MANAGE
 import com.codenvy.organization.spi.impl.OrganizationImpl;
 import javax.inject.Singleton;
 import org.eclipse.che.api.core.ForbiddenException;
-import org.eclipse.che.api.permission.server.account.AccountOperation;
-import org.eclipse.che.api.permission.server.account.AccountPermissionsChecker;
 import org.eclipse.che.commons.env.EnvironmentContext;
 import org.eclipse.che.commons.subject.Subject;
+import org.eclipse.che.multiuser.api.permission.server.account.AccountOperation;
+import org.eclipse.che.multiuser.api.permission.server.account.AccountPermissionsChecker;
 
 /**
  * Defines permissions checking for organizational accounts.

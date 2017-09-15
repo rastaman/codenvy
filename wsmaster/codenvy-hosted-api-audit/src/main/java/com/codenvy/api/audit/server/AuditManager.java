@@ -11,7 +11,7 @@
 package com.codenvy.api.audit.server;
 
 import static java.nio.file.Files.createTempDirectory;
-import static org.eclipse.che.api.workspace.server.WorkspaceDomain.DOMAIN_ID;
+import static org.eclipse.che.multiuser.permission.workspace.server.WorkspaceDomain.DOMAIN_ID;
 
 import com.codenvy.api.audit.server.printer.Printer;
 import com.google.common.annotations.VisibleForTesting;
@@ -34,12 +34,12 @@ import org.eclipse.che.api.core.NotFoundException;
 import org.eclipse.che.api.core.Page;
 import org.eclipse.che.api.core.Page.PageRef;
 import org.eclipse.che.api.core.ServerException;
-import org.eclipse.che.api.permission.server.PermissionsManager;
-import org.eclipse.che.api.permission.server.model.impl.AbstractPermissions;
 import org.eclipse.che.api.user.server.UserManager;
 import org.eclipse.che.api.user.server.model.impl.UserImpl;
 import org.eclipse.che.api.workspace.server.WorkspaceManager;
 import org.eclipse.che.api.workspace.server.model.impl.WorkspaceImpl;
+import org.eclipse.che.multiuser.api.permission.server.PermissionsManager;
+import org.eclipse.che.multiuser.api.permission.server.model.impl.AbstractPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

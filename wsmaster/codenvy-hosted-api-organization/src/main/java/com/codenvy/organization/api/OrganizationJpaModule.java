@@ -21,9 +21,9 @@ import com.codenvy.organization.spi.jpa.JpaOrganizationDistributedResourcesDao;
 import com.google.inject.AbstractModule;
 import com.google.inject.TypeLiteral;
 import com.google.inject.multibindings.Multibinder;
-import org.eclipse.che.api.permission.server.AbstractPermissionsDomain;
-import org.eclipse.che.api.permission.server.model.impl.AbstractPermissions;
-import org.eclipse.che.api.permission.server.spi.PermissionsDao;
+import org.eclipse.che.multiuser.api.permission.server.AbstractPermissionsDomain;
+import org.eclipse.che.multiuser.api.permission.server.model.impl.AbstractPermissions;
+import org.eclipse.che.multiuser.api.permission.server.spi.PermissionsDao;
 
 /** @author Sergii Leschenko */
 public class OrganizationJpaModule extends AbstractModule {

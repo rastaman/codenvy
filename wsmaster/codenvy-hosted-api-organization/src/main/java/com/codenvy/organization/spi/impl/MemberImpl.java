@@ -22,7 +22,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import org.eclipse.che.api.permission.server.model.impl.AbstractPermissions;
+import org.eclipse.che.multiuser.api.permission.server.model.impl.AbstractPermissions;
 
 /**
  * Data object for {@link Member}.

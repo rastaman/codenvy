@@ -25,7 +25,6 @@ import com.codenvy.organization.spi.jpa.JpaOrganizationDistributedResourcesDao;
 import com.codenvy.organization.spi.jpa.JpaOrganizationImplTckRepository;
 import com.google.inject.TypeLiteral;
 import com.google.inject.persist.jpa.JpaPersistModule;
-import org.eclipse.che.api.permission.server.AbstractPermissionsDomain;
 import org.eclipse.che.api.user.server.model.impl.UserImpl;
 import org.eclipse.che.commons.test.db.H2JpaCleaner;
 import org.eclipse.che.commons.test.tck.TckModule;
@@ -35,6 +34,7 @@ import org.eclipse.che.commons.test.tck.repository.TckRepository;
 import org.eclipse.che.core.db.DBInitializer;
 import org.eclipse.che.core.db.schema.SchemaInitializer;
 import org.eclipse.che.core.db.schema.impl.flyway.FlywaySchemaInitializer;
+import org.eclipse.che.multiuser.api.permission.server.AbstractPermissionsDomain;
 
 /** @author Sergii Leschenko */
 public class OrganizationJpaTckModule extends TckModule {
