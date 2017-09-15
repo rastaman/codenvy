@@ -19,7 +19,7 @@ import org.eclipse.che.api.core.rest.HttpJsonRequestFactory;
 import org.eclipse.che.api.user.server.UserManager;
 import org.eclipse.che.commons.subject.Subject;
 import org.eclipse.che.commons.subject.SubjectImpl;
-import org.eclipse.che.machine.authentication.server.MachineTokenRegistry;
+import org.eclipse.che.multiuser.machine.authentication.server.MachineTokenRegistry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

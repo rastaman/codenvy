@@ -50,7 +50,6 @@ import com.codenvy.service.system.DockerBasedSystemRamInfoProvider;
 import com.codenvy.service.system.HostedSystemService;
 import com.codenvy.service.system.SystemRamInfoProvider;
 import com.codenvy.service.system.SystemRamLimitMessageSender;
-import com.codenvy.service.system.SystemServicePermissionsFilter;
 import com.codenvy.template.processor.html.HTMLTemplateProcessor;
 import com.codenvy.template.processor.html.thymeleaf.HTMLTemplateProcessorImpl;
 import com.codenvy.template.processor.html.thymeleaf.ThymeleafTemplate;
@@ -95,8 +94,6 @@ import org.eclipse.che.api.machine.server.recipe.RecipeLoader;
 import org.eclipse.che.api.machine.server.recipe.RecipeService;
 import org.eclipse.che.api.machine.server.spi.RecipeDao;
 import org.eclipse.che.api.machine.server.spi.SnapshotDao;
-import org.eclipse.che.multiuser.api.permission.server.PermissionChecker;
-import org.eclipse.che.api.permission.server.jpa.SystemPermissionsJpaModule;
 import org.eclipse.che.api.project.server.handlers.ProjectHandler;
 import org.eclipse.che.api.project.server.template.ProjectTemplateDescriptionLoader;
 import org.eclipse.che.api.project.server.template.ProjectTemplateRegistry;
@@ -130,8 +127,10 @@ import org.eclipse.che.everrest.CheAsynchronousJobPool;
 import org.eclipse.che.everrest.ETagResponseFilter;
 import org.eclipse.che.everrest.EverrestDownloadFileResponseFilter;
 import org.eclipse.che.inject.DynaModule;
-import org.eclipse.che.machine.authentication.server.MachineAuthLinksInjector;
+import org.eclipse.che.multiuser.api.permission.server.PermissionChecker;
 import org.eclipse.che.multiuser.api.permission.server.PermissionCheckerImpl;
+import org.eclipse.che.multiuser.api.permission.server.jpa.SystemPermissionsJpaModule;
+import org.eclipse.che.multiuser.machine.authentication.server.MachineAuthLinksInjector;
 import org.eclipse.che.plugin.github.factory.resolver.GithubFactoryParametersResolver;
 import org.eclipse.che.security.oauth.OAuthAuthenticatorProvider;
 import org.eclipse.che.security.oauth.OAuthAuthenticatorProviderImpl;
@@ -286,13 +285,13 @@ public class OnPremisesIdeApiModule extends AbstractModule {
     bind(com.codenvy.auth.sso.oauth.SsoOAuthAuthenticationService.class);
 
     //machine authentication
-    bind(org.eclipse.che.machine.authentication.server.MachineTokenPermissionsFilter.class);
-    bind(org.eclipse.che.machine.authentication.server.MachineTokenRegistry.class);
-    bind(org.eclipse.che.machine.authentication.server.MachineTokenService.class);
+    bind(org.eclipse.che.multiuser.machine.authentication.server.MachineTokenPermissionsFilter.class);
+    bind(org.eclipse.che.multiuser.machine.authentication.server.MachineTokenRegistry.class);
+    bind(org.eclipse.che.multiuser.machine.authentication.server.MachineTokenService.class);
     bind(WorkspaceServiceLinksInjector.class)
-        .to(org.eclipse.che.machine.authentication.server.WorkspaceServiceAuthLinksInjector.class);
+        .to(org.eclipse.che.multiuser.machine.authentication.server.WorkspaceServiceAuthLinksInjector.class);
     bind(MachineLinksInjector.class).to(MachineAuthLinksInjector.class);
-    install(new org.eclipse.che.machine.authentication.server.interceptor.InterceptorModule());
+    install(new org.eclipse.che.multiuser.machine.authentication.server.interceptor.InterceptorModule());
     bind(ServerClient.class).to(com.codenvy.auth.sso.client.MachineSsoServerClient.class);
     bind(OnPremisesMachineSessionInvalidator.class);
 
@@ -399,10 +398,10 @@ public class OnPremisesIdeApiModule extends AbstractModule {
     install(new org.eclipse.che.plugin.docker.machine.proxy.DockerProxyModule());
 
     install(new SystemPermissionsJpaModule());
-    install(new org.eclipse.che.api.permission.server.PermissionsModule());
+    install(new org.eclipse.che.multiuser.api.permission.server.PermissionsModule());
     install(new com.codenvy.api.node.server.NodeModule());
     install(new WorkspaceJpaModule());
-    install(new org.eclipse.che.api.workspace.server.WorkspaceApiPermissionsModule());
+    install(new org.eclipse.che.multiuser.permission.workspace.server.WorkspaceApiPermissionsModule());
 
     install(
         new FactoryModuleBuilder()
@@ -467,7 +466,7 @@ public class OnPremisesIdeApiModule extends AbstractModule {
         .to(com.codenvy.machine.WsAgentServerProxyTransformer.class);
 
     install(new org.eclipse.che.plugin.machine.ssh.SshMachineModule());
-    bind(org.eclipse.che.api.factory.server.permissions.FactoryPermissionsFilter.class);
+    bind(org.eclipse.che.multiuser.permission.factory.FactoryPermissionsFilter.class);
 
     bind(MachineInstanceProvider.class).to(com.codenvy.machine.HostedMachineProviderImpl.class);
 

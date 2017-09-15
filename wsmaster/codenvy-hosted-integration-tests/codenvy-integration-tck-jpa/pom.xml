@@ -76,17 +76,22 @@
         </dependency>
         <dependency>
             <groupId>org.eclipse.che.core</groupId>
-            <artifactId>che-core-api-permission</artifactId>
-            <classifier>tests</classifier>
-        </dependency>
-        <dependency>
-            <groupId>org.eclipse.che.core</groupId>
             <artifactId>che-core-api-user</artifactId>
             <classifier>tests</classifier>
         </dependency>
         <dependency>
             <groupId>org.eclipse.che.core</groupId>
             <artifactId>che-core-api-workspace</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.che.multiuser</groupId>
+            <artifactId>che-multiuser-permission-machine</artifactId>
+            <classifier>tests</classifier>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.che.multiuser</groupId>
+            <artifactId>che-multiuser-permission-workspace</artifactId>
+            <classifier>tests</classifier>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
@@ -152,6 +157,21 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>org.eclipse.che.multiuser</groupId>
+            <artifactId>che-multiuser-api-permission</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.che.multiuser</groupId>
+            <artifactId>che-multiuser-permission-machine</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.che.multiuser</groupId>
+            <artifactId>che-multiuser-permission-workspace</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest-core</artifactId>
             <scope>test</scope>
@@ -206,12 +226,12 @@
                                 <configuration>
                                     <outputDirectory>${project.build.testOutputDirectory}</outputDirectory>
                                     <includeArtifactIds>codenvy-hosted-api-machine,
-                                        codenvy-hosted-api-workspace,
-                                        codenvy-hosted-api-organization,
-                                        codenvy-hosted-api-resource,
-                                        codenvy-hosted-api-permission,
-                                        codenvy-hosted-api-invite,
-                                        che-core-api-factory</includeArtifactIds>
+                    codenvy-hosted-api-workspace,
+                    codenvy-hosted-api-organization,
+                    codenvy-hosted-api-resource,
+                    codenvy-hosted-api-permission,
+                    codenvy-hosted-api-invite,
+                    che-core-api-factory</includeArtifactIds>
                                     <includeScope>test</includeScope>
                                 </configuration>
                             </execution>
@@ -223,7 +243,7 @@
                                 </goals>
                                 <configuration>
                                     <includeArtifactIds>che-core-sql-schema,
-                                        codenvy-sql-schema</includeArtifactIds>
+                    codenvy-sql-schema</includeArtifactIds>
                                     <includes>che-schema/,codenvy-schema/</includes>
                                     <outputDirectory>${project.build.directory}</outputDirectory>
                                 </configuration>
@@ -258,8 +278,8 @@
                         <artifactId>docker-maven-plugin</artifactId>
                         <version>0.15.16</version>
                         <!-- Connect start/stop to pre- and
-                             post-integration-test phase, respectively if you want to start
-                             your docker containers during integration tests -->
+                 post-integration-test phase, respectively if you want to start
+                 your docker containers during integration tests -->
                         <executions>
                             <execution>
                                 <id>start</id>

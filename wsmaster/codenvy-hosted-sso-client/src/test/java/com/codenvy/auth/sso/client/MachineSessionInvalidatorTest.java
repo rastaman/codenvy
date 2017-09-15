@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
 import org.eclipse.che.api.core.notification.EventService;
 import org.eclipse.che.api.workspace.shared.dto.event.WorkspaceStatusEvent;
 import org.eclipse.che.commons.lang.NameGenerator;
-import org.eclipse.che.machine.authentication.server.MachineTokenRegistry;
+import org.eclipse.che.multiuser.machine.authentication.server.MachineTokenRegistry;
 import org.junit.Test;
 
 /** @author Yevhenii Voevodin */

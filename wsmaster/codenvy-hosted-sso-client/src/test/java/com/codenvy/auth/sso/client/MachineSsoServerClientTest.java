@@ -32,7 +32,7 @@ import org.eclipse.che.api.user.server.UserManager;
 import org.eclipse.che.api.user.server.model.impl.UserImpl;
 import org.eclipse.che.commons.subject.Subject;
 import org.eclipse.che.commons.test.mockito.answer.SelfReturningAnswer;
-import org.eclipse.che.machine.authentication.server.MachineTokenRegistry;
+import org.eclipse.che.multiuser.machine.authentication.server.MachineTokenRegistry;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 

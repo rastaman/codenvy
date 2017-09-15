@@ -21,12 +21,12 @@ import org.eclipse.che.account.api.AccountManager;
 import org.eclipse.che.account.shared.model.Account;
 import org.eclipse.che.api.core.ApiException;
 import org.eclipse.che.api.core.ForbiddenException;
-import org.eclipse.che.api.permission.server.SystemDomain;
-import org.eclipse.che.api.permission.server.account.AccountOperation;
-import org.eclipse.che.api.permission.server.account.AccountPermissionsChecker;
 import org.eclipse.che.commons.env.EnvironmentContext;
 import org.eclipse.che.commons.subject.Subject;
 import org.eclipse.che.everrest.CheMethodInvokerFilter;
+import org.eclipse.che.multiuser.api.permission.server.SystemDomain;
+import org.eclipse.che.multiuser.api.permission.server.account.AccountOperation;
+import org.eclipse.che.multiuser.api.permission.server.account.AccountPermissionsChecker;
 import org.everrest.core.Filter;
 import org.everrest.core.resource.GenericResourceMethod;
 
