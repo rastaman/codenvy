@@ -87,12 +87,9 @@ import org.eclipse.che.api.factory.server.FactoryService;
 import org.eclipse.che.api.factory.server.jpa.FactoryJpaModule;
 import org.eclipse.che.api.factory.server.jpa.JpaFactoryDao;
 import org.eclipse.che.api.factory.server.spi.FactoryDao;
-import org.eclipse.che.api.machine.server.jpa.JpaRecipeDao;
 import org.eclipse.che.api.machine.server.jpa.JpaSnapshotDao;
-import org.eclipse.che.api.machine.server.jpa.MachineJpaModule;
 import org.eclipse.che.api.machine.server.recipe.RecipeLoader;
 import org.eclipse.che.api.machine.server.recipe.RecipeService;
-import org.eclipse.che.api.machine.server.spi.RecipeDao;
 import org.eclipse.che.api.machine.server.spi.SnapshotDao;
 import org.eclipse.che.api.project.server.handlers.ProjectHandler;
 import org.eclipse.che.api.project.server.template.ProjectTemplateDescriptionLoader;
@@ -111,9 +108,6 @@ import org.eclipse.che.api.workspace.server.WorkspaceService;
 import org.eclipse.che.api.workspace.server.WorkspaceServiceLinksInjector;
 import org.eclipse.che.api.workspace.server.WorkspaceValidator;
 import org.eclipse.che.api.workspace.server.event.WorkspaceMessenger;
-import org.eclipse.che.api.workspace.server.jpa.JpaStackDao;
-import org.eclipse.che.api.workspace.server.jpa.WorkspaceJpaModule;
-import org.eclipse.che.api.workspace.server.spi.StackDao;
 import org.eclipse.che.api.workspace.server.stack.StackLoader;
 import org.eclipse.che.api.workspace.server.stack.StackMessageBodyAdapter;
 import org.eclipse.che.api.workspace.server.stack.StackService;
@@ -131,7 +125,9 @@ import org.eclipse.che.multiuser.api.permission.server.PermissionChecker;
 import org.eclipse.che.multiuser.api.permission.server.PermissionCheckerImpl;
 import org.eclipse.che.multiuser.api.permission.server.jpa.SystemPermissionsJpaModule;
 import org.eclipse.che.multiuser.machine.authentication.server.MachineAuthLinksInjector;
+import org.eclipse.che.multiuser.permission.machine.jpa.MultiuserMachineJpaModule;
 import org.eclipse.che.multiuser.permission.system.SystemServicePermissionsFilter;
+import org.eclipse.che.multiuser.permission.workspace.server.jpa.MultiuserWorkspaceJpaModule;
 import org.eclipse.che.plugin.github.factory.resolver.GithubFactoryParametersResolver;
 import org.eclipse.che.security.oauth.OAuthAuthenticatorProvider;
 import org.eclipse.che.security.oauth.OAuthAuthenticatorProviderImpl;
@@ -224,9 +220,8 @@ public class OnPremisesIdeApiModule extends AbstractModule {
     bind(PlaceholderReplacer.class).toProvider(PlaceholderReplacerProvider.class);
     install(new UserJpaModule());
     install(new SshJpaModule());
-    install(new WorkspaceJpaModule());
-    install(new WorkspaceJpaModule());
-    install(new MachineJpaModule());
+    install(new MultiuserWorkspaceJpaModule());
+    install(new MultiuserMachineJpaModule());
     install(new FactoryJpaModule());
     bind(AccountDao.class).to(JpaAccountDao.class);
     install(new OrganizationApiModule());
@@ -235,8 +230,6 @@ public class OnPremisesIdeApiModule extends AbstractModule {
     install(new com.codenvy.spi.invite.jpa.InviteJpaModule());
     install(new ResourceModule());
     bind(FactoryDao.class).to(JpaFactoryDao.class);
-    bind(StackDao.class).to(JpaStackDao.class);
-    bind(RecipeDao.class).to(JpaRecipeDao.class);
     bind(SnapshotDao.class).to(JpaSnapshotDao.class);
     // Auth
     bind(PassportValidator.class);
@@ -254,7 +247,7 @@ public class OnPremisesIdeApiModule extends AbstractModule {
         .toInstance("predefined-recipes.json");
 
     bind(StackService.class);
-    bind(org.eclipse.che.api.workspace.server.stack.StackLoader.class);
+    //    bind(org.eclipse.che.api.workspace.server.stack.StackLoader.class);
     MapBinder.newMapBinder(
             binder(), String.class, String.class, Names.named(StackLoader.CHE_PREDEFINED_STACKS))
         .addBinding("stacks.json")
@@ -406,7 +399,6 @@ public class OnPremisesIdeApiModule extends AbstractModule {
     install(new SystemPermissionsJpaModule());
     install(new org.eclipse.che.multiuser.api.permission.server.PermissionsModule());
     install(new com.codenvy.api.node.server.NodeModule());
-    install(new WorkspaceJpaModule());
     install(
         new org.eclipse.che.multiuser.permission.workspace.server.WorkspaceApiPermissionsModule());
 
