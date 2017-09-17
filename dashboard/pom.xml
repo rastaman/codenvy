@@ -126,6 +126,10 @@
                                     <directory>${basedir}/node_modules</directory>
                                     <followSymlinks>false</followSymlinks>
                                 </fileset>
+                                <fileset>
+                                    <directory>${basedir}/dist</directory>
+                                    <followSymlinks>false</followSymlinks>
+                                </fileset>
                             </filesets>
                         </configuration>
                     </plugin>
@@ -133,21 +137,36 @@
                         <artifactId>maven-antrun-plugin</artifactId>
                         <executions>
                             <execution>
-                                <id>build-dashboard</id>
+                                <id>compile</id>
                                 <phase>compile</phase>
                                 <goals>
                                     <goal>run</goal>
                                 </goals>
                                 <configuration>
                                     <target>
-                                        <!-- build user dashboard -->
+                                        <!-- Download NPM dependencies -->
                                         <exec dir="${basedir}" executable="npm" failonerror="true">
                                             <arg value="install" />
                                         </exec>
+                                        <!-- Disable development mode -->
+                                        <replace file="${basedir}/src/app/index.module.ts">
+                                            <replacetoken><![CDATA[var DEV = true;]]></replacetoken>
+                                            <replacevalue><![CDATA[var DEV = false;]]></replacevalue>
+                                        </replace>
+                                        <!-- Build the application -->
+                                        <exec dir="${basedir}" executable="npm" failonerror="true">
+                                            <arg value="run" />
+                                            <arg value="build" />
+                                        </exec>
                                         <!-- Change base HREF of the application that will be hosted on /dashboard -->
-                                        <replace file="${basedir}/target/dist/index.html">
+                                        <replace file="${basedir}/dist/index.html">
                                             <replacetoken><![CDATA[<base href="/">]]></replacetoken>
                                             <replacevalue><![CDATA[<base href="/dashboard/">]]></replacevalue>
+                                        </replace>
+                                        <!-- Enable back development mode -->
+                                        <replace file="${basedir}/src/app/index.module.ts">
+                                            <replacetoken><![CDATA[var DEV = false;]]></replacetoken>
+                                            <replacevalue><![CDATA[var DEV = true;]]></replacevalue>
                                         </replace>
                                     </target>
                                 </configuration>
@@ -161,7 +180,8 @@
                                 <configuration>
                                     <target unless="skipTests">
                                         <!-- Run unit tests -->
-                                        <exec dir="${basedir}" executable="gulp" failonerror="true">
+                                        <exec dir="${basedir}" executable="npm" failonerror="true">
+                                            <arg value="run" />
                                             <arg value="test" />
                                         </exec>
                                     </target>

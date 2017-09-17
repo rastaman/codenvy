@@ -20,21 +20,18 @@
 <che-toolbar che-title="Account"></che-toolbar>
 
 <md-content md-scroll-y flex>
-  <md-tabs md-dynamic-height md-stretch-tabs="auto" md-center-tabs="" md-selected="accountController.selectedTabIndex">
+  <md-tabs md-dynamic-height md-stretch-tabs="auto" md-no-ink-bar md-selected="accountController.selectedTabIndex">
     <md-tab>
       <md-tab-label>
-        <md-icon md-font-icon="fa-user" class="fa che-tab-label-icon"></md-icon>
         <span class="che-tab-label-title">Profile</span>
       </md-tab-label>
       <md-tab-body>
-        <account-profile profile-attributes="accountController.profileAttributes"
-                         profile-information-form="profileInformationForm"></account-profile>
+        <account-profile profile-attributes="accountController.profileAttributes"></account-profile>
       </md-tab-body>
     </md-tab>
 
     <md-tab>
       <md-tab-label>
-        <md-icon md-font-icon="material-design icon-ic_settings_24px" class="che-tab-label-icon"></md-icon>
         <span class="che-tab-label-title">Security</span>
       </md-tab-label>
       <md-tab-body>
@@ -42,11 +39,14 @@
         <div class="cdvy-account-security" ng-if="!accountController.isLoading">
           <che-label-container che-label-name="New password"
                                che-label-description="Minimum 8 characters, both letters and digits.">
-            <account-update-password cdvy-password="accountController.newPassword"></account-update-password>
-            <che-button-default che-button-title="Update Password"
-                                ng-disabled="!accountController.newPassword"
-                                ng-click="accountController.setPassword()">
-            </che-button-default>
+            <ng-form name="changePasswordForm">
+              <account-update-password change-password-form="changePasswordForm"
+                                       cdvy-password="accountController.newPassword"></account-update-password>
+              <che-button-default che-button-title="Update Password"
+                                  ng-disabled="!accountController.newPassword || changePasswordForm.$invalid"
+                                  ng-click="accountController.setPassword()">
+              </che-button-default>
+            </ng-form>
           </che-label-container>
           <che-label-container che-label-name="Delete account"
                                che-label-description="Delete your account is irreversible.">
