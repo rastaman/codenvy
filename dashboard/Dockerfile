@@ -20,12 +20,10 @@ USER node-user
 RUN cd /dashboard && npm install
 # workaround to prevent caching old che-dashboard
 ADD https://api.github.com/repos/eclipse/che/git/refs/heads/master /tmp/che-dashboard-version.json
-RUN cd /dashboard && ./node_modules/.bin/bower install
-RUN cd /dashboard && ./node_modules/.bin/typings install
 # Disable dev mode before build
 RUN sed -i -e "s#var DEV = true;#var DEV = false;#" /dashboard/src/app/index.module.ts
-RUN cd /dashboard && ./node_modules/.bin/gulp build
-RUN cd /dashboard && ./node_modules/.bin/gulp test
+RUN cd /dashboard && npm run build
+RUN cd /dashboard && npm run test
 # Enable dev mode after build
 RUN sed -i -e "s#var DEV = false;#var DEV = true;#" /dashboard/src/app/index.module.ts
 # Change base HREF of the application that will be hosted on /dashboard
