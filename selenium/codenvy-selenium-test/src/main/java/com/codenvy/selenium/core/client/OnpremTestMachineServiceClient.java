@@ -14,7 +14,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import org.eclipse.che.api.core.rest.HttpJsonRequestFactory;
 import org.eclipse.che.api.core.rest.HttpJsonResponse;
-import org.eclipse.che.machine.authentication.shared.dto.MachineTokenDto;
+import org.eclipse.che.multiuser.machine.authentication.shared.dto.MachineTokenDto;
 import org.eclipse.che.selenium.core.client.TestMachineServiceClient;
 import org.eclipse.che.selenium.core.provider.TestApiEndpointUrlProvider;
 

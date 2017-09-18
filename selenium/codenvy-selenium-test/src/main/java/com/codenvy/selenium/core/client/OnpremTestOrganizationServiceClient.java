@@ -20,7 +20,7 @@ import com.google.inject.Singleton;
 import java.util.List;
 import org.eclipse.che.api.core.NotFoundException;
 import org.eclipse.che.api.core.rest.HttpJsonRequestFactory;
-import org.eclipse.che.api.permission.shared.dto.PermissionsDto;
+import org.eclipse.che.multiuser.api.permission.shared.dto.PermissionsDto;
 import org.eclipse.che.commons.annotation.Nullable;
 import org.eclipse.che.selenium.core.provider.TestApiEndpointUrlProvider;
 import org.slf4j.Logger;
