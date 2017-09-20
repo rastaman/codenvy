@@ -1,5 +1,25 @@
 # Change Log
 
+## [5.18.0](https://github.com/codenvy/codenvy/tree/5.18.0) (2017-09-20)
+[Full Changelog](https://github.com/codenvy/codenvy/compare/5.17.0...5.18.0)
+
+**Merged pull requests:**
+
+- CODENVY-2373: Remove Report Sender [\#2421](https://github.com/codenvy/codenvy/pull/2421) ([mmorhun](https://github.com/mmorhun))
+- RELEASE: Set next development version [\#2420](https://github.com/codenvy/codenvy/pull/2420) ([riuvshin](https://github.com/riuvshin))
+- Fix find action selenium test [\#2419](https://github.com/codenvy/codenvy/pull/2419) ([mmorhun](https://github.com/mmorhun))
+- CHE-5925: Fix key binding test case [\#2415](https://github.com/codenvy/codenvy/pull/2415) ([mmorhun](https://github.com/mmorhun))
+- Change name of test class in the suite after renaming [\#2414](https://github.com/codenvy/codenvy/pull/2414) ([musienko-maxim](https://github.com/musienko-maxim))
+- CODENVY-2373: Remove ReportSender [\#2410](https://github.com/codenvy/codenvy/pull/2410) ([mmorhun](https://github.com/mmorhun))
+- CODENVY-2284 fix code formatting [\#2407](https://github.com/codenvy/codenvy/pull/2407) ([mmorhun](https://github.com/mmorhun))
+- CODENVY-2284: Add additional logs [\#2406](https://github.com/codenvy/codenvy/pull/2406) ([mmorhun](https://github.com/mmorhun))
+- RELEASE: Update CHANGELOG [\#2395](https://github.com/codenvy/codenvy/pull/2395) ([riuvshin](https://github.com/riuvshin))
+- CLI: disable license check, update license url, remove license props [\#2353](https://github.com/codenvy/codenvy/pull/2353) ([riuvshin](https://github.com/riuvshin))
+- remove redundant version declaration [\#2423](https://github.com/codenvy/codenvy/pull/2423) ([riuvshin](https://github.com/riuvshin))
+- Revisit dependencies to support newer node version [\#2403](https://github.com/codenvy/codenvy/pull/2403) ([ashumilova](https://github.com/ashumilova))
+- CHE 5258 Restyle main tab panels [\#2282](https://github.com/codenvy/codenvy/pull/2282) ([olexii4](https://github.com/olexii4))
+
+
 ## [5.17.0](https://github.com/codenvy/codenvy/tree/5.17.0) (2017-08-23)
 [Full Changelog](https://github.com/codenvy/codenvy/compare/5.16.0...5.17.0)
 
